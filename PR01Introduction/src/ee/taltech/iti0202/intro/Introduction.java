@@ -68,11 +68,6 @@ public class Introduction {
         // static method we can call directly from static method (main)
         System.out.println(countJava("javaJavaJAVA"));  // 3
         System.out.println(countJava("Nothing here"));  // 0
-        System.out.println(countJava("Nothing herejaVa"));  // 0
-        System.out.println(countJava("Nothing here"));  // 0
-        System.out.println(countJava("Nothing here"));  // 0
-        System.out.println(countJava("Nothing here"));  // 0
-
         // try some other examples here
     }
 }
