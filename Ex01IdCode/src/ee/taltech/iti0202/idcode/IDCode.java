@@ -85,7 +85,7 @@ public class IDCode {
                     multiplier = multiplier == 9 ? 1 : multiplier + 1;
 
                 }
-            multiplier += 1;
+                multiplier += 1;
             }
         }
         return false;
@@ -96,7 +96,12 @@ public class IDCode {
     }
 
     public static String getInformationFromIDCode(String idCode) {
-        return "";
+        if (isIDCodeCorrect(idCode)) {
+            String birthDate = idCode.substring(5, 7) + "." + idCode.substring(3, 5) + "." + getFullYear(idCode);
+            return "This is a " + getGender(idCode) + " born on " + birthDate;
+        } else {
+            return "Given invalid ID code!";
+        }
     }
 
     public static Gender getGender(String idCode) {
