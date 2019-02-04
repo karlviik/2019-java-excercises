@@ -6,7 +6,14 @@ public class IDCode {
     }
 
     public static boolean isIDCodeCorrect(String idCode) {
-        return isGenderNumberCorrect(idCode) && isDayNumberCorrect(idCode) && isQueueNumberCorrect(idCode) && isControlNumberCorrect(idCode);
+        if (idCode.length() == 11) {
+            if (isGenderNumberCorrect(idCode) && isDayNumberCorrect(idCode) && isQueueNumberCorrect(idCode)) {
+                if (isControlNumberCorrect(idCode)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static boolean isGenderNumberCorrect(String idCode) {
@@ -38,7 +45,7 @@ public class IDCode {
             int febAdd = isLeapYear(getFullYear(idCode)) ? 1 : 0;
             int[] days = {31, 28 + febAdd, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
             int month = Integer.parseInt(idCode.substring(3, 5));
-            int monthDayCount = days[month];
+            int monthDayCount = days[month - 1];
             int day = Integer.parseInt(idCode.substring(5, 7));
             return 0 < day && day <= monthDayCount;
         }
