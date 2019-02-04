@@ -6,7 +6,7 @@ public class IDCode {
     }
 
     public static boolean isIDCodeCorrect(String idCode) {
-        if (idCode.length() == 11) {
+        if (idCode.length() == 11 && isNumeric(idCode)) {
             if (isGenderNumberCorrect(idCode) && isDayNumberCorrect(idCode) && isQueueNumberCorrect(idCode)) {
                 if (isControlNumberCorrect(idCode)) {
                     return true;
@@ -112,7 +112,7 @@ public class IDCode {
     }
 
     public static Gender getGender(String idCode) {
-        if (isGenderNumberCorrect(idCode)) {
+        if (isIDCodeCorrect(idCode) && isGenderNumberCorrect(idCode)) {
             if (Integer.parseInt(idCode.substring(0, 1)) % 2 == 0) {
                 return Gender.FEMALE;
             } else {
