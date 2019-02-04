@@ -92,8 +92,8 @@ public class IDCode {
                     multiplier = multiplier == 9 ? 1 : multiplier + 1;
 
                 }
-                multiplier += 1;
             }
+            multiplier += 1;
         }
         return false;
     }
@@ -128,5 +128,13 @@ public class IDCode {
             return 1700 + 100 * centuryAdd  + Integer.parseInt(idCode.substring(1, 3));
         }
         return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getGender("39811060019"));
+        System.out.println(getInformationFromIDCode("39811060019"));
+        System.out.println(isControlNumberCorrect("39811060019"));
+        System.out.println(isIDCodeCorrect("39811060019"));
+
     }
 }
