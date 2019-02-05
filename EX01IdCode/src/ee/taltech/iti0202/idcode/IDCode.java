@@ -64,9 +64,12 @@ public class IDCode {
     }
 
     private static boolean isDayNumberCorrect(String idCode) {
-        if (isYearNumberCorrect(idCode) && isMonthNumberCorrect(idCode) && isNumeric(idCode.substring(DAY_START, DAY_END + 1))) {
+        if (isYearNumberCorrect(idCode) && isMonthNumberCorrect(idCode)
+                && isNumeric(idCode.substring(DAY_START, DAY_END + 1))) {
             int febAdd = isLeapYear(getFullYear(idCode)) ? 1 : 0;
-            int[] days = {MONTH_SMALL, FEB_NORMAL + febAdd, MONTH_BIG, MONTH_SMALL, MONTH_BIG, MONTH_SMALL, MONTH_BIG, MONTH_BIG, MONTH_SMALL, MONTH_BIG, MONTH_SMALL, MONTH_BIG};
+            int[] days = {MONTH_SMALL, FEB_NORMAL
+                    + febAdd, MONTH_BIG, MONTH_SMALL, MONTH_BIG, MONTH_SMALL, MONTH_BIG,
+                    MONTH_BIG, MONTH_SMALL, MONTH_BIG, MONTH_SMALL, MONTH_BIG};
             int month = Integer.parseInt(idCode.substring(MONTH_START, MONTH_END + 1));
             int monthDayCount = days[month - 1];
             int day = Integer.parseInt(idCode.substring(DAY_START, DAY_END + 1));
@@ -127,7 +130,8 @@ public class IDCode {
 
     public static String getInformationFromIDCode(String idCode) {
         if (isIDCodeCorrect(idCode)) {
-            String birthDate = idCode.substring(DAY_START, DAY_END + 1) + "." + idCode.substring(MONTH_START, MONTH_END + 1) + "." + getFullYear(idCode);
+            String birthDate = idCode.substring(DAY_START, DAY_END + 1) + "."
+                    + idCode.substring(MONTH_START, MONTH_END + 1) + "." + getFullYear(idCode);
             return "This is a " + getGender(idCode).toString().toLowerCase() + " born on " + birthDate;
         } else {
             return "Given invalid ID code!";
