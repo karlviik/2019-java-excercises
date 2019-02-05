@@ -128,7 +128,7 @@ public class IDCode {
     public static String getInformationFromIDCode(String idCode) {
         if (isIDCodeCorrect(idCode)) {
             String birthDate = idCode.substring(DAY_START, DAY_END + 1) + "." + idCode.substring(MONTH_START, MONTH_END + 1) + "." + getFullYear(idCode);
-            return "This is a " + getGender(idCode) + " born on " + birthDate;
+            return "This is a " + getGender(idCode).toString().toLowerCase() + " born on " + birthDate;
         } else {
             return "Given invalid ID code!";
         }
