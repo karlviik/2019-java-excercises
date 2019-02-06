@@ -93,27 +93,4 @@ public class Main {
         }
         return evenChars.toString();
     }
-
-
-    public static void main(String[] args) {
-        System.out.println(wordCount(new String[]{})); // empty
-        System.out.println(wordCount(new String[]{"eggs", "SPAM", "eggs", "bacon", "SPAM", "bacon", "SPAM"})); // {bacon=2, eggs=2, SPAM=3}
-
-        System.out.println();
-        System.out.println(mostFrequentWord(new String[]{})); // null
-        System.out.println(mostFrequentWord(new String[]{"SPAM", "SPAM", "eggs", "bacon", "and", "SPAM"})); // SPAM
-
-        System.out.println();
-        System.out.println(onlyEvenWords(Arrays.asList("tere", "vanakere"))); // [tere]
-        System.out.println(onlyEvenWords(Arrays.asList("foo", "bar", "baz", "baz", "bar", "foo"))); // [baz, bar, foo]
-        System.out.println(onlyEvenWords(Arrays.asList("a", "b", "b", "a"))); // [b, a]
-        System.out.println(onlyEvenWords(Arrays.asList("a", "b", "a", "b"))); // [a, b]
-        System.out.println(onlyEvenWords(Arrays.asList("eggs", "bacon", "SPAM", "ham", "SPAM", "SPAM"))); // [SPAM]
-
-        System.out.println();
-        System.out.println(onlyEvenCharacters("aaa")); // a
-        System.out.println(onlyEvenCharacters("aabbcaca")); // abca
-        System.out.println(onlyEvenCharacters("bob")); // b
-        System.out.println("\"" + onlyEvenCharacters("abc") + "\"");// ""
-    }
 }
