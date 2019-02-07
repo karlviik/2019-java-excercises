@@ -33,7 +33,7 @@ public class Cpu {
 
     public static Map<String, Integer> compute(String instructions) {
         HashMap<String, Integer> registers = new HashMap<>();
-        for(String line : instructions.split("\n")) {
+        for (String line : instructions.split("\n")) {
             String[] taskComponents = line.split(" ");
             int incOrDec = taskComponents[INC_DEC].equals("inc") ? 1 : -1;
             registers.put(taskComponents[COND_VAR], registers.getOrDefault(taskComponents[COND_VAR], 0));
