@@ -41,7 +41,9 @@ public class Sentence {
         }
     }
 
-    public Sentence() {}
+    public Sentence() {
+
+    }
 
     /**
      * Removes the first occurrence of the specified word from this sentence, if it is present.
@@ -107,6 +109,7 @@ public class Sentence {
         else firstWord = firstWord.substring(0, 1).toUpperCase() + firstWord.substring(1);
         sentence.set(0, firstWord);
     }
+
     @Override
     public String toString() {
         if (sentence.isEmpty()) return "";
