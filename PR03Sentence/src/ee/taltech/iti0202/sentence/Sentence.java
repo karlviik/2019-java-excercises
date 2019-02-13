@@ -8,7 +8,6 @@ import java.util.Objects;
  * Sentence class represent words and punctuation.
  */
 public class Sentence {
-    // TODO: add some private variable(s) here
     private String punctuation = "";
     private boolean hasPunctuation = false;
     private ArrayList<String> sentence = new ArrayList<>();
@@ -34,14 +33,12 @@ public class Sentence {
                     break;
                 }
             }
-            if (!hasPunctuation)
-                sentence.add(word);
+            if (!hasPunctuation) sentence.add(word);
             else {
                 sentence.add(word.substring(0, word.length() - 1));
                 break;
             }
         }
-        // System.out.println(sentence);
     }
 
     public Sentence() {}
@@ -55,8 +52,7 @@ public class Sentence {
      * @return Whether word was in the sentence and removed.
      */
     public boolean removeWord(String word) {
-        if (hasPunctuation)
-            return false;
+        if (hasPunctuation) return false;
         return sentence.remove(word);
     }
 
@@ -69,9 +65,7 @@ public class Sentence {
      * @return Whether word was added to sentence (false if sentence has punctuation).
      */
     public boolean addWord(String word) {
-        // TODO: prolly add check if word has punctuation.
-        if (hasPunctuation)
-            return false;
+        if (hasPunctuation) return false;
         sentence.add(word);
         return true;
     }
@@ -85,9 +79,8 @@ public class Sentence {
      * @param newPunctuation Punctuation string (e.g. "!")
      * @return Whether punctuation was added (false if sentence already had punctuation).
      */
-    public boolean addPunctuation(String newPunctuation) {;
-        if (hasPunctuation || sentence.isEmpty())
-            return false;
+    public boolean addPunctuation(String newPunctuation) {
+        if (hasPunctuation || sentence.isEmpty()) return false;
         punctuation = newPunctuation;
         hasPunctuation = true;
         return true;
@@ -102,8 +95,7 @@ public class Sentence {
      * @return Whether punctuation was removed (false if there was no punctuation).
      */
     public boolean removePunctuation() {
-        if (!hasPunctuation)
-            return false;
+        if (!hasPunctuation) return false;
         punctuation = "";
         hasPunctuation = false;
         return true;
@@ -111,37 +103,18 @@ public class Sentence {
 
     private void firstToUpper() {
         String firstWord = sentence.get(0);
-        if (firstWord.length() == 1)
-            firstWord = firstWord.toUpperCase();
-        else
-            firstWord = firstWord.substring(0, 1).toUpperCase() + firstWord.substring(1);
+        if (firstWord.length() == 1) firstWord = firstWord.toUpperCase();
+        else firstWord = firstWord.substring(0, 1).toUpperCase() + firstWord.substring(1);
         sentence.set(0, firstWord);
     }
     @Override
     public String toString() {
-        if (sentence.isEmpty())
-            return "";
-        String firstWord = sentence.get(0);
-        if (firstWord.length() == 1)
-            firstWord = firstWord.toUpperCase();
-        else
-            firstWord = firstWord.substring(0, 1).toUpperCase() + firstWord.substring(1);
-        String sentenceString = firstWord;
-        if (sentence.size() > 1) {
-            String[] sentenceToArray = sentence.subList(1, sentence.size()).toArray(new String[0]);
-            sentenceString += " " + String.join(" ", sentenceToArray);
-        }
-
-        // System.out.println(sentenceString + "fsdfsdfsdf");
-
-        // System.out.println(String.join(" ", sentenceToArray )+ "aaaaaaaaaaaa");
-
-        if (hasPunctuation)
-            sentenceString += punctuation;
-        else
-            sentenceString += DEFAULT_NO_PUNCTUATION;
-        // System.out.println(sentenceString);
-
+        if (sentence.isEmpty()) return "";
+        firstToUpper();
+        String[] sentenceToArray = sentence.toArray(new String[0]);
+        String sentenceString = String.join(" ", sentenceToArray);
+        if (hasPunctuation) sentenceString += punctuation;
+        else sentenceString += DEFAULT_NO_PUNCTUATION;
         return sentenceString;
     }
 
@@ -152,9 +125,9 @@ public class Sentence {
         Sentence sentence1 = (Sentence) o;
         firstToUpper();
         ((Sentence) o).firstToUpper();
-        return hasPunctuation == sentence1.hasPunctuation &&
-                punctuation.equals(sentence1.punctuation) &&
-                sentence.toString().equals(sentence1.sentence.toString());
+        return hasPunctuation == sentence1.hasPunctuation
+                && punctuation.equals(sentence1.punctuation)
+                && sentence.toString().equals(sentence1.sentence.toString());
     }
 
     @Override
