@@ -18,7 +18,9 @@ public class SocialNetwork {
     }
 
     public Feed getFeedForUser(User user) {
-        return new Feed(user, null);
+        Feed userFeed = new Feed(user, null);
+        userFeed.buildFeed();
+        return userFeed;
     }
 
 }
