@@ -2,8 +2,11 @@ package ee.taltech.iti0202.stock.stock;
 import ee.taltech.iti0202.stock.exceptions.StockException;
 import ee.taltech.iti0202.stock.product.Product;
 
+import java.io.ObjectStreamClass;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * The stock class.
@@ -20,8 +23,15 @@ import java.util.Optional;
  */
 
 public class Stock {
+    private String stockName;
+    private int stockMaxCapacity;
+    private int stockCurrentCapacity = 0;
+    private List<Product> stockProducts;
 
     public Stock(String name, int maxCapacity) {
+        stockName = name;
+        stockMaxCapacity = maxCapacity;
+        stockProducts = new ArrayList<>();
     }
 
     /**
@@ -36,6 +46,10 @@ public class Stock {
      */
 
     public void addProduct(Product product) throws StockException {
+        if (stockProducts.contains(product))
+            throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
+        if (isFull()) throw new StockException(StockException.Reason.STOCK_IS_FULL);
+        stockProducts.add(product);
     }
 
     /**
@@ -48,7 +62,21 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> getProduct(String name) {
-        return Optional.empty();
+        Optional<Product> bestFitOptional = new Optional<>();
+        Product bestFit = null;
+        for (Product product : stockProducts) {
+            if (product.getName().equals(name)) {
+                if (bestFit == null) bestFit = product;
+                else {
+                    if (bestFit.getPrice() > product.getPrice()) bestFit = product;
+                    else if (bestFit.getPrice() == product.getPrice()) {
+                        if (bestFit.getId() > product.getId()) bestFit = product;
+                    }
+                }
+            }
+        }
+        return bestFitOptional;
+
     }
 
     /**
@@ -102,7 +130,7 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        return false;
+        return stockCurrentCapacity >= stockMaxCapacity;
     }
 
 }

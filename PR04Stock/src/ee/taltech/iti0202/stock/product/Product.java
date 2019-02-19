@@ -2,23 +2,31 @@ package ee.taltech.iti0202.stock.product;
 import ee.taltech.iti0202.stock.exceptions.StockException;
 
 public class Product {
+    private static int idCount = 0;
+    private int itemId;
+    private String itemName;
+    private int itemPrice;
 
     public Product(String name, int price) throws StockException {
+        itemId = getNextId();
+        itemName = name;
+        itemPrice = price;
     }
 
     public static int getNextId() {
-        return 0;
+        idCount++;
+        return idCount;
     }
 
     public int getId() {
-        return 0;
+        return itemId;
     }
 
     public String getName() {
-        return null;
+        return itemName;
     }
 
     public int getPrice() {
-        return 0;
+        return itemPrice;
     }
 }
