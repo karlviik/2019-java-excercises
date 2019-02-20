@@ -2,13 +2,11 @@ package ee.taltech.iti0202.stock.stock;
 import ee.taltech.iti0202.stock.exceptions.StockException;
 import ee.taltech.iti0202.stock.product.Product;
 
-import java.io.ObjectStreamClass;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The stock class.
@@ -25,15 +23,15 @@ import java.util.stream.Stream;
  */
 
 public class Stock {
-    private String stockName;
-    private int stockMaxCapacity;
-    private int stockCurrentCapacity = 0;
-    private List<Product> stockProducts;
+    private String name;
+    private int maxCapacity;
+    private int currentCapacity = 0;
+    private List<Product> products;
 
     public Stock(String name, int maxCapacity) {
-        stockName = name;
-        stockMaxCapacity = maxCapacity;
-        stockProducts = new ArrayList<>();
+        this.name = name;
+        this.maxCapacity = maxCapacity;
+        products = new ArrayList<>();
     }
 
     /**
@@ -47,11 +45,12 @@ public class Stock {
      * @throws StockException STOCK_ALREADY_CONTAINS_PRODUCT, STOCK_IS_FULL
      */
     public void addProduct(Product product) throws StockException {
-        if (stockProducts.contains(product))
+        if (products.contains(product)) {
             throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
+        }
         if (isFull()) throw new StockException(StockException.Reason.STOCK_IS_FULL);
-        stockProducts.add(product);
-        stockCurrentCapacity++;
+        products.add(product);
+        currentCapacity++;
     }
 
     /**
@@ -64,8 +63,8 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> getProduct(String name) {
-        Optional<Product> bestFit = new Optional<>();
-        for (Product product : stockProducts) {
+        Optional<Product> bestFit = Optional.empty();
+        for (Product product : products) {
             if (product.getName().equals(name)) {
                 if (bestFit.isEmpty()) bestFit = Optional.of(product);
                 else {
@@ -93,8 +92,8 @@ public class Stock {
     public Optional<Product> removeProduct(String name) {
         Optional<Product> removable = getProduct(name);
         if (removable.isEmpty()) return Optional.empty();
-        stockProducts.remove(removable.get());
-        stockCurrentCapacity--;
+        products.remove(removable.get());
+        currentCapacity--;
         return removable;
     }
 
@@ -104,7 +103,7 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts() {
-        return stockProducts;
+        return products;
     }
 
     /**
@@ -115,7 +114,7 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts(String name) {
-        return stockProducts.stream()
+        return products.stream()
                 .filter(x -> x.getName().equals(name))
                 .sorted(Comparator.comparing(Product::getPrice).thenComparing(Product::getId))
                 .collect(Collectors.toList());
@@ -127,7 +126,7 @@ public class Stock {
      * @return Total price.
      */
     public int getTotalPrice() {
-        return stockProducts.stream()
+        return products.stream()
                 .mapToInt(Product::getPrice)
                 .sum();
     }
@@ -138,7 +137,7 @@ public class Stock {
      * @return boolean
      */
     public boolean isFull() {
-        return stockCurrentCapacity >= stockMaxCapacity;
+        return currentCapacity >= maxCapacity;
     }
 
 }
