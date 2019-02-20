@@ -8,6 +8,7 @@ public class Product {
     private int itemPrice;
 
     public Product(String name, int price) throws StockException {
+        if (price < 0) throw new StockException(StockException.Reason.NEGATIVE_PRICE);
         itemId = getNextId();
         itemName = name;
         itemPrice = price;

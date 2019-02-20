@@ -16,7 +16,6 @@ public class StockException extends Exception {
     public enum Reason {
         NEGATIVE_PRICE,
         STOCK_IS_FULL,
-        PACKAGE_IS_FULL,
         STOCK_ALREADY_CONTAINS_PRODUCT
     }
 

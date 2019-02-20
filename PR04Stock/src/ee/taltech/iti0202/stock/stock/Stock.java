@@ -4,8 +4,10 @@ import ee.taltech.iti0202.stock.product.Product;
 
 import java.io.ObjectStreamClass;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -44,12 +46,12 @@ public class Stock {
      * @param product to be added
      * @throws StockException STOCK_ALREADY_CONTAINS_PRODUCT, STOCK_IS_FULL
      */
-
     public void addProduct(Product product) throws StockException {
         if (stockProducts.contains(product))
             throw new StockException(StockException.Reason.STOCK_ALREADY_CONTAINS_PRODUCT);
         if (isFull()) throw new StockException(StockException.Reason.STOCK_IS_FULL);
         stockProducts.add(product);
+        stockCurrentCapacity++;
     }
 
     /**
@@ -62,21 +64,19 @@ public class Stock {
      * @return Optional
      */
     public Optional<Product> getProduct(String name) {
-        Optional<Product> bestFitOptional = new Optional<>();
-        Product bestFit = null;
+        Optional<Product> bestFit = new Optional<>();
         for (Product product : stockProducts) {
             if (product.getName().equals(name)) {
-                if (bestFit == null) bestFit = product;
+                if (bestFit.isEmpty()) bestFit = Optional.of(product);
                 else {
-                    if (bestFit.getPrice() > product.getPrice()) bestFit = product;
-                    else if (bestFit.getPrice() == product.getPrice()) {
-                        if (bestFit.getId() > product.getId()) bestFit = product;
+                    if (bestFit.get().getPrice() > product.getPrice()) bestFit = Optional.of(product);
+                    else if (bestFit.get().getPrice() == product.getPrice()) {
+                        if (bestFit.get().getId() > product.getId()) bestFit = Optional.of(product);
                     }
                 }
             }
         }
-        return bestFitOptional;
-
+        return bestFit;
     }
 
     /**
@@ -90,9 +90,12 @@ public class Stock {
      * @param name Name of the product to be removed
      * @return Optional
      */
-
     public Optional<Product> removeProduct(String name) {
-        return Optional.empty();
+        Optional<Product> removable = getProduct(name);
+        if (removable.isEmpty()) return Optional.empty();
+        stockProducts.remove(removable.get());
+        stockCurrentCapacity--;
+        return removable;
     }
 
     /**
@@ -101,7 +104,7 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts() {
-        return null;
+        return stockProducts;
     }
 
     /**
@@ -112,7 +115,10 @@ public class Stock {
      * @return List
      */
     public List<Product> getProducts(String name) {
-        return null;
+        return stockProducts.stream()
+                .filter(x -> x.getName().equals(name))
+                .sorted(Comparator.comparing(Product::getPrice).thenComparing(Product::getId))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -121,7 +127,9 @@ public class Stock {
      * @return Total price.
      */
     public int getTotalPrice() {
-        return -1;
+        return stockProducts.stream()
+                .mapToInt(Product::getPrice)
+                .sum();
     }
 
     /**
