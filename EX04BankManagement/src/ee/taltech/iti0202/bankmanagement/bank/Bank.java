@@ -63,6 +63,9 @@ public class Bank {
         List<Person> filteredCustomers = customers.stream()
                 .filter(person -> person.getAge() <= maxAge)
                 .collect(toList());
+        if (filteredCustomers.size() == 0) {
+            return 0.0;
+        }
         return filteredCustomers
                 .stream()
                 .mapToDouble(Person::getMonthlyIncome)
@@ -76,6 +79,9 @@ public class Bank {
         List<Person> filteredCustomers = customers.stream()
                 .filter(person -> person.getAge() >= minAge && person.getAge() <= maxAge)
                 .collect(toList());
+        if (filteredCustomers.size() == 0) {
+            return 0.0;
+        }
         return filteredCustomers
                 .stream()
                 .mapToDouble(Person::getMonthlyIncome)
@@ -89,6 +95,9 @@ public class Bank {
         List<Person> filteredCustomers = customers.stream()
                 .filter(person -> person.getGender() == gender)
                 .collect(toList());
+        if (filteredCustomers.size() == 0) {
+            return 0.0;
+        }
         return filteredCustomers
                 .stream()
                 .mapToDouble(Person::getMonthlyIncome)
