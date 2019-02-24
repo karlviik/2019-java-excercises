@@ -2,8 +2,12 @@ package ee.taltech.iti0202.bankmanagement.bank;
 import ee.taltech.iti0202.bankmanagement.card.BankCard;
 import ee.taltech.iti0202.bankmanagement.person.Person;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
@@ -36,8 +40,8 @@ public class Bank {
         if (!customers.contains(person)) {
             return false;
         }
-        person.setBankCard(null);
         customers.remove(person);
+        person.setBankCard(null);
         return true;
     }
 
@@ -105,8 +109,8 @@ public class Bank {
 
     public Optional<Person> getRichestCustomerByGender(Person.Gender gender) {
         return customers.stream()
-                .filter(person -> person.getGender() == gender)
-                .max(Comparator.comparingDouble(Person::getMonthlyIncome));
+                .filter(person -> person.getGender() == gender && person.getBankCard().isPresent())
+                .max(Comparator.comparing(person -> person.getBankCard().get().getBalance()));
     }
 
     @Override
