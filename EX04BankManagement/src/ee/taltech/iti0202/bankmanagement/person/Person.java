@@ -14,11 +14,12 @@ public class Person {
 
     public enum Gender { MALE, FEMALE }
 
-    public Person(String firstName, String lastName, int age, Gender gender, double monthlyIncome) throws PersonException {
-        if (age < 1){
+    public Person(String firstName, String lastName, int age, Gender gender, double monthlyIncome)
+            throws PersonException {
+        if (age < 1) {
             throw new PersonException("Invalid age.");
         }
-        if (monthlyIncome < 0){
+        if (monthlyIncome < 0) {
             throw new PersonException("Invalid monthly income.");
         }
         this.firstName = firstName;
@@ -60,7 +61,9 @@ public class Person {
         if (this.bankCard != null && this.bankCard.getBank() == bankCard.getBank()) {
                 this.bankCard.getBank().removeCustomer(this);
         }
-        bankCard.getBank().addCustomer(this);
+        if (bankCard != null) {
+            bankCard.getBank().addCustomer(this);
+        }
         this.bankCard = bankCard;
     }
 

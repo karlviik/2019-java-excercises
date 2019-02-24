@@ -1,12 +1,8 @@
 package ee.taltech.iti0202.bankmanagement.bank;
 import ee.taltech.iti0202.bankmanagement.card.BankCard;
-import ee.taltech.iti0202.bankmanagement.card.CreditCard;
-import ee.taltech.iti0202.bankmanagement.card.DebitCard;
 import ee.taltech.iti0202.bankmanagement.person.Person;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
@@ -36,7 +32,7 @@ public class Bank {
         return true;
     }
 
-    public Boolean removeCustomer(Person person){
+    public Boolean removeCustomer(Person person) {
         if (!customers.contains(person)) {
             return false;
         }
