@@ -37,14 +37,11 @@ public class Bank {
     }
 
     public Boolean removeCustomer(Person person) {
-        if (person == null) {
-            return false;
-        }
         if (!customers.contains(person)) {
             return false;
         }
         customers.remove(person);
-        person.setBankCard(null);
+        person.removeBankCard();
         return true;
     }
 

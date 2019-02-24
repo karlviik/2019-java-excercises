@@ -57,6 +57,10 @@ public class Person {
         return Optional.ofNullable(bankCard);
     }
 
+    public void removeBankCard() {
+        bankCard = null;
+    }
+
     public void setBankCard(BankCard bankCard) {
         if (this.bankCard != null && this.bankCard.getBank() == bankCard.getBank()) {
                 this.bankCard.getBank().removeCustomer(this);
