@@ -1,6 +1,5 @@
 package ee.taltech.iti0202.tk1;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
