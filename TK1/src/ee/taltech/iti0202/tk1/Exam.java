@@ -39,7 +39,7 @@ public class Exam {
             sum += b;
         }
         if (c != a && c != b) {
-            sum += b;
+            sum += c;
         }
         return sum;
     }
@@ -54,6 +54,18 @@ public class Exam {
      * getSandwich("xxbreadyy") → ""
      */
     public static String getSandwich(String str) {
+        if (str.length() <= 10) {
+            return "";
+        }
+        String[] substrings = str.split("bread");
+        if (substrings.length <= 1) {
+            return "";
+        }
+        for (String sub : substrings) {
+            if (str.contains("bread" + sub + "bread")) {
+                return sub;
+            }
+        }
         return "";
     }
 
@@ -68,6 +80,10 @@ public class Exam {
      * topping({"pancake": "syrup"}) → {"bread": "butter", "pancake": "syrup"}
      */
     public static Map<String, String> topping(Map<String, String> map) {
-        return null;
+        map.put("bread", "butter");
+        if (map.containsKey("ice cream")) {
+            map.put("ice cream", "cherry");
+        }
+        return map;
     }
 }
