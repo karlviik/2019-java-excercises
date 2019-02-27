@@ -63,13 +63,7 @@ public class Exam {
      * getSandwich("xxbreadyy") → ""
      */
     public static String getSandwich(String str) {
-        if (str.length() <= 10) {
-            return "";
-        }
         String[] substrings = str.split("bread");
-        if (substrings.length <= 1) {
-            return "";
-        }
         for (String sub : substrings) {
             if (str.contains("bread" + sub + "bread")) {
                 return sub;
