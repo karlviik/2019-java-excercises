@@ -18,8 +18,17 @@ public class Exam {
      * evenOdd([2, 2, 2]) → [2, 2, 2]
      */
     public static List<Integer> evenOdd(List<Integer> nums) {
-        nums.sort(Comparator.comparing(x -> x % 2 == 0));
-        return nums;
+        List<Integer> evens = new LinkedList<>();
+        List<Integer> odds = new LinkedList<>();
+        for (Integer num : nums) {
+            if (num % 2 == 0) {
+                evens.add(num);
+            } else {
+                odds.add(num);
+            }
+        }
+        evens.addAll(odds);
+        return evens;
     }
 
     /**
