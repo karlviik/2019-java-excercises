@@ -63,13 +63,20 @@ public class Exam {
      * getSandwich("xxbreadyy") → ""
      */
     public static String getSandwich(String str) {
-        String[] substrings = str.split("bread");
-        for (String sub : substrings) {
-            if (str.contains("bread" + sub + "bread")) {
-                return sub;
+        Integer startOfFirstBread = null;
+        Integer startOfLastBread = null;
+
+        for (int i = 0; i < str.length() - 4; i++) {
+            if (startOfFirstBread == null && str.substring(i, i + 5).equals("bread")) {
+                startOfFirstBread = i;
+            } else if (startOfFirstBread != null && str.substring(i, i + 5).equals("bread")) {
+                startOfLastBread = i;
             }
         }
-        return "";
+        if (startOfFirstBread == null || startOfLastBread == null) {
+            return "";
+        }
+        return str.substring(startOfFirstBread + 5, startOfLastBread);
     }
 
     /**
