@@ -22,7 +22,7 @@ public class Person {
         return false;
     }
 
-    boolean sellCat(Person sellTo, Cat cat) {
+    public boolean sellCat(Person sellTo, Cat cat) {
         if (sellTo == this || !cats.contains(cat)) {
             return false;
         }
