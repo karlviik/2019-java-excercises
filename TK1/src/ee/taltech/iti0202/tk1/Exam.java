@@ -31,7 +31,17 @@ public class Exam {
      * loneSum(3, 3, 3) → 0
      */
     public static int loneSum(int a, int b, int c) {
-        return 0;
+        int sum = 0;
+        if (a != b && a != c) {
+            sum += a;
+        }
+        if (b != a && b != c) {
+            sum += b;
+        }
+        if (c != a && c != b) {
+            sum += b;
+        }
+        return sum;
     }
 
     /**
