@@ -1,5 +1,5 @@
-
 package ee.taltech.iti0202.shelter.animal;
+
 public abstract class Animal {
     public enum Type {
         HIROLA, TARANTULA, WOMBAT

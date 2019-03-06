@@ -1,4 +1,5 @@
 package ee.taltech.iti0202.shelter.shelter;
+
 import ee.taltech.iti0202.shelter.animal.Animal;
 import ee.taltech.iti0202.shelter.animalprovider.AnimalProvider;
 
@@ -38,7 +39,9 @@ public class AnimalShelter {
             if (providedAnimals.size() == 0) {
                 return animals;
             }
-            providedAnimals = providedAnimals.stream().filter(x -> x.getColor().equals(color)).collect(Collectors.toList());
+            providedAnimals = providedAnimals.stream()
+                    .filter(x -> x.getColor().equals(color))
+                    .collect(Collectors.toList());
             int providedCounter = 0;
             while (count > 0 && providedCounter < providedAnimals.size()) {
                 animals.add(providedAnimals.get(providedCounter));
