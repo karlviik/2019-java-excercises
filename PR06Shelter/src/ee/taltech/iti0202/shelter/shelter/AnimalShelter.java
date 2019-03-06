@@ -44,9 +44,12 @@ public class AnimalShelter {
                     .collect(Collectors.toList());
             int providedCounter = 0;
             while (count > 0 && providedCounter < providedAnimals.size()) {
-                animals.add(providedAnimals.get(providedCounter));
+                Animal nextAnimal = providedAnimals.get(providedCounter);
+                if (!animals.contains(nextAnimal)) {
+                    animals.add(nextAnimal);
+                    count -= 1;
+                }
                 providedCounter += 1;
-                count -= 1;
             }
         }
         return animals;
