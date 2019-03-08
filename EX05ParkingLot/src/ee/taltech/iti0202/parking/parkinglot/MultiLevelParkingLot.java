@@ -60,4 +60,3 @@ public class MultiLevelParkingLot extends ParkingLot {
         return queue.size() < 10;
     }
 }
-

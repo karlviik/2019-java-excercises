@@ -63,7 +63,7 @@ public class City {
             return Optional.empty();
         }
         ParkingLot targetLot = viableLots.stream()
-                .filter(x-> x.getQueueSize() == viableLots.stream()
+                .filter(x -> x.getQueueSize() == viableLots.stream()
                         .min(Comparator.comparingInt(ParkingLot::getQueueSize))
                         .get()
                         .getQueueSize())

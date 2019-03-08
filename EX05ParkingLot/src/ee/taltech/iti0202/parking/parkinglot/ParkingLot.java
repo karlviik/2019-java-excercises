@@ -2,7 +2,8 @@ package ee.taltech.iti0202.parking.parkinglot;
 
 import ee.taltech.iti0202.parking.car.Car;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parking lot is a rectangular area with fixed with and height.
@@ -22,7 +23,7 @@ import java.util.*;
  * in its queue and how the queue is processed.
  * See the class description for more information.
  */
-abstract public class ParkingLot {
+public abstract class ParkingLot {
 
     private final int width;
     private final int height;
@@ -63,7 +64,7 @@ abstract public class ParkingLot {
      * which could initialize the process.
      *
      */
-    abstract public void processQueue();
+    public abstract void processQueue();
 
     /**
      * Returns a list of parked cars in the order they were received from the queue.
@@ -128,4 +129,3 @@ abstract public class ParkingLot {
         this.creationId = creationId;
     }
 }
-

@@ -1,5 +1,7 @@
 package ee.taltech.iti0202.parking.car;
 
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * Represents a car with priority and size.
  * The size can be one of 1, 2, 4 (the code doesn't have to validate it).
@@ -23,11 +25,19 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car o) {
-        if(this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) return 1;
-        else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) return -1;
+        if (this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) {
+            return 1;
+        }
+        else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
+            return -1;
+        }
         else if (this.status == PriorityStatus.PRIORITY) {
-            if (o.status == PriorityStatus.HIGHEST) return -1;
-            else if (o.status == PriorityStatus.COMMON) return 1;
+            if (o.status == PriorityStatus.HIGHEST) {
+                return -1;
+            }
+            else if (o.status == PriorityStatus.COMMON) {
+                return 1;
+            }
         }
         return Integer.compare(this.size, o.size);
     }
@@ -66,6 +76,7 @@ public class Car implements Comparable<Car> {
         if (!isParked) {
             return false;
         }
+        return false;  // placeholder
     }
 
     public boolean isParked() {
@@ -88,6 +99,9 @@ public class Car implements Comparable<Car> {
                 break;
             case COMMON:
                 output += "C";
+                break;
+            default:
+                output += "thestylecheckwantsmetodothisanditistotallynotrequiredbecausetherearenootheroptions";
                 break;
         }
         output += size;
