@@ -1,5 +1,8 @@
 
 package ee.taltech.iti0202.parking.parkinglot;
+
+import ee.taltech.iti0202.parking.car.Car;
+
 /**
  * Modern parking lot located under ground.
  * The parking lot has several levels.
@@ -50,6 +53,11 @@ public class MultiLevelParkingLot extends ParkingLot {
     @Override
     public String getTable() {
         return super.getTable();
+    }
+
+    @Override
+    public boolean doYouAcceptThisCar(Car car) {
+        return queue.size() < 10;
     }
 }
 

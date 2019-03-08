@@ -3,9 +3,11 @@ import ee.taltech.iti0202.parking.car.Car;
 import ee.taltech.iti0202.parking.parkinglot.ParkingLot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+import java.util.Map;
+import java.util.Comparator;
 
 public class City {
     private String name;
@@ -48,7 +50,27 @@ public class City {
      *          empty() in case no parking lot is suitable.
      */
     public Optional<ParkingLot> parkCar(Car car) {
-        return Optional.empty();
+        ArrayList<ParkingLot> viableLots = new ArrayList<>();
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.getQueue().contains(car) || parkingLot.getParkedCars().contains(car)) {
+                return Optional.empty();
+            }
+            if (parkingLot.doYouAcceptThisCar(car)) {
+                viableLots.add(parkingLot);
+            }
+        }
+        if (viableLots.size() == 0) {
+            return Optional.empty();
+        }
+        ParkingLot targetLot = viableLots.stream()
+                .filter(x-> x.getQueueSize() == viableLots.stream()
+                        .min(Comparator.comparingInt(ParkingLot::getQueueSize))
+                        .get()
+                        .getQueueSize())
+                .min(Comparator.comparing(ParkingLot::getCreationId))
+                .get();
+        targetLot.addToQueue(car);
+        return Optional.of(targetLot);
     }
 
     /**
@@ -67,7 +89,16 @@ public class City {
      * @return map with priority-size counts
      */
     public Map<String, Integer> getParkedCarCountBySizeAndPriority() {
-        return null;
+        HashMap<String, Integer> parkedCarsMap = new HashMap<>();
+        for (String carString : Car.POSSIBLE_STRINGS) {
+            parkedCarsMap.put(carString, 0);
+        }
+        for (ParkingLot parkingLot : parkingLots) {
+            for (Car car : parkingLot.getParkedCars()) {
+                parkedCarsMap.put(car.toString(), parkedCarsMap.get(car.toString()) + 1);
+            }
+        }
+        return parkedCarsMap;
     }
 
     /**
@@ -77,7 +108,15 @@ public class City {
      * @return Count of cars in queue.
      */
     public int getCarCountInQueue(Car.PriorityStatus priorityStatus, int size) {
-        return -1;
+        int queuedCarsCount = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (Car car : parkingLot.getQueue()) {
+                if (car.getPriorityStatus() == priorityStatus) {
+                    queuedCarsCount++;
+                }
+            }
+        }
+        return queuedCarsCount;
     }
 
     /**
@@ -87,6 +126,18 @@ public class City {
      * @return Count of parked cars.
      */
     public int getParkedCarCount(Car.PriorityStatus priorityStatus, int size) {
-        return -1;
+        int parkedCarCount = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (Car car : parkingLot.getParkedCars()) {
+                if (car.getPriorityStatus() == priorityStatus) {
+                    parkedCarCount++;
+                }
+            }
+        }
+        return parkedCarCount;
+    }
+
+    public String getName() {
+        return name;
     }
 }

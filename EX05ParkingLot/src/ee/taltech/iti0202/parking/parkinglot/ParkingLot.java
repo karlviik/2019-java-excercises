@@ -26,8 +26,9 @@ abstract public class ParkingLot {
 
     private final int width;
     private final int height;
-
     private int creationId;
+    ArrayList<Car> parkedCars;
+    ArrayList<Car> queue;
 
     /**
      * Initialize the parking slot with the given width and height.
@@ -47,6 +48,7 @@ abstract public class ParkingLot {
      * @param car Car to be added
      */
     public boolean addToQueue(Car car) {
+        queue.add(car);
         return true;
     }
 
@@ -63,14 +65,12 @@ abstract public class ParkingLot {
      */
     abstract public void processQueue();
 
-
-
     /**
      * Returns a list of parked cars in the order they were received from the queue.
      * @return A list of parked cars.
      */
     public List<Car> getParkedCars() {
-        return null;
+        return parkedCars;
     }
 
     /**
@@ -110,6 +110,19 @@ abstract public class ParkingLot {
         return "";
     }
 
+    public int getCreationId() {
+        return creationId;
+    }
+
+    public ArrayList<Car> getQueue() {
+        return queue;
+    }
+
+    public int getQueueSize() {
+        return queue.size();
+    }
+
+    public abstract boolean doYouAcceptThisCar(Car car);
 
     public void setCreationId(int creationId) {
         this.creationId = creationId;

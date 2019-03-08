@@ -1,4 +1,7 @@
 package ee.taltech.iti0202.parking.parkinglot;
+
+import ee.taltech.iti0202.parking.car.Car;
+
 /**
  * Accepts all cars if the queue size is less than 5.
  * Small car (size 1) with the highest priority can park alone.
@@ -21,5 +24,10 @@ public class PriorityParkingLot extends ParkingLot {
     @Override
     public void processQueue() {
 
+    }
+
+    @Override
+    public boolean doYouAcceptThisCar(Car car) {
+        return queue.size() < 5;
     }
 }

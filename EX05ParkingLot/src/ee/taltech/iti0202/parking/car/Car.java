@@ -13,6 +13,9 @@ package ee.taltech.iti0202.parking.car;
 public class Car implements Comparable<Car> {
     private PriorityStatus status;
     private int size;
+    private boolean isParked;
+    public static final String[] POSSIBLE_STRINGS = {"H1", "H2", "H4", "P1", "P2", "P4", "C1", "C2", "C4"};
+
 
     public enum PriorityStatus {
         HIGHEST, PRIORITY, COMMON
@@ -20,7 +23,13 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car o) {
-        return 0;
+        if(this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) return 1;
+        else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) return -1;
+        else if (this.status == PriorityStatus.PRIORITY) {
+            if (o.status == PriorityStatus.HIGHEST) return -1;
+            else if (o.status == PriorityStatus.COMMON) return 1;
+        }
+        return Integer.compare(this.size, o.size);
     }
 
     public Car(PriorityStatus status, int size) {
@@ -44,6 +53,7 @@ public class Car implements Comparable<Car> {
         return size;
     }
 
+    // TODO: this thing
     /**
      * Finish parking. This car has finished parking.
      * The car should be removed from parking lot
@@ -53,7 +63,34 @@ public class Car implements Comparable<Car> {
      * @return True if the car was parking, false otherwise.
      */
     public boolean unpark() {
-        return true;
+        if (!isParked) {
+            return false;
+        }
+    }
+
+    public boolean isParked() {
+        return isParked;
+    }
+
+    public void setParked(boolean parked) {
+        isParked = parked;
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        switch (status) {
+            case HIGHEST:
+                output += "H";
+                break;
+            case PRIORITY:
+                output += "P";
+                break;
+            case COMMON:
+                output += "C";
+                break;
+        }
+        output += size;
+        return output;
     }
 }
-
