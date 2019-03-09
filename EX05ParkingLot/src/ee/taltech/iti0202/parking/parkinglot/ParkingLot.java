@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.parking.parkinglot;
 
+import ee.taltech.iti0202.parking.City;
 import ee.taltech.iti0202.parking.car.Car;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public abstract class ParkingLot {
 
     final int width;
     final int height;
+    City city = null;
     private int creationId;
     ArrayList<Car> parkedCars = new ArrayList<>();
     PriorityQueue<Car> queue = new PriorityQueue<>();
@@ -133,5 +135,13 @@ public abstract class ParkingLot {
 
     public void setCreationId(int creationId) {
         this.creationId = creationId;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
