@@ -53,9 +53,12 @@ public class City {
      *          empty() in case no parking lot is suitable.
      */
     public Optional<ParkingLot> parkCar(Car car) {
+        if (car.isParked()) {
+            return Optional.empty();
+        }
         ArrayList<ParkingLot> viableLots = new ArrayList<>();
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getQueue().contains(car) || parkingLot.getParkedCars().contains(car)) {
+            if (parkingLot.getQueue().contains(car)) {
                 return Optional.empty();
             }
             if (parkingLot.doYouAcceptThisCar(car)) {

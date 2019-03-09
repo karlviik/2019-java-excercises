@@ -28,8 +28,8 @@ public abstract class ParkingLot {
     final int width;
     final int height;
     private int creationId;
-    ArrayList<Car> parkedCars;
-    ArrayList<Car> queue;
+    ArrayList<Car> parkedCars = new ArrayList<>();
+    ArrayList<Car> queue = new ArrayList<>();
 
     /**
      * Initialize the parking slot with the given width and height.
