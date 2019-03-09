@@ -32,15 +32,9 @@ public class SmallCarParkingLot extends ParkingLot {
         }
     }
 
-    public void unparkCar(Car car) {
-        Integer[] coords = locations.get(car);
-        locations.remove(car);
-        map[coords[0]][coords[1]] = null;
-        emptySlots.add(coords);
-        parkedCars.remove(car);
-        processQueue();
-    }
 
+
+    @Override
     public String getTable() {
         LinkedList<String> tableRows = new LinkedList<>();
         for (Car[] cars : map) {
@@ -76,5 +70,15 @@ public class SmallCarParkingLot extends ParkingLot {
     @Override
     public boolean doYouAcceptThisCar(Car car) {
         return car.getSize() == 1;
+    }
+
+    @Override
+    public void unparkCar(Car car) {
+        Integer[] coords = locations.get(car);
+        locations.remove(car);
+        map[coords[0]][coords[1]] = null;
+        emptySlots.add(coords);
+        parkedCars.remove(car);
+        processQueue();
     }
 }
