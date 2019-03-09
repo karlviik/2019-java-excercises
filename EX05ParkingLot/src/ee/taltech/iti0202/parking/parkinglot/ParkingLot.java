@@ -4,6 +4,7 @@ import ee.taltech.iti0202.parking.car.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Parking lot is a rectangular area with fixed with and height.
@@ -29,7 +30,7 @@ public abstract class ParkingLot {
     final int height;
     private int creationId;
     ArrayList<Car> parkedCars = new ArrayList<>();
-    ArrayList<Car> queue = new ArrayList<>();
+    PriorityQueue<Car> queue = new PriorityQueue<>();
 
     /**
      * Initialize the parking slot with the given width and height.
@@ -113,7 +114,7 @@ public abstract class ParkingLot {
         return creationId;
     }
 
-    public ArrayList<Car> getQueue() {
+    public PriorityQueue<Car> getQueue() {
         return queue;
     }
 

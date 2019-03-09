@@ -53,14 +53,11 @@ public class City {
      *          empty() in case no parking lot is suitable.
      */
     public Optional<ParkingLot> parkCar(Car car) {
-        if (car.isParked()) {
+        if (car.getLocation() != null) {
             return Optional.empty();
         }
         ArrayList<ParkingLot> viableLots = new ArrayList<>();
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getQueue().contains(car)) {
-                return Optional.empty();
-            }
             if (parkingLot.doYouAcceptThisCar(car)) {
                 viableLots.add(parkingLot);
             }
@@ -76,6 +73,7 @@ public class City {
                 .min(Comparator.comparing(ParkingLot::getCreationId))
                 .get();
         targetLot.addToQueue(car);
+        car.setLocation(targetLot);
         targetLot.processQueue();
         return Optional.of(targetLot);
     }

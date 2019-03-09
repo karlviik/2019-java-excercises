@@ -59,18 +59,17 @@ public class SmallCarParkingLot extends ParkingLot {
 
     @Override
     public void processQueue() {
-        for (int i = 0; i < queue.size(); i++) {
+        while (true) {
             if (emptySlots.size() == 0) {
                 break;
             }
-            Car car = queue.get(0);
+            Car car = queue.poll();
             Integer[] coords = emptySlots.get(0);
             emptySlots.remove(0);
             locations.put(car, coords);
             map[coords[0]][coords[1]] = car;
             parkedCars.add(car);
-            queue.remove(car);
-            car.setLocation(this);
+            car.setParked();
         }
     }
 

@@ -18,6 +18,7 @@ public class Car implements Comparable<Car> {
     private PriorityStatus status;
     private int size;
     private ParkingLot location;
+    private boolean isParked = false;
     public static final String[] POSSIBLE_STRINGS = {"H1", "H2", "H4", "P1", "P2", "P4", "C1", "C2", "C4"};
 
 
@@ -66,7 +67,6 @@ public class Car implements Comparable<Car> {
         return size;
     }
 
-    // TODO: this thing
     /**
      * Finish parking. This car has finished parking.
      * The car should be removed from parking lot
@@ -76,15 +76,24 @@ public class Car implements Comparable<Car> {
      * @return True if the car was parking, false otherwise.
      */
     public boolean unpark() {
-        if (location == null) {
+        if (location == null || !isParked) {
             return false;
         }
         location.unparkCar(this);
+        isParked = false;
         return true;
     }
 
+    public void setParked() {
+        isParked = true;
+    }
+
+    public ParkingLot getLocation() {
+        return location;
+    }
+
     public boolean isParked() {
-        return location != null;
+        return isParked;
     }
 
     public void setLocation(ParkingLot parkingLot) {
