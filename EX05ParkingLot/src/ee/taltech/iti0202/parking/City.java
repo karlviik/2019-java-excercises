@@ -26,8 +26,10 @@ public class City {
      * @return true if parking lot was added.
      */
     public boolean addParkingLot(ParkingLot parkingLot) {
-        if (parkingLots.contains(parkingLot)) {
-            return false;
+        for (ParkingLot cityParkingLot : parkingLots) {
+            if (cityParkingLot.getClass().equals(parkingLot.getClass())) {
+                return false;
+            }
         }
         parkingLot.setCreationId(creationNo);
         creationNo += 1;
