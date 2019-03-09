@@ -37,6 +37,7 @@ public class SmallCarParkingLot extends ParkingLot {
         locations.remove(car);
         map[coords[0]][coords[1]] = null;
         emptySlots.add(coords);
+        parkedCars.remove(car);
         car.setLocation(null);
         processQueue();
     }
@@ -45,14 +46,17 @@ public class SmallCarParkingLot extends ParkingLot {
         LinkedList<String> tableRows = new LinkedList<>();
         for (Car[] cars : map) {
             String row = "";
+            String otherRow = "";
             for (Car car : cars) {
                 if (car == null) {
                     row = row.concat("..");
                 } else {
                     row = row.concat(car.toString());
                 }
+                otherRow = otherRow.concat("..");
             }
             tableRows.add(row);
+            tableRows.add(otherRow);
         }
         return String.join("\n", tableRows);
     }
