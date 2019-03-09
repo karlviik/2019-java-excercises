@@ -25,8 +25,8 @@ import java.util.List;
  */
 public abstract class ParkingLot {
 
-    private final int width;
-    private final int height;
+    final int width;
+    final int height;
     private int creationId;
     ArrayList<Car> parkedCars;
     ArrayList<Car> queue;
@@ -107,9 +107,7 @@ public abstract class ParkingLot {
      *
      * @return String representation of the parking lot
      */
-    public String getTable() {
-        return "";
-    }
+    public abstract String getTable();
 
     public int getCreationId() {
         return creationId;
@@ -124,6 +122,8 @@ public abstract class ParkingLot {
     }
 
     public abstract boolean doYouAcceptThisCar(Car car);
+
+    public abstract void unparkCar(Car car);
 
     public void setCreationId(int creationId) {
         this.creationId = creationId;

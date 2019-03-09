@@ -1,5 +1,7 @@
 package ee.taltech.iti0202.parking.car;
 
+import ee.taltech.iti0202.parking.parkinglot.ParkingLot;
+
 import java.util.InvalidPropertiesFormatException;
 
 /**
@@ -15,7 +17,7 @@ import java.util.InvalidPropertiesFormatException;
 public class Car implements Comparable<Car> {
     private PriorityStatus status;
     private int size;
-    private boolean isParked;
+    private ParkingLot location;
     public static final String[] POSSIBLE_STRINGS = {"H1", "H2", "H4", "P1", "P2", "P4", "C1", "C2", "C4"};
 
 
@@ -45,6 +47,7 @@ public class Car implements Comparable<Car> {
     public Car(PriorityStatus status, int size) {
         this.status = status;
         this.size = size;
+        location = null;
     }
 
     /**
@@ -73,18 +76,19 @@ public class Car implements Comparable<Car> {
      * @return True if the car was parking, false otherwise.
      */
     public boolean unpark() {
-        if (!isParked) {
+        if (location == null) {
             return false;
         }
-        return false;  // placeholder
+        location.unparkCar(this);
+        return true;
     }
 
     public boolean isParked() {
-        return isParked;
+        return location != null;
     }
 
-    public void setParked(boolean parked) {
-        isParked = parked;
+    public void setLocation(ParkingLot parkingLot) {
+        location = parkingLot;
     }
 
     @Override
