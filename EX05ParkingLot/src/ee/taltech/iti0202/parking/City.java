@@ -113,7 +113,7 @@ public class City {
         int queuedCarsCount = 0;
         for (ParkingLot parkingLot : parkingLots) {
             for (Car car : parkingLot.getQueue()) {
-                if (car.getPriorityStatus() == priorityStatus) {
+                if (car.getPriorityStatus() == priorityStatus && car.getSize() == size) {
                     queuedCarsCount++;
                 }
             }
@@ -131,7 +131,7 @@ public class City {
         int parkedCarCount = 0;
         for (ParkingLot parkingLot : parkingLots) {
             for (Car car : parkingLot.getParkedCars()) {
-                if (car.getPriorityStatus() == priorityStatus) {
+                if (car.getPriorityStatus() == priorityStatus && car.getSize() == size) {
                     parkedCarCount++;
                 }
             }
