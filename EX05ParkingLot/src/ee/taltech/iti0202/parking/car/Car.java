@@ -26,17 +26,17 @@ public class Car implements Comparable<Car> {
     @Override
     public int compareTo(Car o) {
         if (this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) {
-            return 1;
+            return -1;
         }
         else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
-            return -1;
+            return 1;
         }
         else if (this.status == PriorityStatus.PRIORITY) {
             if (o.status == PriorityStatus.HIGHEST) {
-                return -1;
+                return 1;
             }
             else if (o.status == PriorityStatus.COMMON) {
-                return 1;
+                return -1;
             }
         }
         return Integer.compare(this.size, o.size);
