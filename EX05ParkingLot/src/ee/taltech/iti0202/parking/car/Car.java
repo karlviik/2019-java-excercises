@@ -71,7 +71,7 @@ public class Car implements Comparable<Car> {
      * @return True if the car was parking, false otherwise.
      */
     public boolean unpark() {
-        if (location == null || !isParked) {
+        if (location == null) {
             return false;
         }
         location.unparkCar(this);

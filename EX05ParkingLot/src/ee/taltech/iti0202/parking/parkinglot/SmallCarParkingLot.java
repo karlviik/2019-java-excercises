@@ -74,11 +74,15 @@ public class SmallCarParkingLot extends ParkingLot {
 
     @Override
     public void unparkCar(Car car) {
-        Integer[] coords = locations.get(car);
-        locations.remove(car);
-        map[coords[0]][coords[1]] = null;
-        emptySlots.add(coords);
-        parkedCars.remove(car);
+        if (car.isParked()) {
+            Integer[] coords = locations.get(car);
+            locations.remove(car);
+            map[coords[0]][coords[1]] = null;
+            emptySlots.add(coords);
+            parkedCars.remove(car);
+        } else {
+            queue.remove(car);
+        }
         processQueue();
     }
 }
