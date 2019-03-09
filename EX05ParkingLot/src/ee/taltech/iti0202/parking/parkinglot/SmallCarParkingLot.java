@@ -67,6 +67,17 @@ public class SmallCarParkingLot extends ParkingLot {
     }
 
     @Override
+    public boolean addToQueue(Car car) {
+        if (this.doYouAcceptThisCar(car) && car.getLocation() == null) {
+            queue.add(car);
+            car.setLocation(this);
+            processQueue();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean doYouAcceptThisCar(Car car) {
         return car.getSize() == 1;
     }
@@ -76,8 +87,8 @@ public class SmallCarParkingLot extends ParkingLot {
         if (car.isParked()) {
             Integer[] coords = locations.get(car);
             locations.remove(car);
-            map[coords[0]][coords[1]] = null;
             emptySlots.add(coords);
+            map[coords[0]][coords[1]] = null;
             parkedCars.remove(car);
         } else {
             queue.remove(car);

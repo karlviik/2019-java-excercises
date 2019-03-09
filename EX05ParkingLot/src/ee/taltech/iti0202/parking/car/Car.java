@@ -13,37 +13,22 @@ import ee.taltech.iti0202.parking.parkinglot.ParkingLot;
  * So highest-1 (priority status-size) comes before highest-2 which comes before priority-1.
  */
 public class Car implements Comparable<Car> {
+
     private PriorityStatus status;
     private int size;
-    private ParkingLot location;
+    private ParkingLot location = null;
     private boolean isParked = false;
     public static final String[] POSSIBLE_STRINGS = {"H1", "H2", "H4", "P1", "P2", "P4", "C1", "C2", "C4"};
-
 
     public enum PriorityStatus {
         HIGHEST, PRIORITY, COMMON
     }
 
-    @Override
-    public int compareTo(Car o) {
-        if (this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) {
-            return -1;
-        } else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
-            return 1;
-        } else if (this.status == PriorityStatus.PRIORITY) {
-            if (o.status == PriorityStatus.HIGHEST) {
-                return 1;
-            } else if (o.status == PriorityStatus.COMMON) {
-                return -1;
-            }
-        }
-        return Integer.compare(this.size, o.size);
-    }
+
 
     public Car(PriorityStatus status, int size) {
         this.status = status;
         this.size = size;
-        location = null;
     }
 
     /**
@@ -115,5 +100,21 @@ public class Car implements Comparable<Car> {
         }
         output += size;
         return output;
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        if (this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) {
+            return -1;
+        } else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
+            return 1;
+        } else if (this.status == PriorityStatus.PRIORITY) {
+            if (o.status == PriorityStatus.HIGHEST) {
+                return 1;
+            } else if (o.status == PriorityStatus.COMMON) {
+                return -1;
+            }
+        }
+        return Integer.compare(this.size, o.size);
     }
 }
