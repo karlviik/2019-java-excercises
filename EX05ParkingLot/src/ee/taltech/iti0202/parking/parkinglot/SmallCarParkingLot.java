@@ -33,7 +33,6 @@ public class SmallCarParkingLot extends ParkingLot {
     }
 
 
-
     @Override
     public String getTable() {
         LinkedList<String> tableRows = new LinkedList<>();
