@@ -50,8 +50,9 @@ public abstract class ParkingLot {
      * @param car Car to be added
      */
     public boolean addToQueue(Car car) {
-        if (this.doYouAcceptThisCar(car)) {
+        if (this.doYouAcceptThisCar(car) && car.getLocation() == null) {
             queue.add(car);
+            car.setLocation(this);
             return true;
         }
         return false;
