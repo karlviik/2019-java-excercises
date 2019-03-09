@@ -48,7 +48,7 @@ public class SmallCarParkingLot extends ParkingLot {
                 otherRow = otherRow.concat("..");
             }
             tableRows.add(row);
-            tableRows.add(row);
+            tableRows.add(otherRow);
         }
         return String.join("\n", tableRows);
     }
@@ -64,17 +64,6 @@ public class SmallCarParkingLot extends ParkingLot {
             parkedCars.add(car);
             car.setParked();
         }
-    }
-
-    @Override
-    public boolean addToQueue(Car car) {
-        if (this.doYouAcceptThisCar(car) && car.getLocation() == null) {
-            queue.add(car);
-            car.setLocation(this);
-            processQueue();
-            return true;
-        }
-        return false;
     }
 
     @Override
