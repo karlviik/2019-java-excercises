@@ -60,7 +60,7 @@ public class SmallCarParkingLot extends ParkingLot {
     @Override
     public void processQueue() {
         while (true) {
-            if (emptySlots.size() == 0) {
+            if (emptySlots.size() == 0 || queue.size() == 0) {
                 break;
             }
             Car car = queue.poll();
