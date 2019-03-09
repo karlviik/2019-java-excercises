@@ -2,8 +2,6 @@ package ee.taltech.iti0202.parking.car;
 
 import ee.taltech.iti0202.parking.parkinglot.ParkingLot;
 
-import java.util.InvalidPropertiesFormatException;
-
 /**
  * Represents a car with priority and size.
  * The size can be one of 1, 2, 4 (the code doesn't have to validate it).
@@ -30,15 +28,12 @@ public class Car implements Comparable<Car> {
     public int compareTo(Car o) {
         if (this.status == PriorityStatus.HIGHEST && o.status != PriorityStatus.HIGHEST) {
             return -1;
-        }
-        else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
+        } else if (this.status == PriorityStatus.COMMON && o.status != PriorityStatus.COMMON) {
             return 1;
-        }
-        else if (this.status == PriorityStatus.PRIORITY) {
+        } else if (this.status == PriorityStatus.PRIORITY) {
             if (o.status == PriorityStatus.HIGHEST) {
                 return 1;
-            }
-            else if (o.status == PriorityStatus.COMMON) {
+            } else if (o.status == PriorityStatus.COMMON) {
                 return -1;
             }
         }
