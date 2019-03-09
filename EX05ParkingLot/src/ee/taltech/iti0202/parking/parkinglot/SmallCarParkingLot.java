@@ -49,7 +49,7 @@ public class SmallCarParkingLot extends ParkingLot {
                 otherRow = otherRow.concat("..");
             }
             tableRows.add(row);
-            tableRows.add(otherRow);
+            tableRows.add(row);
         }
         return String.join("\n", tableRows);
     }

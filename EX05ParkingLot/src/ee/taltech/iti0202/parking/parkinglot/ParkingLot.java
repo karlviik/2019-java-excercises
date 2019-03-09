@@ -53,6 +53,7 @@ public abstract class ParkingLot {
         if (this.doYouAcceptThisCar(car) && car.getLocation() == null) {
             queue.add(car);
             car.setLocation(this);
+            processQueue();
             return true;
         }
         return false;

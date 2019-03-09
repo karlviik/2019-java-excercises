@@ -73,8 +73,6 @@ public class City {
                 .min(Comparator.comparing(ParkingLot::getCreationId))
                 .get();
         targetLot.addToQueue(car);
-        car.setLocation(targetLot);
-        targetLot.processQueue();
         return Optional.of(targetLot);
     }
 
