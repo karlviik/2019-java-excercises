@@ -80,6 +80,7 @@ public class Car implements Comparable<Car> {
             return false;
         }
         location.unparkCar(this);
+        location = null;
         isParked = false;
         return true;
     }

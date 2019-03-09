@@ -27,7 +27,7 @@ public class City {
      */
     public boolean addParkingLot(ParkingLot parkingLot) {
         for (ParkingLot cityParkingLot : parkingLots) {
-            if (cityParkingLot.equals(parkingLot)) {
+            if (cityParkingLot.getClass().equals(parkingLot.getClass())) {
                 return false;
             }
         }

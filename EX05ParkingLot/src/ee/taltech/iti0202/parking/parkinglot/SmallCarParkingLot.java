@@ -38,7 +38,6 @@ public class SmallCarParkingLot extends ParkingLot {
         map[coords[0]][coords[1]] = null;
         emptySlots.add(coords);
         parkedCars.remove(car);
-        car.setLocation(null);
         processQueue();
     }
 
@@ -63,10 +62,7 @@ public class SmallCarParkingLot extends ParkingLot {
 
     @Override
     public void processQueue() {
-        while (true) {
-            if (emptySlots.size() == 0 || queue.size() == 0) {
-                break;
-            }
+        while (emptySlots.size() != 0 && queue.size() != 0) {
             Car car = queue.poll();
             Integer[] coords = emptySlots.get(0);
             emptySlots.remove(0);
