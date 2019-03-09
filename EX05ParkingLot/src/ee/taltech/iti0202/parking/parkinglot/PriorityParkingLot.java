@@ -27,7 +27,17 @@ public class PriorityParkingLot extends ParkingLot {
     }
 
     @Override
+    public String getTable() {
+        return null;
+    }
+
+    @Override
     public boolean doYouAcceptThisCar(Car car) {
         return queue.size() < 5;
+    }
+
+    @Override
+    public void unparkCar(Car car) {
+
     }
 }

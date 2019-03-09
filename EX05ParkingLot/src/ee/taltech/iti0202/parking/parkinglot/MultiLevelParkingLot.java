@@ -52,11 +52,16 @@ public class MultiLevelParkingLot extends ParkingLot {
      */
     @Override
     public String getTable() {
-        return super.getTable();
+        return "";
     }
 
     @Override
     public boolean doYouAcceptThisCar(Car car) {
         return queue.size() < 10;
+    }
+
+    @Override
+    public void unparkCar(Car car) {
+
     }
 }
