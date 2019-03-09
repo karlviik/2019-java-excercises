@@ -16,6 +16,7 @@ public class City {
 
     public City(String name) {
         this.name = name;
+        parkingLots = new ArrayList<>();
     }
 
     /**
@@ -70,6 +71,7 @@ public class City {
                 .min(Comparator.comparing(ParkingLot::getCreationId))
                 .get();
         targetLot.addToQueue(car);
+        targetLot.processQueue();
         return Optional.of(targetLot);
     }
 

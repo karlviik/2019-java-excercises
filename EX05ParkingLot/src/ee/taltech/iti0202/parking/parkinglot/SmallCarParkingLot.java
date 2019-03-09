@@ -38,6 +38,7 @@ public class SmallCarParkingLot extends ParkingLot {
         map[coords[0]][coords[1]] = null;
         emptySlots.add(coords);
         car.setLocation(null);
+        processQueue();
     }
 
     public String getTable() {
