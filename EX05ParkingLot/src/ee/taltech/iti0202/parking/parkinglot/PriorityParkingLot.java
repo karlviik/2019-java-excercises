@@ -40,6 +40,7 @@ public class PriorityParkingLot extends ParkingLot {
             Car car = queue.peek();
             if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
                 unparkAndQueueAllCommonCars();
+                continue;
             }
             ArrayList<Integer[]> coords = getParkingSpot(car.getSize(), car.getPriorityStatus());
             if (coords.size() == 0) {
