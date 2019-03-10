@@ -1,4 +1,5 @@
 package ee.taltech.iti0202.files.output;
+
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
