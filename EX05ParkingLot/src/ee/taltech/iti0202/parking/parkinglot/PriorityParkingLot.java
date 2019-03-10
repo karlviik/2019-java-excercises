@@ -38,22 +38,16 @@ public class PriorityParkingLot extends ParkingLot {
     public void processQueue() {
         while (queue.size() > 0) {
             Car car = queue.peek();
-            if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
-                if (unparkAndQueueAllCommonCars()) {
-                    continue;
-                }
-            }
             ArrayList<Integer[]> coords = getParkingSpot(car.getSize(), car.getPriorityStatus());
             if (coords.size() == 0) {
-                return;
-//                if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
-//                    return;
-//                } else {
-//                    if (unparkAndQueueAllCommonCars()) {
-//                        continue;
-//                    }
-//                    return;
-//                }
+                if (car.getPriorityStatus() != Car.PriorityStatus.HIGHEST) {
+                    return;
+                } else {
+                    if (unparkAndQueueAllCommonCars()) {
+                        continue;
+                    }
+                    return;
+                }
             }
             parkedCars.add(queue.poll());
             locations.put(car, coords);
