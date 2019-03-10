@@ -18,10 +18,11 @@ public class InputFilesBufferReader implements InputFilesReader {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             while (true) {
                 String line = reader.readLine();
-                lines.add(line);
                 if (line == null) {
                     break;
                 }
+                line = line.replace("\n", "");
+                lines.add(line);
             }
         } catch (Exception e) {
             throw new FileReaderException("No such file", e);
