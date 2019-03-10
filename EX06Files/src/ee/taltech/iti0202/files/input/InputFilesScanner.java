@@ -13,14 +13,15 @@ public class InputFilesScanner implements InputFilesReader {
     public List<String> readTextFromFile(String filename) {
         LinkedList<String> lines = new LinkedList<>();
         Path path = Paths.get(filename);
+        // Path path = Paths.get("EX06Files", "src", filename);  //TODO :: remove this
+        System.out.println(path);
         try (Scanner scanner = new Scanner(path)) {
-            while (scanner.hasNext()) {
+            while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-//                if (line == null) {
-//                    break;
-//                }
-//                line = line.replace("\n", "");
-//                if (line.length() == 0) continue;
+                if (line == null) {
+                    break;
+                }
+                line = line.replace("\n", "");
                 lines.add(line);
             }
         } catch (Exception e) {

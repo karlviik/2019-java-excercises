@@ -1,9 +1,21 @@
 package ee.taltech.iti0202.files.output;
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class OutputFilesWriter {
 
     public boolean writeLinesToFile(List<String> lines, String filename) {
-        return false;
+        Path path = Paths.get(filename);
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (String line : lines) {
+                writer.write(line);
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

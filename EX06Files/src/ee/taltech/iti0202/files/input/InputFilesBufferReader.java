@@ -14,6 +14,7 @@ public class InputFilesBufferReader implements InputFilesReader {
     public List<String> readTextFromFile(String filename) {
         LinkedList<String> lines = new LinkedList<>();
         Path path = Paths.get(filename);
+        // Path path = Paths.get("EX06Files", "src", filename);  // TODO :: remove this
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             while (true) {
                 String line = reader.readLine();
