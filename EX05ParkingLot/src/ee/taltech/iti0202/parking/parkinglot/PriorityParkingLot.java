@@ -45,12 +45,14 @@ public class PriorityParkingLot extends ParkingLot {
                 } else {
                     if (unparkAndQueueAllCommonCars()) {
                         continue;
+                    } else {
+                        return;
                     }
-                    return;
                 }
             }
             parkedCars.add(queue.poll());
             locations.put(car, coords);
+            car.setParked();
             for (Integer[] coord : coords) {
                 map[coord[0]][coord[1]][coord[2]] = car;
             }
