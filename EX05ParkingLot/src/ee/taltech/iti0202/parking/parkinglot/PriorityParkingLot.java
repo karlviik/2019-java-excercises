@@ -163,6 +163,9 @@ public class PriorityParkingLot extends ParkingLot {
             queue.remove(car);
         } else {
             ArrayList<Integer[]> coords = locations.get(car);
+            for (Integer[] coord : coords) {
+                map[coord[0]][coord[1]][coord[2]] = null;
+            }
             locations.remove(car);
             emptySlots.addAll(coords);
             parkedCars.remove(car);
