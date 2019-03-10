@@ -16,10 +16,10 @@ public class InputFilesScanner implements InputFilesReader {
         try (Scanner scanner = new Scanner(path)) {
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
-                if (line == null) {
-                    break;
-                }
-                line = line.replace("\n", "");
+//                if (line == null) {
+//                    break;
+//                }
+//                line = line.replace("\n", "");
 //                if (line.length() == 0) continue;
                 lines.add(line);
             }
