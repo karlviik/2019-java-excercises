@@ -10,9 +10,11 @@ public class OutputFilesWriter {
     public boolean writeLinesToFile(List<String> lines, String filename) {
         Path path = Paths.get(filename);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            for (String line : lines) {
-                writer.write(line);
-            }
+            String everything = String.join("\n", lines);
+            writer.write(everything);
+//            for (String line : lines) {
+//                writer.write(line);
+//            }
         } catch (Exception e) {
             return false;
         }
