@@ -13,6 +13,7 @@ public class MorseTranslator {
         HashMap<String, String> alphabetToMorse = new HashMap<>();
         HashMap<String, String> alphabetFromMorse = new HashMap<>();
         for (String line : lines) {
+            line = line.toLowerCase();
             line = line.replace("\n", "");
             String[] relation = line.split("\\s");
             alphabetToMorse.put(relation[0], relation[1]);
