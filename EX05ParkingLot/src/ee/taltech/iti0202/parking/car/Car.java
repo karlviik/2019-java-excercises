@@ -69,6 +69,10 @@ public class Car implements Comparable<Car> {
         isParked = true;
     }
 
+    public void setUnparked() {
+        isParked = false;
+    }
+
     public ParkingLot getLocation() {
         return location;
     }
