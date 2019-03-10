@@ -80,14 +80,14 @@ public class MultiLevelParkingLot extends ParkingLot {
                             if (j < height - 1 && map[i][j + 1][k][0] == null && map[i][j + 1][k][1] == null) {
                                 parkingSpots.add(new Integer[]{i, j, k, 0});
                                 parkingSpots.add(new Integer[]{i, j, k, 1});
-                                parkingSpots.add(new Integer[]{i + 1, j, k, 0});
-                                parkingSpots.add(new Integer[]{i + 1, j, k, 1});
+                                parkingSpots.add(new Integer[]{i, j + 1, k, 0});
+                                parkingSpots.add(new Integer[]{i, j + 1, k, 1});
                                 return parkingSpots;
                             } else if (k < width - 1 && map[i][j][k + 1][0] == null && map[i][j][k + 1][1] == null) {
                                 parkingSpots.add(new Integer[]{i, j, k, 0});
                                 parkingSpots.add(new Integer[]{i, j, k, 1});
-                                parkingSpots.add(new Integer[]{i, j + 1, k, 0});
-                                parkingSpots.add(new Integer[]{i, j + 1, k, 1});
+                                parkingSpots.add(new Integer[]{i, j, k + 1, 0});
+                                parkingSpots.add(new Integer[]{i, j, k + 1, 1});
                                 return parkingSpots;
                             }
                         }
