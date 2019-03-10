@@ -2,8 +2,10 @@ package ee.taltech.iti0202.parking.parkinglot;
 
 import ee.taltech.iti0202.parking.car.Car;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -18,7 +20,6 @@ public class PriorityParkingLot extends ParkingLot {
 
     private Car[][][] map;
     private HashMap<Car, ArrayList<Integer[]>> locations = new HashMap<>();
-    private ArrayList<Integer[]> emptySlots = new ArrayList<>();
     // queue
     // parkedcars
 
@@ -31,33 +32,30 @@ public class PriorityParkingLot extends ParkingLot {
     public PriorityParkingLot(int height, int width) {
         super(height, width);
         map = new Car[height][width][2];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                emptySlots.add(new Integer[] {i, j, 0});
-                emptySlots.add(new Integer[] {i, j, 1});
-            }
-        }
     }
 
     @Override
     public void processQueue() {
         while (queue.size() > 0) {
             Car car = queue.peek();
+            if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
+                unparkAndQueueAllCommonCars();
+            }
             ArrayList<Integer[]> coords = getParkingSpot(car.getSize(), car.getPriorityStatus());
             if (coords.size() == 0) {
-                if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
-                    return;
-                } else {
-                    if (unparkAndQueueAllCommonCars()) {
-                        continue;
-                    }
-                    return;
-                }
+                return;
+//                if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
+//                    return;
+//                } else {
+//                    if (unparkAndQueueAllCommonCars()) {
+//                        continue;
+//                    }
+//                    return;
+//                }
             }
             parkedCars.add(queue.poll());
             locations.put(car, coords);
             for (Integer[] coord : coords) {
-                emptySlots.removeIf(x -> Arrays.equals(x, coord));
                 map[coord[0]][coord[1]][coord[2]] = car;
             }
 
@@ -92,7 +90,7 @@ public class PriorityParkingLot extends ParkingLot {
                     }
                 } else {
                     if (map[i][j][0] == null && map[i][j][1] == null) {
-                        if ( i < height - 1 && map[i + 1][j][0] == null && map[i + 1][j][1] == null) {
+                        if (i < height - 1 && map[i + 1][j][0] == null && map[i + 1][j][1] == null) {
                             parkingSpots.add(new Integer[] {i, j, 0});
                             parkingSpots.add(new Integer[] {i, j, 1});
                             parkingSpots.add(new Integer[] {i + 1, j, 0});
@@ -163,11 +161,10 @@ public class PriorityParkingLot extends ParkingLot {
             queue.remove(car);
         } else {
             ArrayList<Integer[]> coords = locations.get(car);
+            locations.remove(car);
             for (Integer[] coord : coords) {
                 map[coord[0]][coord[1]][coord[2]] = null;
             }
-            locations.remove(car);
-            emptySlots.addAll(coords);
             parkedCars.remove(car);
         }
     }
