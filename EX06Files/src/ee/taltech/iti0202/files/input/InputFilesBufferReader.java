@@ -2,7 +2,6 @@ package ee.taltech.iti0202.files.input;
 import ee.taltech.iti0202.files.exception.FileReaderException;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

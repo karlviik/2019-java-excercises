@@ -20,6 +20,7 @@ public class InputFilesScanner implements InputFilesReader {
                     break;
                 }
                 line = line.replace("\n", "");
+                if (line.length() == 0) continue;
                 lines.add(line);
             }
         } catch (Exception e) {
