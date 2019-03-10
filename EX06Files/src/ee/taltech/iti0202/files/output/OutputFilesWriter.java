@@ -12,9 +12,6 @@ public class OutputFilesWriter {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             String everything = String.join("\n", lines);
             writer.write(everything);
-//            for (String line : lines) {
-//                writer.write(line);
-//            }
         } catch (Exception e) {
             return false;
         }

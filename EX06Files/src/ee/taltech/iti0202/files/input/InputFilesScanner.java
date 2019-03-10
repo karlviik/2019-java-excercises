@@ -13,7 +13,6 @@ public class InputFilesScanner implements InputFilesReader {
     public List<String> readTextFromFile(String filename) {
         LinkedList<String> lines = new LinkedList<>();
         Path path = Paths.get(filename);
-        // Path path = Paths.get("EX06Files", "src", filename);  //TODO :: remove this
         System.out.println(path);
         try (Scanner scanner = new Scanner(path)) {
             while (scanner.hasNextLine()) {
