@@ -19,8 +19,8 @@ public class InputFilesScanner implements InputFilesReader {
                 if (line == null) {
                     break;
                 }
-                line = line.replace("\n", "");
-                if (line.length() == 0) continue;
+//                line = line.replace("\n", "");
+//                if (line.length() == 0) continue;
                 lines.add(line);
             }
         } catch (Exception e) {
