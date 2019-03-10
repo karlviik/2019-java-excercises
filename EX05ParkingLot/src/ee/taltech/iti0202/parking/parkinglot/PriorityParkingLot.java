@@ -39,7 +39,7 @@ public class PriorityParkingLot extends ParkingLot {
         while (queue.size() > 0) {
             Car car = queue.peek();
             if (car.getPriorityStatus() == Car.PriorityStatus.HIGHEST) {
-                if (!unparkAndQueueAllCommonCars()) {
+                if (unparkAndQueueAllCommonCars()) {
                     continue;
                 }
             }
