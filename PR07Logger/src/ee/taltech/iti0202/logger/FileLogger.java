@@ -11,21 +11,26 @@ public class FileLogger extends Logger {
     Faili kirjutamise kohta saad lugeda javadocist.
     https://ained.ttu.ee/javadoc/output_file.html
      */
+    private String logFilePath;
 
     public FileLogger(String tag, String logFilePath) {
-        // super + do something with logFilePath
+        super(tag);
+        this.logFilePath = logFilePath;
     }
 
     public FileLogger(String tag, String logFilePath, Level level) {
-        // super + do something with logFilePath
+        super(tag, level);
+        this.logFilePath = logFilePath;
     }
 
     public FileLogger(String tag, String logFilePath, Level level, LogFormatter formatter) {
-        // super + do something with logFilePath
+        super(tag, level, formatter);
+        this.logFilePath = logFilePath;
     }
 
     public FileLogger(String tag, String logFilePath, LogFilter filter, LogFormatter formatter) {
-        // super + do something with logFilePath
+        super(tag, filter, formatter);
+        this.logFilePath = logFilePath;
     }
 
     @Override

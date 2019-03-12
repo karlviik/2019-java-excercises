@@ -32,7 +32,7 @@ public class Main {
 
         System.out.println("Custom formatter with dates");
         LogFormatter dateFormatter = log -> {
-            var logFormatter = new SimpleFormatter();
+            LogFormatter logFormatter = new SimpleFormatter();
             return String.format("%tF %<tT\t%s", new Date(), logFormatter.format(log));
         };
         logger = new ConsoleLogger("date", Level.DEBUG, dateFormatter);

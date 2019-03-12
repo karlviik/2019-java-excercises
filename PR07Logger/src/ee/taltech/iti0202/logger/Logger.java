@@ -76,26 +76,36 @@ public abstract class Logger {
     /**
      * Creates log with Level.SEVERE
      */
-    public final void severe(String message) { }
+    public final void severe(String message) {
+        log(Level.SEVERE, formatter.format(new Log(message, tag, Level.SEVERE)));
+    }
 
     /**
      * Creates log with Level.ERROR
      */
-    public final void error(String message) { }
+    public final void error(String message) {
+        log(Level.ERROR, formatter.format(new Log(message, tag, Level.ERROR)));
+    }
 
     /**
      * Creates log with Level.WARNING
      */
-    public final void warning(String message) { }
+    public final void warning(String message) {
+        log(Level.WARNING, formatter.format(new Log(message, tag, Level.WARNING)));
+    }
 
     /**
      * Creates log with Level.INFO
      */
-    public final void info(String message) { }
+    public final void info(String message) {
+        log(Level.INFO, formatter.format(new Log(message, tag, Level.INFO)));
+    }
 
     /**
      * Creates log with Level.DEBUG
      */
-    public final void debug(String message) { }
+    public final void debug(String message) {
+        log(Level.DEBUG, formatter.format(new Log(message, tag, Level.DEBUG)));
+    }
 
 }
