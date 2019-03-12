@@ -1,8 +1,7 @@
 package ee.taltech.iti0202.logger.filter;
-/*
-Liides LogFilter on funktsionaalne liides, mille eesmärk on selgeks teha, kas logi tuleb üles märkida. Omab vaid ühte meetodit boolean isLoggable(Log log)
 
+import ee.taltech.iti0202.logger.log.Log;
 
- */
 public interface LogFilter {
+    boolean isLoggable(Log log);
 }

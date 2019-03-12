@@ -1,24 +1,27 @@
 package ee.taltech.iti0202.logger.log;
+
 import ee.taltech.iti0202.logger.level.Level;
-/*
-Lihtne objekt, mille eesmärk on kapseldada kokku info logisõnumi kohta. Konstruktor võtab sisendiks sõnumi (message),
-sildi (tag) ja taseme (level) . Kõikide konstruktoris väärtustatud väärtuste jaoks on ka getterid.
- */
+
 public class Log {
+    private final String message;
+    private final String tag;
+    private final Level level;
 
     public Log(String message, String tag, Level level) {
-        // TODO
+        this.message = message;
+        this.tag = tag;
+        this.level = level;
     }
 
     public String getMessage() {
-        return null;
+        return message;
     }
 
     public String getTag() {
-        return null;
+        return tag;
     }
 
     public Level getLevel() {
-        return null;
+        return level;
     }
 }
