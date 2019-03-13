@@ -4,7 +4,6 @@ import ee.taltech.iti0202.logger.formatter.LogFormatter;
 import ee.taltech.iti0202.logger.level.Level;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
