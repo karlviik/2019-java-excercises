@@ -3,6 +3,8 @@ import ee.taltech.iti0202.logger.filter.LogFilter;
 import ee.taltech.iti0202.logger.formatter.LogFormatter;
 import ee.taltech.iti0202.logger.level.Level;
 
+import java.nio.file.Path;
+
 public class FileLogger extends Logger {
 
     /*
@@ -11,26 +13,26 @@ public class FileLogger extends Logger {
     Faili kirjutamise kohta saad lugeda javadocist.
     https://ained.ttu.ee/javadoc/output_file.html
      */
-    private String logFilePath;
+    private Path logFilePath;
 
     public FileLogger(String tag, String logFilePath) {
         super(tag);
-        this.logFilePath = logFilePath;
+        this.logFilePath = Path.of(logFilePath);
     }
 
     public FileLogger(String tag, String logFilePath, Level level) {
         super(tag, level);
-        this.logFilePath = logFilePath;
+        this.logFilePath = Path.of(logFilePath);
     }
 
     public FileLogger(String tag, String logFilePath, Level level, LogFormatter formatter) {
         super(tag, level, formatter);
-        this.logFilePath = logFilePath;
+        this.logFilePath = Path.of(logFilePath);
     }
 
     public FileLogger(String tag, String logFilePath, LogFilter filter, LogFormatter formatter) {
         super(tag, filter, formatter);
-        this.logFilePath = logFilePath;
+        this.logFilePath = Path.of(logFilePath);
     }
 
     @Override
