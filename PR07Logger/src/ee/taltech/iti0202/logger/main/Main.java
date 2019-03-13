@@ -47,6 +47,8 @@ public class Main {
 
         logger = new FileLogger(className, "log.tsv");
         testLogger(logger);
+        testLogger(logger);
+
     }
 
     private static void testLogger(Logger logger) {
