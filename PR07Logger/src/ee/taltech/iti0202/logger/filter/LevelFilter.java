@@ -13,6 +13,6 @@ public class LevelFilter implements LogFilter {
 
     @Override
     public boolean isLoggable(Log log) {
-        return log.getLevel().getValue() >= levelProvider.getLevel().getValue(); // should log if levelProviders.log.value is less or equal to Log.level.value
+        return log.getLevel().getValue() >= levelProvider.getLevel().getValue();
     }
 }

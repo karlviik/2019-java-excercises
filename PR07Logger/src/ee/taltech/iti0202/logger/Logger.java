@@ -5,7 +5,6 @@ import ee.taltech.iti0202.logger.filter.LogFilter;
 import ee.taltech.iti0202.logger.formatter.LogFormatter;
 import ee.taltech.iti0202.logger.formatter.SimpleFormatter;
 import ee.taltech.iti0202.logger.level.Level;
-import ee.taltech.iti0202.logger.level.LevelProvider;
 import ee.taltech.iti0202.logger.log.Log;
 
 public abstract class Logger {
@@ -43,7 +42,7 @@ public abstract class Logger {
      * @see ee.taltech.iti0202.logger.level.Level
      */
     public Logger(String tag, Level level, LogFormatter formatter) {
-        this(tag, new LevelFilter(()->level), formatter);
+        this(tag, new LevelFilter(() -> level), formatter);
     }
 
     /**

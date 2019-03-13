@@ -4,19 +4,15 @@ import ee.taltech.iti0202.logger.formatter.LogFormatter;
 import ee.taltech.iti0202.logger.level.Level;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class FileLogger extends Logger {
 
-    /*
-    Logger, mis kirjutab logid faili. Kui antud nimega faili ei ole siis teeb uue faili, muul juhul lisab faili lõppu uue logi.
-
-    Faili kirjutamise kohta saad lugeda javadocist.
-    https://ained.ttu.ee/javadoc/output_file.html
-     */
     private Path logFilePath;
 
     public FileLogger(String tag, String logFilePath) {
@@ -41,7 +37,9 @@ public class FileLogger extends Logger {
 
     @Override
     protected void writeLog(String message) {
-        try (BufferedWriter writer = Files.newBufferedWriter(logFilePath)) {
+        try (
+             BufferedWriter writer = Files.newBufferedWriter(logFilePath,
+                     StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.APPEND)) {
             writer.write(message + "\n");
         } catch (IOException e) {
             System.out.println("IOException:" + e.getMessage());
