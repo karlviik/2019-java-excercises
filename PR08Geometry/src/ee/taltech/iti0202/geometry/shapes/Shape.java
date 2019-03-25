@@ -30,7 +30,8 @@ public abstract class Shape {
     }
 
     public String drawMessage() {
-        return String.format("Shape: %s (%s), Number of angles: %d, Color: %s, Size: %d", name, getType(), getCorners(), color, size);
+        return String.format("Shape: %s (%s), Number of angles: %d, Color: %s, Size: %d",
+                name, getType(), getCorners(), color, size);
     }
 
     public String getName() {

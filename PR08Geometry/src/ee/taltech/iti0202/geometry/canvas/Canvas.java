@@ -19,7 +19,8 @@ public class Canvas {
             System.out.println(String.format("Shape %s was drawn successfully!", shape.getName()));
             return true;
         } else {
-            System.out.println(String.format("Shape %s was not drawn because it already exists on the canvas! Yeah, no copypasta in this neighbourhood!", shape.getName()));
+            System.out.println(String.format("Shape %s was not drawn because it already exists on the canvas! " +
+                    "Yeah, no copypasta in this neighbourhood!", shape.getName()));
             return false;
         }
     }
@@ -37,7 +38,8 @@ public class Canvas {
             System.out.println(String.format("Successfully erased %s from the canvas!", shape.getName()));
             return true;
         } else {
-            System.out.println(String.format("Couldn't erase %s from the canvas because it's not on there!", shape.getName()));
+            System.out.println(String.format("Couldn't erase %s from the canvas because it's not on there!",
+                    shape.getName()));
             return false;
         }
     }
