@@ -19,8 +19,8 @@ public class Canvas {
             System.out.println(String.format("Shape %s was drawn successfully!", shape.getName()));
             return true;
         } else {
-            System.out.println(String.format("Shape %s was not drawn because it already exists on the canvas! " +
-                    "Yeah, no copypasta in this neighbourhood!", shape.getName()));
+            System.out.println(String.format("Shape %s was not drawn because it already exists on the canvas! "
+                    + "Yeah, no copypasta in this neighbourhood!", shape.getName()));
             return false;
         }
     }
@@ -32,7 +32,7 @@ public class Canvas {
         return removeCount;
     }
 
-    public boolean eraseShape (Shape shape) {
+    public boolean eraseShape(Shape shape) {
         if (shapes.contains(shape)) {
             shapes.remove(shape);
             System.out.println(String.format("Successfully erased %s from the canvas!", shape.getName()));

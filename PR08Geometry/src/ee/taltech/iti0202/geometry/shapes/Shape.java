@@ -20,7 +20,8 @@ public abstract class Shape {
         TRIANGLE
     }
 
-    Shape() {}
+    Shape() {
+    }
 
     Shape(String name, Color color, int size) {
         this.name = name;
