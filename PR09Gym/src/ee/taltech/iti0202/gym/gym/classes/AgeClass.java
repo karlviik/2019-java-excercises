@@ -22,6 +22,6 @@ public class AgeClass extends Class {
     @Override
     public String toString() {
         return "Class " + name + ", instructor " + instructor + ", no people under " + age
-                + "\n Our participants are " + participants.toString();
+                + "\n Our participants are: " + participants.toString();
     }
 }
