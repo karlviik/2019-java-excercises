@@ -30,7 +30,7 @@ public class Ship {
     }
 
     public int getCurrentCapacityPercentage() {
-        return (int) Math.floor(currentCapacity / capacity * 100);
+        return 100 * currentCapacity / capacity;
     }
 
     public void addRestriction(String restriction) {
