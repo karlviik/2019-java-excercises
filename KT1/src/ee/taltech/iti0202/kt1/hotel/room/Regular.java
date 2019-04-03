@@ -3,8 +3,8 @@ package ee.taltech.iti0202.kt1.hotel.room;
 public class Regular extends Room {
     private int numberOfComplaints;
 
-    public Regular(int size, int number, boolean booked, int numberOfComplaints) {
-        super(size, number, booked, Type.REGULAR);
+    public Regular(int size, int number, int numberOfComplaints) {
+        super(size, number, Type.REGULAR);
         this.numberOfComplaints = numberOfComplaints;
     }
 

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * NOTE: this is unfinished, missing place where to show off, rest seems done-ish
+ * NOTE: this is unfinished, have some faults
  */
 public class Hotel {
     private ArrayList<Room> rooms = new ArrayList<>();

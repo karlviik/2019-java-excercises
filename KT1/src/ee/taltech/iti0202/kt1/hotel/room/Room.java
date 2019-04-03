@@ -11,10 +11,9 @@ public abstract class Room {
     Type type;
 
 
-    public Room(int size, int number, boolean booked, Type type) {
+    public Room(int size, int number, Type type) {
         this.size = size;
         this.number = number;
-        this.booked = booked;
         this.type = type;
     }
 

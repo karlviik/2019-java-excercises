@@ -4,8 +4,8 @@ public class Suite extends Room {
     private int bathCount;
     private int greatViewCount;
 
-    public Suite(int size, int number, boolean booked, int bathCount, int greatViewCount) {
-        super(size, number, booked, Type.SUITE);
+    public Suite(int size, int number, int bathCount, int greatViewCount) {
+        super(size, number, Type.SUITE);
         this.bathCount = bathCount;
         this.greatViewCount = greatViewCount;
     }
