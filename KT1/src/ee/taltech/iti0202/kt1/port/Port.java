@@ -50,7 +50,9 @@ public class Port {
         int successCount = 0;
         List<Cargo> toRemoveCargo = new ArrayList<>();
         for (Cargo cargo : cargoStorage) {
-            for (Ship ship : ships.stream().sorted(Comparator.comparingInt(Ship::getCurrentCapacityPercentage)).collect(Collectors.toList())) {
+            for (Ship ship : ships.stream()
+                    .sorted(Comparator.comparingInt(Ship::getCurrentCapacityPercentage))
+                    .collect(Collectors.toList())) {
                 if (ship.addCargo(cargo)) {
                     successCount++;
                     toRemoveCargo.add(cargo);

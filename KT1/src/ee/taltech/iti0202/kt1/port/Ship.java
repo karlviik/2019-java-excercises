@@ -21,7 +21,10 @@ public class Ship {
     }
 
     public boolean addCargo(Cargo cargo) {
-        if (cargo == null || cargoList.contains(cargo) || restrictions.contains(cargo.getName()) || currentCapacity + cargo.getTotalWeight() > capacity) {
+        if (cargo == null
+                || cargoList.contains(cargo)
+                || restrictions.contains(cargo.getName())
+                || currentCapacity + cargo.getTotalWeight() > capacity) {
             return false;
         }
         cargoList.add(cargo);

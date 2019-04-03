@@ -36,7 +36,9 @@ public class Hotel {
     }
 
     public Room bookRoomOfSize(Room.Type type, Integer size) {
-        Optional<Room> room = rooms.stream().filter(x -> x.getSize() >= size && !x.isBooked() && type.equals(x.getType())).findFirst();
+        Optional<Room> room = rooms.stream()
+                .filter(x -> x.getSize() >= size && !x.isBooked() && type.equals(x.getType()))
+                .findFirst();
         if (room.isPresent()) {
             Room chosenRoom = room.get();
             chosenRoom.book();
