@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * NOTE: this is unfinished, lack of time.
+ * NOTE: this is unfinished, missing place where to show off, rest seems done-ish
  */
 public class Hotel {
     private ArrayList<Room> rooms = new ArrayList<>();
@@ -27,13 +27,22 @@ public class Hotel {
         return false;
     }
 
+    public boolean unBook(Room room) {
+        return room.unBook();
+    }
+
     public Room bookRoom(Room.Type type) {
         return bookRoomOfSize(type, Integer.MAX_VALUE);
     }
 
     public Room bookRoomOfSize(Room.Type type, Integer size) {
-        Optional<Room> room = rooms.stream().filter(x -> x.getSize() >= size && type.equals(x.getType())).findFirst();
-        return room.isPresent() ? room.get() : null;
+        Optional<Room> room = rooms.stream().filter(x -> x.getSize() >= size && !x.isBooked() && type.equals(x.getType())).findFirst();
+        if (room.isPresent()) {
+            Room chosenRoom = room.get();
+            chosenRoom.book();
+            return chosenRoom;
+        }
+        return null;
     }
 
     public List getRoomsOfMinSize(int size) {
