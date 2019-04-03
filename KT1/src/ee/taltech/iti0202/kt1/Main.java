@@ -36,7 +36,7 @@ public class Main {
         System.out.println();
         System.out.println(abruka.getCurrentCapacityPercentage()); // 0
         System.out.println(abruka.addCargo(new Cargo("Leib", 20, 10))); // true
-        System.out.println(abruka.getCurrentCapacityPercentage()); // 10 AAAAH
+        System.out.println(abruka.getCurrentCapacityPercentage()); // 10
 
         System.out.println();
         System.out.println(paldiski.emptyCargoStorage()); // 20
