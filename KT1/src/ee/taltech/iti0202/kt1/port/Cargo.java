@@ -27,7 +27,7 @@ public class Cargo {
         if (size < 10 || weight < 10) {
             return 10;
         }
-        return size;
+        return size * size * weight;
     }
 
     public String toString() {
