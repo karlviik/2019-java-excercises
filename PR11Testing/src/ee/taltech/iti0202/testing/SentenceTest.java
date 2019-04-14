@@ -86,7 +86,25 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_MultipleWordSentenceRemoveWord_WordIsRemoved() {
+    public void testToString_ShortSentence_HasSentence() {
+        Sentence sentence = new Sentence("a");
+
+        String actual = sentence.toString();
+
+        assertEquals("A...", actual);
+    }
+
+    @Test
+    public void testToString_MultipleWordSentence_OnlyFirstLetterUppercase() {
+        Sentence sentence = new Sentence("ABcd efGH");
+
+        String actual = sentence.toString();
+
+        assertEquals("Abcd efgh...", actual);
+    }
+
+    @Test
+    public void testRemoveWord_MultipleWordSentenceRemoveWord_WordIsRemoved() {
         Sentence sentence = new Sentence("Hello there");
 
         sentence.removeWord("there");
@@ -96,7 +114,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_MultipleWordSentenceRemoveWord_FirstWordInstanceIsRemoved() {
+    public void testRemoveWord_MultipleWordSentenceRemoveWord_FirstWordInstanceIsRemoved() {
         Sentence sentence = new Sentence("Hello there ha there");
 
         sentence.removeWord("there");
@@ -106,7 +124,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_MultipleWordSentenceRemoveWord_FirstWordOfSentenceIsRemoved() {
+    public void testRemoveWord_MultipleWordSentenceRemoveWord_FirstWordOfSentenceIsRemoved() {
         Sentence sentence = new Sentence("Hello there");
 
         sentence.removeWord("Hello");
@@ -116,7 +134,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_PunctuationSentenceRemoveWord_NoWordRemoved() {
+    public void testRemoveWord_PunctuationSentenceRemoveWord_NoWordRemoved() {
         Sentence sentence = new Sentence("Hello there!");
 
         sentence.removeWord("there");
@@ -144,7 +162,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_EmptySentenceAddWord_HasWord() {
+    public void testAddWord_EmptySentenceAddWord_HasWord() {
         Sentence sentence = new Sentence();
 
         sentence.addWord("hi");
@@ -154,7 +172,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_NewSentenceAddWord_HasWord() {
+    public void testAddWord_NewSentenceAddWord_HasWord() {
         Sentence sentence = new Sentence("Hi there");
 
         sentence.addWord("heyo");
@@ -164,7 +182,7 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_NewPunctuationSentenceAddWord_NoNewWord() {
+    public void testAddWord_NewPunctuationSentenceAddWord_NoNewWord() {
         Sentence sentence = new Sentence("Hi there.");
 
         sentence.addWord("heyo");
