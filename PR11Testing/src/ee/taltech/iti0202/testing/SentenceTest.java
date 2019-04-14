@@ -15,14 +15,14 @@ public class SentenceTest {
         assertEquals("", actual);
     }
 
-    @Test
-    public void testToString_EmptyString_IsEmptyString() {
-        Sentence sentence = new Sentence("");
-
-        String actual = sentence.toString();
-
-        assertEquals("", actual);
-    }
+//    @Test
+//    public void testToString_EmptyString_IsEmptyString() {
+//        Sentence sentence = new Sentence("");
+//
+//        String actual = sentence.toString();
+//
+//        assertEquals("", actual);
+//    }
 
     @Test
     public void testToString_HasSentence_IsSentence() {
