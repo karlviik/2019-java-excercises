@@ -408,9 +408,8 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence();
         Sentence sentence2 = new Sentence();
 
-        boolean actual = sentence1.equals(sentence2);
-
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
     @Test
@@ -418,9 +417,11 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heyo");
         Sentence sentence2 = new Sentence("Heya");
 
-        boolean actual = sentence1.equals(sentence2);
+        boolean actual1 = sentence1.equals(sentence2);
+        boolean actual2 = sentence2.equals(sentence1);
 
-        assertFalse(actual);
+        assertFalse(actual2);
+        assertFalse(actual1);
     }
 
     @Test
@@ -428,9 +429,8 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heya!");
         Sentence sentence2 = new Sentence("Heya!");
 
-        boolean actual = sentence1.equals(sentence2);
-
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
     @Test
@@ -438,9 +438,11 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heya.");
         Sentence sentence2 = new Sentence("Heya");
 
-        boolean actual = sentence1.equals(sentence2);
+        boolean actual1 = sentence1.equals(sentence2);
+        boolean actual2 = sentence2.equals(sentence1);
 
-        assertFalse(actual);
+        assertFalse(actual2);
+        assertFalse(actual1);
     }
 
     @Test
@@ -448,9 +450,11 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heya.");
         Sentence sentence2 = new Sentence("Heya!");
 
-        boolean actual = sentence1.equals(sentence2);
+        boolean actual1 = sentence1.equals(sentence2);
+        boolean actual2 = sentence2.equals(sentence1);
 
-        assertFalse(actual);
+        assertFalse(actual2);
+        assertFalse(actual1);
     }
 
     @Test
@@ -458,9 +462,11 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heya.");
         Sentence sentence2 = new Sentence("Heya..");
 
-        boolean actual = sentence1.equals(sentence2);
+        boolean actual1 = sentence1.equals(sentence2);
+        boolean actual2 = sentence2.equals(sentence1);
 
-        assertFalse(actual);
+        assertFalse(actual2);
+        assertFalse(actual1);
     }
 
     @Test
@@ -469,9 +475,9 @@ public class SentenceTest {
         Sentence sentence2 = new Sentence("Heya");
 
         sentence2.addPunctuation(".");
-        boolean actual = sentence1.equals(sentence2);
 
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
     @Test
@@ -480,9 +486,9 @@ public class SentenceTest {
         Sentence sentence2 = new Sentence("Heya");
 
         sentence2.addPunctuation("...");
-        boolean actual = sentence1.equals(sentence2);
 
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
     @Test
@@ -490,9 +496,8 @@ public class SentenceTest {
         Sentence sentence1 = new Sentence("Heya...");
         Sentence sentence2 = new Sentence("Heya");
 
-        boolean actual = sentence1.equals(sentence2);
-
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
     @Test
@@ -501,9 +506,9 @@ public class SentenceTest {
         Sentence sentence2 = new Sentence("Heya");
 
         sentence2.addPunctuation("...");
-        boolean actual = sentence1.equals(sentence2);
 
-        assertTrue(actual);
+        assertEquals(sentence1, sentence2);
+        assertEquals(sentence2, sentence1);
     }
 
 }
