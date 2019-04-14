@@ -142,15 +142,15 @@ public class SentenceTest {
         assertEquals("There...", actual);
     }
 
-    @Test
-    public void testRemoveWord_MultipleWordSentenceRemoveUncapitalizedWord_FirstWordOfSentenceIsRemoved() {
-        Sentence sentence = new Sentence("Hello there");
-
-        sentence.removeWord("hello");
-        String actual = sentence.toString();
-
-        assertEquals("There...", actual);
-    }
+//    @Test
+//    public void testRemoveWord_MultipleWordSentenceRemoveUncapitalizedWord_FirstWordOfSentenceIsRemoved() {
+//        Sentence sentence = new Sentence("Hello there");
+//
+//        sentence.removeWord("hello");
+//        String actual = sentence.toString();
+//
+//        assertEquals("There...", actual);
+//    }
 
     @Test
     public void testRemoveWord_PunctuationSentenceRemoveWord_NoWordRemoved() {
