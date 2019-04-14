@@ -116,6 +116,15 @@ public class SentenceTest {
     }
 
     @Test
+    public void testToString_MultipleCapsWordSentence_KeepUppercase() {
+        Sentence sentence = new Sentence("HELLO THERE");
+
+        String actual = sentence.toString();
+
+        assertEquals("HELLO THERE...", actual);
+    }
+
+    @Test
     public void testRemoveWord_MultipleWordSentenceRemoveWord_WordIsRemoved() {
         Sentence sentence = new Sentence("Hello there");
 
@@ -392,6 +401,56 @@ public class SentenceTest {
         String actual = sentence.toString();
 
         assertEquals("Heyo...", actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoEmptySentences_IsTrue() {
+        Sentence sentence1 = new Sentence();
+        Sentence sentence2 = new Sentence();
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertTrue(actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoDifferentSentences_IsFalse() {
+        Sentence sentence1 = new Sentence("Heyo");
+        Sentence sentence2 = new Sentence("Heya");
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoSameSentences_IsTrue() {
+        Sentence sentence1 = new Sentence("Heya!");
+        Sentence sentence2 = new Sentence("Heya!");
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertTrue(actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoSameSentencesPunctuationDifference1_IsFalse() {
+        Sentence sentence1 = new Sentence("Heya.");
+        Sentence sentence2 = new Sentence("Heya");
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoSameSentencesPunctuationDifference2_IsFalse() {
+        Sentence sentence1 = new Sentence("Heya.");
+        Sentence sentence2 = new Sentence("Heya!");
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertFalse(actual);
     }
 
 }
