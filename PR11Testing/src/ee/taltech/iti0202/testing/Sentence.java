@@ -107,8 +107,7 @@ public class Sentence {
         String firstWord = sentence.get(0);
         if (firstWord.length() == 1) {
             firstWord = firstWord.toUpperCase();
-        }
-        else {
+        } else {
             firstWord = firstWord.substring(0, 1).toUpperCase() + firstWord.substring(1);
         }
         sentence.set(0, firstWord);
@@ -124,8 +123,7 @@ public class Sentence {
         String sentenceString = String.join(" ", sentenceToArray);
         if (hasPunctuation) {
             sentenceString += punctuation;
-        }
-        else {
+        } else {
             sentenceString += DEFAULT_NO_PUNCTUATION;
         }
         return sentenceString;

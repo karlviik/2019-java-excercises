@@ -86,6 +86,15 @@ public class SentenceTest {
     }
 
     @Test
+    public void testToString_MultiplePunctuationsInsideWords_KeepInsidePunctuation() {
+        Sentence sentence = new Sentence("Hel.!?lo .!?th!!ere");
+
+        String actual = sentence.toString();
+
+        assertEquals("Hel.!?lo .!?th!!ere...", actual);
+    }
+
+    @Test
     public void testToString_ShortSentence_HasSentence() {
         Sentence sentence = new Sentence("a");
 
@@ -124,10 +133,20 @@ public class SentenceTest {
     }
 
     @Test
-    public void testRemoveWord_MultipleWordSentenceRemoveWord_FirstWordOfSentenceIsRemoved() {
+    public void testRemoveWord_MultipleWordSentenceRemoveCapitalizedWord_FirstWordOfSentenceIsRemoved() {
         Sentence sentence = new Sentence("Hello there");
 
         sentence.removeWord("Hello");
+        String actual = sentence.toString();
+
+        assertEquals("There...", actual);
+    }
+
+    @Test
+    public void testRemoveWord_MultipleWordSentenceRemoveUncapitalizedWord_FirstWordOfSentenceIsRemoved() {
+        Sentence sentence = new Sentence("Hello there");
+
+        sentence.removeWord("hello");
         String actual = sentence.toString();
 
         assertEquals("There...", actual);
