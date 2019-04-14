@@ -2,7 +2,10 @@ package ee.taltech.iti0202.testing;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 
 public class SentenceTest {
 
@@ -161,6 +164,25 @@ public class SentenceTest {
 
         assertEquals("Hello there!", actual);
     }
+
+    @Test
+    public void testRemoveWord_EmptySentenceRemoveWord_ReturnFalse() {
+        Sentence sentence = new Sentence();
+
+        boolean actual = sentence.removeWord("there");
+
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testRemoveWord_WordSentenceRemovePartialWord_ReturnFalse() {
+        Sentence sentence = new Sentence("Hello there");
+
+        boolean actual = sentence.removeWord("the");
+
+        assertFalse(actual);
+    }
+
 
     @Test
     public void testRemoveWord_MultipleWordPunctuationSentence_WordRemoveReturnFalse() {
