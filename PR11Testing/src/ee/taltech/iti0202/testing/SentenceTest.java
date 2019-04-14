@@ -201,6 +201,24 @@ public class SentenceTest {
     }
 
     @Test
+    public void testAddWord_NewSentenceAddEmptyWord_AddWordReturnFalse() {
+        Sentence sentence = new Sentence("Hi there");
+
+        boolean actual = sentence.addWord("");
+
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testAddWord_NewSentenceAddWhitespaceWord_AddWordReturnFalse() {
+        Sentence sentence = new Sentence("Hi there");
+
+        boolean actual = sentence.addWord("  ");
+
+        assertFalse(actual);
+    }
+
+    @Test
     public void testAddWord_NewSentenceAddWord_AddWordReturnTrue() {
         Sentence sentence = new Sentence("Hi there");
 
@@ -245,6 +263,16 @@ public class SentenceTest {
         boolean actual = sentence.removePunctuation();
 
         assertFalse(actual);
+    }
+
+    @Test
+    public void testRemovePunctuation_MultiplePunctuationsInARowSentence_OnePunctuationRemoved() {
+        Sentence sentence = new Sentence("Hello there...");
+
+        sentence.removePunctuation();
+        String actual = sentence.toString();
+
+        assertEquals("Hello there.....", actual);
     }
 
     @Test
