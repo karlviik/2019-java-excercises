@@ -95,12 +95,12 @@ public class SentenceTest {
     }
 
     @Test
-    public void testToString_MultipleWordSentence_OnlyFirstLetterUppercase() {
+    public void testToString_MultipleWordSentence_KeepUppercase() {
         Sentence sentence = new Sentence("ABcd efGH");
 
         String actual = sentence.toString();
 
-        assertEquals("Abcd efgh...", actual);
+        assertEquals("ABcd efGH...", actual);
     }
 
     @Test
