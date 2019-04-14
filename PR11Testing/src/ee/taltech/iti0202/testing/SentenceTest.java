@@ -453,4 +453,25 @@ public class SentenceTest {
         assertFalse(actual);
     }
 
+    @Test
+    public void testEquals_EqualTwoSameSentencesPunctuationDifference3_IsFalse() {
+        Sentence sentence1 = new Sentence("Heya.");
+        Sentence sentence2 = new Sentence("Heya..");
+
+        boolean actual = sentence1.equals(sentence2);
+
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testEquals_EqualTwoSameSentencesPunctuationDifference4_IsTrue() {
+        Sentence sentence1 = new Sentence("Heya.");
+        Sentence sentence2 = new Sentence("Heya");
+
+        sentence2.addPunctuation(".");
+        boolean actual = sentence1.equals(sentence2);
+
+        assertTrue(actual);
+    }
+
 }
