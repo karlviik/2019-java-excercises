@@ -16,7 +16,7 @@ public class StatisticsCalculator {
     private BirdFilter filter;
     private List<Bird> birds;
 
-    public StatisticsCalculator(BirdDataController controller, BirdFilter filter) {
+    public StatisticsCalculator(BirdDataController controller, BirdFilter filter) throws BirdDataException {
         this.controller = controller;
         this.filter = filter;
     }
