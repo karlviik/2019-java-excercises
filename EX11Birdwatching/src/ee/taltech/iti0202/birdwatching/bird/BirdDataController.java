@@ -33,6 +33,8 @@ public class BirdDataController {
             }
         } catch (IOException e) {
             throw new BirdDataException(e.getMessage());
+        } catch (Exception e) {
+            throw new BirdDataException(e.getMessage());
         }
     }
 
