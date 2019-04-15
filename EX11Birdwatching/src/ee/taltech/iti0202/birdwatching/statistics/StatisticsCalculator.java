@@ -38,7 +38,7 @@ public class StatisticsCalculator {
     }
 
     public long countBirds() {
-        // could use .stream().count(); , but that's excessive
+        // could use .stream().count(); , but that's excessive.
         return getBirds().size();
     }
 
