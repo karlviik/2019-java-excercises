@@ -12,7 +12,7 @@ import java.util.List;
 public class BirdDataController {
     private List<Bird> birds = new ArrayList<>();
 
-    public void readBirdDataFromCsvFile(String filename) throws BirdDataException {
+    public void readBirdDataFromCsvFile(String filename) {
         Path path = Paths.get(filename);
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             BirdBuilder bb = new BirdBuilder();
@@ -32,7 +32,7 @@ public class BirdDataController {
 
             }
         } catch (IOException e) {
-            throw new BirdDataException(e.getMessage());
+            System.out.println(new BirdDataException(e.getMessage()).toString());
         }
     }
 

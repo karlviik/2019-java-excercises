@@ -17,7 +17,7 @@ public class StatisticsCalculator {
         this.filter = filter;
     }
 
-    public void prepareBirdData(String filename) throws BirdDataException {
+    public void prepareBirdData(String filename) {
         controller.readBirdDataFromCsvFile(filename);
         birds = filter.getSuitableBirds(controller.getBirds());
     }
