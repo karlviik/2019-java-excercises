@@ -106,7 +106,7 @@ public class StatisticsCalculator {
 
     public List<Bird> getLargeBirds(int skipCount) {
         return getBirds().stream()
-                .sorted()
+                .sorted(Comparator.comparing(Bird::getWeight))
                 .skip(skipCount)
                 .collect(Collectors.toList());
     }
