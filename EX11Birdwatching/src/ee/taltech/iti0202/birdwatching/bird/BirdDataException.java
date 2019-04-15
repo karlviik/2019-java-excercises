@@ -3,15 +3,14 @@ package ee.taltech.iti0202.birdwatching.bird;
 import java.awt.event.FocusEvent;
 
 public class BirdDataException extends Exception {
-
-
+    private static String ERROR_MESSAGE = "Error handling bird data.";
 
     public BirdDataException(Throwable cause) {
-        super(cause);
+        super(ERROR_MESSAGE, cause);
     }
 
     @Override
     public String toString() {
-        return "Error handling bird data.";
+        return ERROR_MESSAGE;
     }
 }
