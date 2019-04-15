@@ -17,8 +17,7 @@ public class BirdDataController {
         try (Stream<String> lines = Files.lines(path)) {
             lines.map(x -> x.split(","))
             .forEach(fields -> birds.add(
-                new BirdBuilder()
-                    .setSpecies(fields[0])
+                bb.setSpecies(fields[0])
                     .setWeight(Double.valueOf(fields[1]))
                     .setWingspan(Double.valueOf(fields[2]))
                     .setAge(Bird.Age.valueOf(fields[4].toUpperCase()))
