@@ -1,9 +1,7 @@
 package ee.taltech.iti0202.birdwatching.bird;
 
-import java.awt.event.FocusEvent;
-
 public class BirdDataException extends Exception {
-    private static String ERROR_MESSAGE = "Error handling bird data.";
+    private static String ERROR_MESSAGE = "Error handling bird data";
 
     public BirdDataException(Throwable cause) {
         super(ERROR_MESSAGE, cause);
