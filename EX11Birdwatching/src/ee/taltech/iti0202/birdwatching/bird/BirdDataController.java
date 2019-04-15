@@ -20,8 +20,8 @@ public class BirdDataController {
                 bb.setSpecies(fields[0])
                     .setWeight(Double.valueOf(fields[1]))
                     .setWingspan(Double.valueOf(fields[2]))
-                    .setAge(Bird.Age.valueOf(fields[3].toUpperCase()))
-                    .setSex(Bird.Sex.valueOf(fields[4].toUpperCase()))
+                    .setAge(Bird.Age.valueOf(fields[4].toUpperCase()))
+                    .setSex(Bird.Sex.valueOf(fields[3].toUpperCase()))
                     .createBird()
             ));
         } catch (IOException e) {
