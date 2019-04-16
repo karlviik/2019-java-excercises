@@ -52,6 +52,7 @@ public class Recursion {
 
   /**
    * Remove any char that isn't in the Pseudo Hawaiian pidgin language.
+   * Added more text just to get more testing.
    *
    * @param word a word that may contain other chars
    * @return a word where only Hawaiian pidgin chars exist
