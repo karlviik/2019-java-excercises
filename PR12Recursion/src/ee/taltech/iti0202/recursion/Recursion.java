@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Recursion {
-  private final static ArrayList<Character> ALLOWED_LETTERS = new ArrayList<>(
+  private static final ArrayList<Character> ALLOWED_LETTERS = new ArrayList<>(
       List.of('a', 'e', 'i', 'o', 'u', 'h', 'k', 'l', 'm', 'n', 'p', 'w', 'r', '\'', ' ', 'ā', 'ō', 'ū', '.', ',', '!', '?')
   );
 
