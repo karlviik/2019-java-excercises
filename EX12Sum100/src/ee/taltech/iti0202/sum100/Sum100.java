@@ -13,7 +13,9 @@ public class Sum100 {
         return List.of();
       }
     }
-    List<String> makeNumBigger = iterator(currentDigit + 1, sumSoFar, currentNumber < 0 ? currentNumber * 10 - currentDigit : currentNumber * 10 + currentDigit);
+    List<String> makeNumBigger = iterator(currentDigit + 1, sumSoFar, currentNumber < 0
+        ? currentNumber * 10 - currentDigit
+        : currentNumber * 10 + currentDigit);
     List<String> nextPosNum = iterator(currentDigit + 1, sumSoFar + currentNumber, currentDigit);
     List<String> nextNegNum = iterator(currentDigit + 1, sumSoFar + currentNumber, -currentDigit);
 
