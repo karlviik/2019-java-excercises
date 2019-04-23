@@ -10,7 +10,11 @@ public class PlantInColumns implements PlantingStrategy {
   @Override
   public String[][] plantHerbs(int height, int width, Map<String, Integer> plants) {
     String[][] plantField = new String[height][width];
-    List<Map.Entry<String, Integer>> plantEntries = plants.entrySet().stream().sorted(Comparator.comparing(x -> x.getValue())).collect(Collectors.toList());
+    List<Map.Entry<String, Integer>> plantEntries = plants
+        .entrySet()
+        .stream()
+        .sorted(Comparator.comparing(x -> x.getValue()))
+        .collect(Collectors.toList());
     for (int currentWidth = 0; currentWidth < width; currentWidth++) {
       for (int currentHeight = 0; currentHeight < height; currentHeight++) {
         String plant = plantEntries.get(0).getKey();
