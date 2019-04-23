@@ -20,11 +20,11 @@ public class HerbGarden {
     Gardener gardener = new Gardener("Els", strategy3);
 
     Map<String, Integer> herbs = new HashMap<>();
-    herbs.put("thyme", 7);
+    herbs.put("thyme", 3);
     herbs.put("parsley", 3);
     herbs.put("rosemary", 2);
 
-    String[][] plantedHerbs = gardener.plantHerbs(3, 4, herbs);
+    String[][] plantedHerbs = gardener.plantHerbs(2, 4, herbs);
 
     System.out.println(Arrays.stream(plantedHerbs).
         map(x -> String.join(",", x))
