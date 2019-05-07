@@ -66,15 +66,16 @@ public class TravelAgency {
         }
       }
     }
-    System.out.println(cities.get(5000).getAverageTemperature());
-    System.out.println(cities.get(0).getName());
-    System.out.println(cities.get(0).getTemperatures());
-    System.out.println(cities.get(0).getAverageHumidity());
-    System.out.println(cities.get(0).getHumidity());
-    System.out.println(cities.get(0).getLat());
-    System.out.println(cities.get(0).getLon());
-    System.out.println(cities.get(0).getWeatherCodes());
+//    System.out.println(cities.get(0).getName());
+//    System.out.println(cities.get(0).getTemperatures());
+//    System.out.println(cities.get(0).getAverageHumidity());
+//    System.out.println(cities.get(0).getHumidity());
+//    System.out.println(cities.get(0).getLat());
+//    System.out.println(cities.get(0).getLon());
+//    System.out.println(cities.get(0).getWeatherCodes());
 
+    Optional<City> wasd = client.chooseBestCity(cities);
+    System.out.println(cities.get(5000).getAverageTemperature());
 
 
 
