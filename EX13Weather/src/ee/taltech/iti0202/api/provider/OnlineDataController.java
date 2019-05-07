@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class OnlineDataController {
 
   class ApiResponse {
+    private Integer cod;
 
     private ApiCity city;
 
@@ -85,6 +86,9 @@ public class OnlineDataController {
     con.disconnect();
     Gson gson = new Gson();
     ApiResponse response = gson.fromJson(content.toString(), ApiResponse.class);
+    if (response.cod != 200) {
+      return "";
+    }
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.city.name)
         .setLon(response.city.coord.lon)

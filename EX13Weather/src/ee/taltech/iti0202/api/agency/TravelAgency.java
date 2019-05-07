@@ -60,7 +60,10 @@ public class TravelAgency {
     List<City> cities = new ArrayList<>();
     for (String cityName : cityNames) {
       if (!cityName.equals(client.getStartingCity())) {
-        cities.add(new Gson().fromJson(dataController.getCity(cityName), City.class));
+        String response = dataController.getCity(cityName);
+        if (!response.equals("")) {
+          cities.add(new Gson().fromJson(response, City.class));
+        }
       }
     }
     System.out.println(cities.get(0).getAverageTemperature());
