@@ -46,7 +46,9 @@ public class City {
   public Double getAverageTemperature() {
     Double sum = 0d;
     for (Double temp : temperatures) {
-      sum += temp;
+      if (temp != null) {
+        sum += temp;
+      }
     }
     return sum / temperatures.size();
 //    return temperatures.stream()
