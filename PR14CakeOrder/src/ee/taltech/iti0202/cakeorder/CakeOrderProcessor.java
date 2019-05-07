@@ -56,6 +56,8 @@ public class CakeOrderProcessor {
       for (String word : nameWords) {
         cakeId = cakeId.concat(word.substring(0, 1));
       }
+      cakeId += cakeId.length();
+      cake.cakeId = cakeId;
       total += cake.price * cake.kg;
       if (type.equals(CakeOrderProcessorType.MAKE_DAIRY_FREE)) {
         List<String> newIngredients = new ArrayList<>();
