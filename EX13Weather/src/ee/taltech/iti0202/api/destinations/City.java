@@ -4,8 +4,8 @@ import java.util.List;
 
 public class City {
   private String name;
-  private double lon;
-  private double lat;
+  private Double lon;
+  private Double lat;
   private List<Double> temperatures;
   private List<Double> humidity;
   private List<Integer> weatherCodes;
@@ -44,10 +44,15 @@ public class City {
   }
 
   public Double getAverageTemperature() {
-    return temperatures.stream()
-        .mapToDouble(x -> x)
-        .average()
-        .orElse(0);
+    Double sum = 0d;
+    for (Double temp : temperatures) {
+      sum += temp;
+    }
+    return sum / temperatures.size();
+//    return temperatures.stream()
+//        .mapToDouble(x -> x)
+//        .average()
+//        .orElse(0);
   }
 
   public Double getAverageHumidity() {
