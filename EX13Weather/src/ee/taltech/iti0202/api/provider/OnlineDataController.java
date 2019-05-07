@@ -14,45 +14,46 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OnlineDataController {
+
   class ApiResponse {
 
     private ApiCity city;
 
-    class ApiCity {
-
-      private String name;
-
-      private Coord coord;
-
-      class Coord {
-
-        private Double lon;
-
-        private Double lat;
-      }
-    }
-
     List<Datapoint> list;
+  }
 
-    class Datapoint {
+  class Datapoint {
 
-      @SerializedName("main")
-      private Measurements measurements;
+    @SerializedName("main")
+    private Measurements measurements;
 
-      class Measurements {
+    private List<Weather> weather;
+  }
 
-        private Double temp;
+  class Weather {
 
-        private Double humidity;
-      }
+    private Integer id;
+  }
 
-      private List<Weather> weather;
+  class ApiCity {
 
-      class Weather {
+    private String name;
 
-        private Integer id;
-      }
-    }
+    private Coord coord;
+  }
+
+  class Measurements {
+
+    private Double temp;
+
+    private Double humidity;
+  }
+
+  class Coord {
+
+    private Double lon;
+
+    private Double lat;
   }
 
   /**
