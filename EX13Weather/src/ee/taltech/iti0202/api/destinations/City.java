@@ -44,14 +44,14 @@ public class City {
     return weatherCodes;
   }
 
-  public double getAverageTemperature() {
+  public Double getAverageTemperature() {
     return temperatures.stream()
         .mapToDouble(x -> x)
         .average()
         .orElse(0);
   }
 
-  public double getAverageHumidity() {
+  public Double getAverageHumidity() {
     return humidity.stream().mapToDouble(Double::doubleValue).average().orElse(0);
 
   }
