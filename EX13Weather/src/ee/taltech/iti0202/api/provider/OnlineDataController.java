@@ -63,8 +63,6 @@ public class OnlineDataController {
    * @param cityName Name of the city
    * @return String in the form of a json-string
    *
-   *
-   *
    * f4f5c7fec3ac8e25ab261496495da93a
    */
   public String getCity(String cityName) throws IOException {
@@ -96,14 +94,17 @@ public class OnlineDataController {
         .setTemperatures(response.list
             .stream()
             .map(x -> x.measurements.temp)
+            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .setHumidity(response.list
             .stream()
             .map(x -> x.measurements.humidity)
+            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .setWeatherCodes(response.list
             .stream()
             .map(x -> x.weather.get(0).id)
+            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .createCity();
     return gson.toJson(city);
