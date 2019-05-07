@@ -61,19 +61,19 @@ public class TravelAgency {
     for (String cityName : cityNames) {
       if (!cityName.equals(client.getStartingCity())) {
         String response = dataController.getCity(cityName);
-//        if (!response.equals("")) {
-//          cities.add(new Gson().fromJson(response, City.class));
-//        }
+        if (!response.equals("")) {
+          cities.add(new Gson().fromJson(response, City.class));
+        }
       }
     }
-//    System.out.println(cities.get(0).getAverageTemperature());
-//    System.out.println(cities.get(0).getName());
-//    System.out.println(cities.get(0).getTemperatures());
-//    System.out.println(cities.get(0).getAverageHumidity());
-//    System.out.println(cities.get(0).getHumidity());
-//    System.out.println(cities.get(0).getLat());
-//    System.out.println(cities.get(0).getLon());
-//    System.out.println(cities.get(0).getWeatherCodes());
+    System.out.println(cities.get(5000).getAverageTemperature());
+    System.out.println(cities.get(0).getName());
+    System.out.println(cities.get(0).getTemperatures());
+    System.out.println(cities.get(0).getAverageHumidity());
+    System.out.println(cities.get(0).getHumidity());
+    System.out.println(cities.get(0).getLat());
+    System.out.println(cities.get(0).getLon());
+    System.out.println(cities.get(0).getWeatherCodes());
 
 
 
