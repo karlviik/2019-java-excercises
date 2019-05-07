@@ -76,7 +76,7 @@ public class CakeOrderProcessor {
       }
       if (type.equals(CakeOrderProcessorType.REMOVE_BEST_BEFORE_DAY_OVER)) {
         LocalDate bbd = LocalDate.parse(cake.bbd, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        if (LocalDate.now().compareTo(bbd) > 0) {
+        if (LocalDate.now().compareTo(bbd) >= 0) {
           removeList.add(cake);
         }
       }
