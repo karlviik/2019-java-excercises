@@ -10,6 +10,6 @@ public class WarmWeatherCityFinder implements CityFinderStrategy {
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
     return candidateCities.stream()
-        .max(Comparator.comparingDouble(City::getAverageTemperature));
+        .max(Comparator.comparing(City::getAverageTemperature));
   }
 }
