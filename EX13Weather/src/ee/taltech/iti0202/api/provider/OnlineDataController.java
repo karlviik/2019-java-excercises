@@ -87,6 +87,9 @@ public class OnlineDataController {
     if (response.cod != 200) {
       return "";
     }
+    if (response.list.size() == 0) {
+      return "";
+    }
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.city.name)
         .setLon(response.city.coord.lon)
