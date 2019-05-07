@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class HatesRainCityFinder implements CityFinderStrategy {
-  // TODO: this
-
+  private static final int DATAPOINTS = 40;
+  private static final int DATAPOINTS_IN_DAY = 8;
+  private static final double MAXIMUM_ALLOWED_HUMIDITY = 80d;
   /**
    * Klient ei soovi rohkemal kui ühel päeval vihma ning keskmine niiskus ei tohi olla ühelgi päeval üle 80%.
    * @param candidateCities
@@ -25,17 +26,17 @@ public class HatesRainCityFinder implements CityFinderStrategy {
       List<Integer> codes = city.getWeatherCodes();
       int rainyDayCount = 0;
       boolean hasRainedToday = false;
-      for (int i = 0; i < 40; i++) {
+      for (int i = 0; i < DATAPOINTS; i++) {
         sum += temps.get(i);
         if (!hasRainedToday && codes.get(i) / 100 == 5) {
           hasRainedToday = true;
           rainyDayCount++;
         }
         miniCounter++;
-        if (miniCounter == 8) {
+        if (miniCounter == DATAPOINTS_IN_DAY) {
           miniCounter = 0;
           hasRainedToday = false;
-          if (sum / 8 >= 80) {
+          if (sum / DATAPOINTS_IN_DAY >= MAXIMUM_ALLOWED_HUMIDITY) {
             willAdd = false;
             break;
           }

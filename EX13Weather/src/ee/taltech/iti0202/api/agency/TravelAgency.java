@@ -43,12 +43,12 @@ public class TravelAgency {
     return cityNames;
   }
 
-  // TODO: this
   /**
    * This method tries to find a suitable city for the client to visit.
    *
    * It uses OnlineDataController, to get data for the cities.
-   * After getting data about a city, SAVE IT for the duration of the cycle. OpenWeather API updates data every 10 minutes.
+   * After getting data about a city, SAVE IT for the duration of the cycle.
+   * OpenWeather API updates data every 10 minutes.
    * Create a City object using the CityBuilder here.
    * @param client a client who wants to go somewhere.
    * @return Optional city if the client was happy with it.

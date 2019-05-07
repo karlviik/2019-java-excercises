@@ -17,7 +17,12 @@ public class Client {
     this(name, startingCity, choosingStrategy, new ArrayList<>());
   }
 
-  public Client(String name, String startingCity, CityFinderStrategy choosingStrategy, List<String> wantsToVisitCities) {
+  public Client(
+      String name,
+      String startingCity,
+      CityFinderStrategy choosingStrategy,
+      List<String> wantsToVisitCities
+  ) {
     if (name == null || startingCity == null || choosingStrategy == null || wantsToVisitCities == null) {
       throw new InvalidParameterException();
     }

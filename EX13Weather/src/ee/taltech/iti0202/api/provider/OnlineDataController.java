@@ -67,7 +67,11 @@ public class OnlineDataController {
    */
   public String getCity(String cityName) throws IOException {
     cityName = cityName.replace(" ", "+");
-    URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric&appid=f4f5c7fec3ac8e25ab261496495da93a");
+    URL url = new URL(
+        "https://api.openweathermap.org/data/2.5/forecast?q="
+            + cityName
+            + "&units=metric&appid=f4f5c7fec3ac8e25ab261496495da93a"
+    );
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
     BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
