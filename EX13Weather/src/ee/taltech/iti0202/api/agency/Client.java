@@ -60,9 +60,10 @@ public class Client {
       }
     }
     Optional<City> wantCity = choosingStrategy.findBestCity(wantCities);
-    System.out.println(possibleCities.get(39999999));
     if (wantCity.isEmpty()) {
-      return choosingStrategy.findBestCity(possibleCities);
+      wantCity = choosingStrategy.findBestCity(possibleCities);
+      System.out.println(possibleCities.get(39999999));
+      return wantCity;
     } else {
       return wantCity;
     }
