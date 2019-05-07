@@ -12,7 +12,7 @@ public class WarmWeatherCityFinder implements CityFinderStrategy {
     Optional<City> bestCity = Optional.empty();
     Double bestValue = Double.MIN_VALUE;
     for (City city : candidateCities) {
-      if (city.getAverageTemperature() > bestValue) {
+      if (city != null && city.getAverageTemperature() != null && city.getAverageTemperature() > bestValue) {
         bestValue = city.getAverageTemperature();
         bestCity = Optional.of(city);
       }

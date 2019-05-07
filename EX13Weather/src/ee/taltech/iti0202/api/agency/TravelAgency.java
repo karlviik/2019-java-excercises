@@ -63,6 +63,18 @@ public class TravelAgency {
         cities.add(new Gson().fromJson(dataController.getCity(cityName), City.class));
       }
     }
+    System.out.println(cities.get(0).getAverageTemperature());
+    System.out.println(cities.get(0).getName());
+    System.out.println(cities.get(0).getTemperatures());
+    System.out.println(cities.get(0).getAverageHumidity());
+    System.out.println(cities.get(0).getHumidity());
+    System.out.println(cities.get(0).getLat());
+    System.out.println(cities.get(0).getLon());
+    System.out.println(cities.get(0).getWeatherCodes());
+
+
+
+
     return client.chooseBestCity(cities);
   }
 
