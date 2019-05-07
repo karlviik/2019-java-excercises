@@ -15,7 +15,11 @@ public class TravelAgency {
   private OnlineDataController dataController;
 
   public TravelAgency(List<String> cityNames, OnlineDataController dataController) {
-    this.cityNames = cityNames;
+    if (cityNames != null) {
+      this.cityNames = cityNames;
+    } else {
+      this.cityNames = new ArrayList<>();
+    }
     this.dataController = dataController;
   }
 
@@ -25,7 +29,7 @@ public class TravelAgency {
    * @param city city name.
    */
   public void addCity(String city) {
-    if (!cityNames.contains(city)) {
+    if (city != null && !cityNames.contains(city)) {
       cityNames.add(city);
     }
   }
@@ -50,6 +54,9 @@ public class TravelAgency {
    * @return Optional city if the client was happy with it.
    */
   public Optional<City> findSuitableCitiesForClient(Client client) throws IOException {
+    if (client == null) {
+      return Optional.empty();
+    }
     List<City> cities = new ArrayList<>();
     for (String cityName : cityNames) {
       if (!cityName.equals(client.getStartingCity())) {
