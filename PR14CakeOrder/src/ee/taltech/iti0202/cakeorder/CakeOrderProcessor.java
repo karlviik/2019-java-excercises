@@ -10,6 +10,7 @@ import java.util.List;
 
 
 public class CakeOrderProcessor {
+  private static final float MULTIPLIER_ADD = 0.1f;
   private int nextOrderId = 1;
 
   private class CakeOrder {
@@ -65,7 +66,7 @@ public class CakeOrderProcessor {
         for (String ingredient : cake.ingredients) {
           if (ingredient.equals("milk") || ingredient.equals("cream-cheese") || ingredient.equals("yoghurt")) {
             newIngredients.add("plant-" + ingredient);
-            multiplier += 0.1;
+            multiplier += MULTIPLIER_ADD;
           } else {
             newIngredients.add(ingredient);
           }
