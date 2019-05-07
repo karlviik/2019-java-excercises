@@ -45,7 +45,10 @@ public class City {
   }
 
   public double getAverageTemperature() {
-    return temperatures.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+    return temperatures.stream()
+        .mapToDouble(x -> x)
+        .average()
+        .orElse(0);
   }
 
   public double getAverageHumidity() {
