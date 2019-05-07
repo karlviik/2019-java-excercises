@@ -59,6 +59,7 @@ public class Client {
         wantCities.add(city);
       }
     }
+    System.out.println(possibleCities.get(39999999));
     Optional<City> wantCity = choosingStrategy.findBestCity(wantCities);
     if (wantCity.isEmpty()) {
       return choosingStrategy.findBestCity(possibleCities);

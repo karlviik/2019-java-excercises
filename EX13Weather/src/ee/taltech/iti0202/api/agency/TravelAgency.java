@@ -75,9 +75,6 @@ public class TravelAgency {
 //    System.out.println(cities.get(0).getWeatherCodes());
 
     Optional<City> wasd = client.chooseBestCity(cities);
-    System.out.println(cities.get(5000).getAverageTemperature());
-
-
 
     return client.chooseBestCity(cities);
   }
