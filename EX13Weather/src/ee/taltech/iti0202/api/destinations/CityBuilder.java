@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CityBuilder {
   private String name;
-  private double lon;
-  private double lat;
+  private Double lon;
+  private Double lat;
   private List<Double> temperatures;
   private List<Double> humidity;
   private List<Integer> weatherCodes;
@@ -15,12 +15,12 @@ public class CityBuilder {
     return this;
   }
 
-  public CityBuilder setLon(double lon) {
+  public CityBuilder setLon(Double lon) {
     this.lon = lon;
     return this;
   }
 
-  public CityBuilder setLat(double lat) {
+  public CityBuilder setLat(Double lat) {
     this.lat = lat;
     return this;
   }

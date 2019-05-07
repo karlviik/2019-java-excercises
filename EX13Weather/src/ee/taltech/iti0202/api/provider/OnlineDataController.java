@@ -26,9 +26,9 @@ public class OnlineDataController {
 
       class Coord {
 
-        Double lon;
+        private Double lon;
 
-        Double lat;
+        private Double lat;
       }
     }
 

@@ -1,6 +1,5 @@
 package ee.taltech.iti0202.api.destinations;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class City {
