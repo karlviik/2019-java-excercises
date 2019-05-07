@@ -16,7 +16,7 @@ public class CakeOrderProcessor {
     @SerializedName("order_id")
     private Integer orderId;
     private List<Cake> cakes;
-    private Double total;
+    private Float total;
   }
 
   private class Cake {
@@ -25,8 +25,8 @@ public class CakeOrderProcessor {
     private String name;
     @SerializedName("BBD")
     private String bbd;
-    private double price;
-    private double kg;
+    private float price;
+    private float kg;
     private List<String> ingredients;
   }
   public enum CakeOrderProcessorType {
@@ -47,7 +47,7 @@ public class CakeOrderProcessor {
     CakeOrder order = gson.fromJson(jsonInput, CakeOrder.class);
     order.orderId = nextOrderId;
     nextOrderId++;
-    Double total = 0d;
+    float total = 0f;
     List<Cake> removeList = new ArrayList<>();
 //    int cakeCounter = 0;
     for (Cake cake : order.cakes) {
