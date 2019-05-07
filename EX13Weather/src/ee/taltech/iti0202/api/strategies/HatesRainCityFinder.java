@@ -1,0 +1,20 @@
+package ee.taltech.iti0202.api.strategies;
+
+import ee.taltech.iti0202.api.destinations.City;
+
+import java.util.List;
+import java.util.Optional;
+
+public class HatesRainCityFinder implements CityFinderStrategy {
+  // TODO: this
+
+  /**
+   * Klient ei soovi rohkemal kui ühel päeval vihma ning keskmine niiskus ei tohi olla ühelgi päeval üle 80%.
+   * @param candidateCities
+   * @return
+   */
+  @Override
+  public Optional<City> findBestCity(List<City> candidateCities) {
+    return Optional.empty();
+  }
+}
