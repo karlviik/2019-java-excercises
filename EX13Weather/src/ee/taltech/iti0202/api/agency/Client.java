@@ -2,6 +2,7 @@ package ee.taltech.iti0202.api.agency;
 import ee.taltech.iti0202.api.destinations.City;
 import ee.taltech.iti0202.api.strategies.CityFinderStrategy;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,9 @@ public class Client {
   }
 
   public Client(String name, String startingCity, CityFinderStrategy choosingStrategy, List<String> wantsToVisitCities) {
+    if (name == null || startingCity == null || choosingStrategy == null || wantsToVisitCities == null) {
+      throw new InvalidParameterException();
+    }
     this.name = name;
     this.startingCity = startingCity;
     this.choosingStrategy = choosingStrategy;

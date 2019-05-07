@@ -18,6 +18,9 @@ public class ChoosingClient extends Client {
 
   @Override
   public Optional<City> chooseBestCity(List<City> possibleCities) {
+    if (possibleCities == null) {
+      return Optional.empty();
+    }
     List<City> wantCities = new ArrayList<>();
     for (City city : possibleCities) {
       if (wantsToVisitCities.contains(city.getName())) {
