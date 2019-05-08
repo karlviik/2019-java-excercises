@@ -2,6 +2,7 @@ package ee.taltech.iti0202.api.provider;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import ee.taltech.iti0202.api.destinations.City;
 import ee.taltech.iti0202.api.destinations.CityBuilder;
 
@@ -143,7 +144,7 @@ public class OnlineDataController {
     in.close();
     con.disconnect();
     Gson gson = new Gson();
-    ApiResponse response = gson.fromJson(content.toString(), ApiResponse.class);
+    ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() {}.getType());
     if (response.getCod() != 200) {
       return "";
     }
@@ -170,8 +171,8 @@ public class OnlineDataController {
     if (city.getTemperatures().size() == 0 || city.getHumidity().size() == 0) {
       return "";
     }
-    System.out.println(gson.toJson(city));
+    System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
     lastCity = city;
-    return gson.toJson(city);
+    return gson.toJson(city, new TypeToken<City>() {}.getType());
   }
 }

@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.api.agency;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import ee.taltech.iti0202.api.destinations.City;
 import ee.taltech.iti0202.api.provider.OnlineDataController;
 
@@ -60,20 +61,20 @@ public class TravelAgency {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
 //          cities.add(dataController.lastCity);
-          cities.add(new Gson().fromJson(response, City.class));
+          cities.add(new Gson().fromJson(response, new TypeToken<City>() {}.getType()));
         }
       }
     }
-    System.out.println(cities.get(0).getHumidity());
-//    System.out.println(cities.get(9999999).getName());
-    System.out.println(cities.get(1).getTemperatures());
-    System.out.println(cities.get(0).getAverageHumidity());
-    System.out.println(cities.get(0).getHumidity());
-    System.out.println(cities.get(0).getLat());
-    System.out.println(cities.get(0).getLon());
-    System.out.println(cities.get(0).getWeatherCodes());
+//    System.out.println(cities.get(0).getHumidity());
+////    System.out.println(cities.get(9999999).getName());
+//    System.out.println(cities.get(1).getTemperatures());
+//    System.out.println(cities.get(0).getAverageHumidity());
+//    System.out.println(cities.get(0).getHumidity());
+//    System.out.println(cities.get(0).getLat());
+//    System.out.println(cities.get(0).getLon());
+//    System.out.println(cities.get(0).getWeatherCodes());
 
-    Optional<City> wasd = client.chooseBestCity(cities);
+//    Optional<City> wasd = client.chooseBestCity(cities);
 
     return client.chooseBestCity(cities);
   }
