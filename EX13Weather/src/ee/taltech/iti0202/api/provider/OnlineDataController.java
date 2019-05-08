@@ -145,7 +145,7 @@ public class OnlineDataController {
     con.disconnect();
     Gson gson = new Gson();
     ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() {}.getType());
-    if (response.getCod() != 200) {
+    if (response.getCod() > 299) {
       return "";
     }
     if (response.getList().size() == 0) {

@@ -52,16 +52,14 @@ public class TravelAgency {
    * @return Optional city if the client was happy with it.
    */
   public Optional<City> findSuitableCitiesForClient(Client client) throws IOException {
-    if (client == null) {
-      return Optional.empty();
-    }
     List<City> cities = new ArrayList<>();
+    Gson gson = new Gson();
     for (String cityName : cityNames) {
       if (!cityName.equals(client.getStartingCity())) {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
 //          cities.add(dataController.lastCity);
-          cities.add(new Gson().fromJson(response, new TypeToken<City>() {}.getType()));
+          cities.add(gson.fromJson(response, new TypeToken<City>() {}.getType()));
         }
       }
     }
