@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class ChoosingClient extends Client {
-  public ChoosingClient(String name, String startingCity, CityFinderStrategy choosingStrategy) {
+
+  public ChoosingClient(
+      String name,
+      String startingCity,
+      CityFinderStrategy choosingStrategy) {
     super(name, startingCity, choosingStrategy);
   }
 
@@ -23,15 +27,12 @@ public class ChoosingClient extends Client {
 
   @Override
   public Optional<City> chooseBestCity(List<City> possibleCities) {
-    if (possibleCities == null) {
-      return Optional.empty();
-    }
     List<City> wantCities = new ArrayList<>();
     for (City city : possibleCities) {
-      if (wantsToVisitCities.contains(city.getName())) {
+      if (this.getCitiesThatWantsToVisit().contains(city.getName())) {
         wantCities.add(city);
       }
     }
-    return choosingStrategy.findBestCity(wantCities);
+    return this.getChoosingStrategy().findBestCity(wantCities);
   }
 }

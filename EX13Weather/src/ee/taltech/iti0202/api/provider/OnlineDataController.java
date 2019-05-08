@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//todo check this
 public class OnlineDataController {
   public City lastCity;
 
