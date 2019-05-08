@@ -50,19 +50,18 @@ public class City {
     return weatherCodes;
   }
 
-  //todo: refactor
   public Double getAverageTemperature() {
-    Double sum = 0d;
-    for (Double temp : temperatures) {
-      if (temp != null) {
-        sum += temp;
-      }
-    }
-    return sum / temperatures.size();
-//    return temperatures.stream()
-//        .mapToDouble(x -> x)
-//        .average()
-//        .orElse(0);
+//    Double sum = 0d;
+//    for (Double temp : temperatures) {
+//      if (temp != null) {
+//        sum += temp;
+//      }
+//    }
+//    return sum / temperatures.size();
+    return temperatures.stream()
+        .mapToDouble(x -> x)
+        .average()
+        .orElse(0);
   }
 
   public Double getAverageHumidity() {
