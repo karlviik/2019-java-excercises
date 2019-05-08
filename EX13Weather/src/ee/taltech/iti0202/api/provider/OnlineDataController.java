@@ -132,7 +132,7 @@ public class OnlineDataController {
     BufferedReader in;
     try {
       in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-    } catch (FileNotFoundException o){
+    } catch (FileNotFoundException o) {
       return "";
     }
     String inputLine;

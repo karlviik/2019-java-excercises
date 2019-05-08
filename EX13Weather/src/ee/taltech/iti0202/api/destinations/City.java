@@ -51,13 +51,6 @@ public class City {
   }
 
   public Double getAverageTemperature() {
-//    Double sum = 0d;
-//    for (Double temp : temperatures) {
-//      if (temp != null) {
-//        sum += temp;
-//      }
-//    }
-//    return sum / temperatures.size();
     return temperatures.stream()
         .mapToDouble(x -> x)
         .average()
