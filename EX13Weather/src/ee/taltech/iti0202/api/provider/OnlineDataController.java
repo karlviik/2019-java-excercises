@@ -170,6 +170,9 @@ public class OnlineDataController {
             .filter(x -> x != null)
             .collect(Collectors.toList()))
         .createCity();
+    if (city.getTemperatures().size() == 0) {
+      return "";
+    }
     System.out.println(gson.toJson(city));
     lastCity = city;
     return gson.toJson(city);
