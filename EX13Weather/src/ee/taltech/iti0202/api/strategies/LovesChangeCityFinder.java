@@ -15,17 +15,17 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
-    Float bestWeight = Float.MIN_VALUE;
+    Double bestWeight = Double.MIN_VALUE;
     Optional<City> bestCity = Optional.empty();
     for (City city : candidateCities) {
-      Float weight = 0f;
+      Double weight = 0d;
       int miniCounter = 0;
-      Float tempSum = 0f;
-      Float humidSum = 0f;
-      List<Float> tempDiffs = new ArrayList<>();
-      List<Float> humidDiffs = new ArrayList<>();
-      List<Float> temps = city.getTemperatures();
-      List<Float> humids = city.getHumidity();
+      Double tempSum = 0d;
+      Double humidSum = 0d;
+      List<Double> tempDiffs = new ArrayList<>();
+      List<Double> humidDiffs = new ArrayList<>();
+      List<Double> temps = city.getTemperatures();
+      List<Double> humids = city.getHumidity();
       List<Integer> codes = city.getWeatherCodes();
       Integer lastCode = 0;
       Integer code;
@@ -37,8 +37,8 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
           miniCounter = 0;
           tempDiffs.add(tempSum);
           humidDiffs.add(humidSum);
-          humidSum = 0f;
-          tempSum = 0f;
+          humidSum = 0d;
+          tempSum = 0d;
         }
         code = codes.get(i);
         if (i > 0) {

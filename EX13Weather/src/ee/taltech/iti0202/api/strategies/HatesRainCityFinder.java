@@ -21,8 +21,8 @@ public class HatesRainCityFinder implements CityFinderStrategy {
     for (City city : candidateCities) {
       boolean willAdd = true;
       int miniCounter = 0;
-      Float sum = 0f;
-      List<Float> temps = city.getTemperatures();
+      Double sum = 0d;
+      List<Double> temps = city.getTemperatures();
       List<Integer> codes = city.getWeatherCodes();
       int rainyDayCount = 0;
       boolean hasRainedToday = false;
