@@ -62,7 +62,8 @@ public class TravelAgency {
       if (!cityName.equals(client.getStartingCity())) {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
-          cities.add(new Gson().fromJson(response, City.class));
+          cities.add(dataController.lastCity);
+//          cities.add(new Gson().fromJson(response, City.class));
         }
       }
     }

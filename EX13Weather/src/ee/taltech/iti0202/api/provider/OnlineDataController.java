@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OnlineDataController {
+  public City lastCity;
 
   class ApiResponse {
     private Integer cod;
@@ -114,11 +115,11 @@ public class OnlineDataController {
    * f4f5c7fec3ac8e25ab261496495da93a
    */
   public String getCity(String cityName) throws IOException {
-    cityName = cityName.replace(" ", "+");
+    cityName = cityName.trim().replace(" ", "+");
     URL url = new URL(
         "https://api.openweathermap.org/data/2.5/forecast?q="
             + cityName
-            + "&units=metric&appid=f4f5c7fec3ac8e25ab261496495da93a"
+            + "&units=metric&appid=f4f5c7fec3ac8e25ab261496495da93a/"
     );
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
@@ -159,6 +160,7 @@ public class OnlineDataController {
             .collect(Collectors.toList()))
         .createCity();
     System.out.println(gson.toJson(city));
+    lastCity = city;
     return gson.toJson(city);
   }
 }
