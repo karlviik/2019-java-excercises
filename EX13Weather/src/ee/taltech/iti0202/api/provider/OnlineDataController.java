@@ -6,6 +6,7 @@ import ee.taltech.iti0202.api.destinations.City;
 import ee.taltech.iti0202.api.destinations.CityBuilder;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -124,8 +125,13 @@ public class OnlineDataController {
     );
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
-    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-    String inputLine;
+    BufferedReader in;
+    try {
+      in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+    } catch (FileNotFoundException o){
+      return "";
+    }
+      String inputLine;
     StringBuffer content = new StringBuffer();
     while ((inputLine = in.readLine()) != null) {
       content.append(inputLine);
