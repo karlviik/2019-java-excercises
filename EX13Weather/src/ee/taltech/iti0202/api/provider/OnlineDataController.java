@@ -40,13 +40,13 @@ public class OnlineDataController {
 
   class Datapoint {
 
-    @SerializedName("main")
-    private Measurements measurements;
+//    @SerializedName("main")
+    private Measurements main;
 
     private List<Weather> weather;
 
     public Measurements getMeasurements() {
-      return measurements;
+      return main;
     }
 
     public List<Weather> getWeather() {
@@ -157,17 +157,14 @@ public class OnlineDataController {
         .setTemperatures(response.getList()
             .stream()
             .map(x -> x.getMeasurements().getTemp())
-            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .setHumidity(response.getList()
             .stream()
             .map(x -> x.getMeasurements().getHumidity())
-            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .setWeatherCodes(response.getList()
             .stream()
             .map(x -> x.getWeather().get(0).getId())
-            .filter(x -> x != null)
             .collect(Collectors.toList()))
         .createCity();
     if (city.getTemperatures().size() == 0 || city.getHumidity().size() == 0) {
