@@ -21,6 +21,18 @@ public class OnlineDataController {
     private ApiCity city;
 
     List<Datapoint> list;
+
+    public Integer getCod() {
+      return cod;
+    }
+
+    public ApiCity getCity() {
+      return city;
+    }
+
+    public List<Datapoint> getList() {
+      return list;
+    }
   }
 
   class Datapoint {
@@ -29,11 +41,23 @@ public class OnlineDataController {
     private Measurements measurements;
 
     private List<Weather> weather;
+
+    public Measurements getMeasurements() {
+      return measurements;
+    }
+
+    public List<Weather> getWeather() {
+      return weather;
+    }
   }
 
   class Weather {
 
     private Integer id;
+
+    public Integer getId() {
+      return id;
+    }
   }
 
   class ApiCity {
@@ -41,6 +65,14 @@ public class OnlineDataController {
     private String name;
 
     private Coord coord;
+
+    public String getName() {
+      return name;
+    }
+
+    public Coord getCoord() {
+      return coord;
+    }
   }
 
   class Measurements {
@@ -48,6 +80,14 @@ public class OnlineDataController {
     private Double temp;
 
     private Double humidity;
+
+    public Double getTemp() {
+      return temp;
+    }
+
+    public Double getHumidity() {
+      return humidity;
+    }
   }
 
   class Coord {
@@ -55,6 +95,14 @@ public class OnlineDataController {
     private Double lon;
 
     private Double lat;
+
+    public Double getLon() {
+      return lon;
+    }
+
+    public Double getLat() {
+      return lat;
+    }
   }
 
   /**
@@ -84,32 +132,33 @@ public class OnlineDataController {
     con.disconnect();
     Gson gson = new Gson();
     ApiResponse response = gson.fromJson(content.toString(), ApiResponse.class);
-    if (response.cod != 200) {
+    if (response.getCod() != 200) {
       return "";
     }
-    if (response.list.size() == 0) {
+    if (response.getList().size() == 0) {
       return "";
     }
     CityBuilder builder = new CityBuilder();
-    City city = builder.setName(response.city.name)
-        .setLon(response.city.coord.lon)
-        .setLat(response.city.coord.lat)
-        .setTemperatures(response.list
+    City city = builder.setName(response.getCity().getName())
+        .setLon(response.getCity().getCoord().getLon())
+        .setLat(response.getCity().getCoord().getLat())
+        .setTemperatures(response.getList()
             .stream()
-            .map(x -> x.measurements.temp)
+            .map(x -> x.getMeasurements().getTemp())
             .filter(x -> x != null)
             .collect(Collectors.toList()))
-        .setHumidity(response.list
+        .setHumidity(response.getList()
             .stream()
-            .map(x -> x.measurements.humidity)
+            .map(x -> x.getMeasurements().getHumidity())
             .filter(x -> x != null)
             .collect(Collectors.toList()))
-        .setWeatherCodes(response.list
+        .setWeatherCodes(response.getList()
             .stream()
-            .map(x -> x.weather.get(0).id)
+            .map(x -> x.getWeather().get(0).getId())
             .filter(x -> x != null)
             .collect(Collectors.toList()))
         .createCity();
+    System.out.println(gson.toJson(city));
     return gson.toJson(city);
   }
 }
