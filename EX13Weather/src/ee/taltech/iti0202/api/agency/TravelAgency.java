@@ -65,7 +65,7 @@ public class TravelAgency {
       }
     }
     System.out.println(cities.get(0).getName());
-    System.out.println(cities.get(0).getTemperatures());
+    System.out.println(cities.get(1).getTemperatures());
     System.out.println(cities.get(0).getAverageHumidity());
     System.out.println(cities.get(0).getHumidity());
     System.out.println(cities.get(0).getLat());

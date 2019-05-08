@@ -10,12 +10,13 @@ public class City {
   private List<Double> humidity;
   private List<Integer> weatherCodes;
 
-  City(String name,
-       Double lon,
-       Double lat,
-       List<Double> temperatures,
-       List<Double> humidity,
-       List<Integer> weatherCodes
+  City(
+      String name,
+      Double lon,
+      Double lat,
+      List<Double> temperatures,
+      List<Double> humidity,
+      List<Integer> weatherCodes
   ) {
     this.name = name;
     this.lon = lon;
@@ -49,6 +50,7 @@ public class City {
     return weatherCodes;
   }
 
+  //todo: refactor
   public Double getAverageTemperature() {
     Double sum = 0d;
     for (Double temp : temperatures) {
@@ -64,7 +66,10 @@ public class City {
   }
 
   public Double getAverageHumidity() {
-    return humidity.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+    return humidity.stream()
+        .mapToDouble(Double::doubleValue)
+        .average()
+        .orElse(0);
 
   }
 
