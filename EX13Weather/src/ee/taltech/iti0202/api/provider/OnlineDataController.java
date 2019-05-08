@@ -126,13 +126,16 @@ public class OnlineDataController {
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
     int status = con.getResponseCode();
+    if (status > 299) {
+      return "";
+    }
     BufferedReader in;
     try {
       in = new BufferedReader(new InputStreamReader(con.getInputStream()));
     } catch (FileNotFoundException o){
       return "";
     }
-      String inputLine;
+    String inputLine;
     StringBuffer content = new StringBuffer();
     while ((inputLine = in.readLine()) != null) {
       content.append(inputLine);
