@@ -6,16 +6,16 @@ public class City {
   private String name;
   private Double lon;
   private Double lat;
-  private List<Double> temperatures;
-  private List<Double> humidity;
+  private List<Float> temperatures;
+  private List<Float> humidity;
   private List<Integer> weatherCodes;
 
   City(
       String name,
       Double lon,
       Double lat,
-      List<Double> temperatures,
-      List<Double> humidity,
+      List<Float> temperatures,
+      List<Float> humidity,
       List<Integer> weatherCodes
   ) {
     this.name = name;
@@ -38,11 +38,11 @@ public class City {
     return lat;
   }
 
-  public List<Double> getTemperatures() {
+  public List<Float> getTemperatures() {
     return temperatures;
   }
 
-  public List<Double> getHumidity() {
+  public List<Float> getHumidity() {
     return humidity;
   }
 
@@ -59,7 +59,7 @@ public class City {
 
   public Double getAverageHumidity() {
     return humidity.stream()
-        .mapToDouble(Double::doubleValue)
+        .mapToDouble(x -> x)
         .average()
         .orElse(0);
 

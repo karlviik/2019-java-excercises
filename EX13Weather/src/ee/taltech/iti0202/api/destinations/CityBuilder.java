@@ -6,8 +6,8 @@ public class CityBuilder {
   private String name;
   private Double lon;
   private Double lat;
-  private List<Double> temperatures;
-  private List<Double> humidity;
+  private List<Float> temperatures;
+  private List<Float> humidity;
   private List<Integer> weatherCodes;
 
   public CityBuilder setName(String name) {
@@ -25,12 +25,12 @@ public class CityBuilder {
     return this;
   }
 
-  public CityBuilder setTemperatures(List<Double> temperatures) {
+  public CityBuilder setTemperatures(List<Float> temperatures) {
     this.temperatures = temperatures;
     return this;
   }
 
-  public CityBuilder setHumidity(List<Double> humidity) {
+  public CityBuilder setHumidity(List<Float> humidity) {
     this.humidity = humidity;
     return this;
   }

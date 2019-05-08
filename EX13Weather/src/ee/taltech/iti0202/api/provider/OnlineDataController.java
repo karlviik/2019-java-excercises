@@ -24,7 +24,7 @@ public class OnlineDataController {
 
     private ApiCity city;
 
-    List<Datapoint> list;
+    private List<Datapoint> list;
 
     public Integer getCod() {
       return cod;
@@ -41,7 +41,6 @@ public class OnlineDataController {
 
   class Datapoint {
 
-//    @SerializedName("main")
     private Measurements main;
 
     private List<Weather> weather;
@@ -81,15 +80,15 @@ public class OnlineDataController {
 
   class Measurements {
 
-    private Double temp;
+    private Float temp;
 
-    private Double humidity;
+    private Float humidity;
 
-    public Double getTemp() {
+    public Float getTemp() {
       return temp;
     }
 
-    public Double getHumidity() {
+    public Float getHumidity() {
       return humidity;
     }
   }
