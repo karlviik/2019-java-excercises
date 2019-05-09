@@ -12,7 +12,7 @@ public class HatesRainCityFinder implements CityFinderStrategy {
   private static final int DATAPOINTS_IN_DAY = 8;
   /**
    * Klient eelistab linna, kus on kõige vähem sajuga päevi.
-   * Kui sama sajupäevadega linnu on mitu, siis eelistab sellist, kus keskmine õhuniiskus on väikseim.
+   * Kui sama sajupäevadega linnu on mitu, siis eelistab sellist, kus keskmine õhuniiskus on väikseim
    */
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
