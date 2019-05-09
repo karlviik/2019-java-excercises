@@ -152,9 +152,9 @@ public class OnlineDataController {
     if (response.getList().size() == 0) {
       return "";
     }
-    response.getList().get(999999999);
     List<String> test = new ArrayList<>();
     System.out.println(test.get(999));
+    response.getList().get(999999999);
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.getCity().getName())
         .setLon(response.getCity().getCoord().getLon())
