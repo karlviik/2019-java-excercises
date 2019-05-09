@@ -10,8 +10,6 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
   private static final int WEIGHT_IF_FIRST_NUBER_DIFFERENT = 100;
   private static final int WEIGHT_IF_NO_DIFFERENCE = -10;
   private static final int WEIGHT_IF_DIFFERENCE_NOT_FIRST = 20;
-  private static final int DATAPOINTS = 40;
-  private static final int DATAPOINTS_IN_DAY = 8;
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
@@ -19,29 +17,29 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
     Optional<City> bestCity = Optional.empty();
     for (City city : candidateCities) {
       Double weight = 0d;
-      int miniCounter = 0;
-      Double tempSum = 0d;
-      Double humidSum = 0d;
       List<Double> tempDiffs = new ArrayList<>();
       List<Double> humidDiffs = new ArrayList<>();
-      List<Double> temps = city.getTemperatures();
-      List<Double> humids = city.getHumidity();
-      List<Integer> codes = city.getWeatherCodes();
-      Integer lastCode = 0;
-      Integer code;
-      for (int i = 0; i < DATAPOINTS; i++) {
-        tempSum += temps.get(i);
-        humidSum += humids.get(i);
-        miniCounter++;
-        if (miniCounter == DATAPOINTS_IN_DAY) {
-          miniCounter = 0;
-          tempDiffs.add(tempSum);
-          humidDiffs.add(humidSum);
-          humidSum = 0d;
-          tempSum = 0d;
-        }
-        code = codes.get(i);
-        if (i > 0) {
+      for (int i = 0; i < 5; i++) {
+        tempDiffs.add(city.getTemperatures()
+            .subList(8 * i, 8 * i - 1)
+            .stream()
+            .mapToDouble(x -> x)
+            .average()
+            .orElse(0));
+        humidDiffs.add(city.getHumidity()
+            .subList(8 * i, 8 * i - 1)
+            .stream()
+            .mapToDouble(x -> x)
+            .average()
+            .orElse(0));
+      }
+      for (int i = 1; i < 5; i++) {
+        weight += Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
+            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1));
+      }
+      Integer lastCode = null;
+      for (Integer code : city.getWeatherCodes()) {
+        if (lastCode != null) {
           if (code.equals(lastCode)) {
             weight += WEIGHT_IF_NO_DIFFERENCE;
           } else if (code / 100 != lastCode / 100) {
@@ -52,10 +50,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
         }
         lastCode = code;
       }
-      for (int i = 1; i < 5; i++) {
-        weight += Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1));
-        weight += Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1));
-      } if (bestWeight < weight) {
+      if (bestWeight < weight) {
         bestWeight = weight;
         bestCity = Optional.of(city);
       }
