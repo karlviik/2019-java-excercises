@@ -152,7 +152,7 @@ public class OnlineDataController {
     if (response.getList().size() == 0) {
       return "";
     }
-    response.getList().get(999999999);
+    System.out.println(response.getList().get(9999999));
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.getCity().getName())
         .setLon(response.getCity().getCoord().getLon())
@@ -171,7 +171,7 @@ public class OnlineDataController {
             .collect(Collectors.toList()))
         .createCity();
 //    System.out.println(city.getHumidity().get(0) + 1);
-    System.out.println(city.getHumidity().get(99999999));
+    System.out.println(city.getHumidity().get(999999));
     System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
     lastCity = city;
     return gson.toJson(city, new TypeToken<City>() {}.getType());
