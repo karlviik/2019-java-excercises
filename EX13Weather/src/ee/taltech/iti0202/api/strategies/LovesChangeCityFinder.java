@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class LovesChangeCityFinder implements CityFinderStrategy {
-  private static final int WEIGHT_IF_FIRST_NUBER_DIFFERENT = 100;
-  private static final int WEIGHT_IF_NO_DIFFERENCE = -10;
-  private static final int WEIGHT_IF_DIFFERENCE_NOT_FIRST = 20;
+  private static final int FIRST_NUMBER_DIFFERENT_WEIGHT = 100;
+  private static final int NO_DIFFERENCE_WEIGHT = -10;
+  private static final int DIFFERENT_BUT_NOT_FIRST_WEIGHT = 20;
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
@@ -35,19 +35,19 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
             .getAsDouble());
 //            .orElse(0));
       }
-      for (int i = 1; i < 5; i++) {
-        weight += Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
-            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1));
-      }
+//      for (int i = 1; i < 5; i++) {
+//        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
+//            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
+//      }
       Integer lastCode = null;
       for (Integer code : city.getWeatherCodes()) {
         if (lastCode != null) {
           if (code.equals(lastCode)) {
-            weight += WEIGHT_IF_NO_DIFFERENCE;
-          } else if (code / 100 != lastCode / 100) {
-            weight += WEIGHT_IF_FIRST_NUBER_DIFFERENT;
+            weight += NO_DIFFERENCE_WEIGHT;
+          } else if ((code / 100) != (lastCode / 100)) {
+            weight += FIRST_NUMBER_DIFFERENT_WEIGHT;
           } else {
-            weight += WEIGHT_IF_DIFFERENCE_NOT_FIRST;
+            weight += DIFFERENT_BUT_NOT_FIRST_WEIGHT;
           }
         }
         lastCode = code;
