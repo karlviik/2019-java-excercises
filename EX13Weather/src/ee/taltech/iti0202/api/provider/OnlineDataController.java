@@ -152,7 +152,7 @@ public class OnlineDataController {
     if (response.getList().size() == 0) {
       return "";
     }
-    System.out.println(response.getList().get(9999999));
+    System.out.println(response.getList().get(999999999));
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.getCity().getName())
         .setLon(response.getCity().getCoord().getLon())
