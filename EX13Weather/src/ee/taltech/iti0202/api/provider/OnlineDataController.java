@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class OnlineDataController {
   public City lastCity;
 
-  class ApiResponse {
+  public class ApiResponse {
     private Integer cod;
 
     private ApiCity city;
@@ -39,7 +39,7 @@ public class OnlineDataController {
     }
   }
 
-  class Datapoint {
+  public class Datapoint {
 
 //    @SerializedName("main")
     private Measurements main;
@@ -55,7 +55,7 @@ public class OnlineDataController {
     }
   }
 
-  class Weather {
+  public class Weather {
 
     private Integer id;
 
@@ -64,7 +64,7 @@ public class OnlineDataController {
     }
   }
 
-  class ApiCity {
+  public class ApiCity {
 
     private String name;
 
@@ -79,7 +79,7 @@ public class OnlineDataController {
     }
   }
 
-  class Measurements {
+  public class Measurements {
 
     private Double temp;
 
@@ -94,7 +94,7 @@ public class OnlineDataController {
     }
   }
 
-  class Coord {
+  public class Coord {
 
     private Double lon;
 
@@ -110,7 +110,8 @@ public class OnlineDataController {
   }
 
   /**
-   * Tries to get forecast data for the cityName. If there is no data or cityName doesn't exist, return an empty string.
+   * Tries to get forecast data for the cityName.
+   * If there is no data or cityName doesn't exist, return an empty string.
    *
    * @param cityName Name of the city
    * @return String in the form of a json-string
@@ -152,28 +153,30 @@ public class OnlineDataController {
     if (response.getList().size() == 0) {
       return "";
     }
-    System.out.println(response.getList().get(999999999));
-    CityBuilder builder = new CityBuilder();
-    City city = builder.setName(response.getCity().getName())
-        .setLon(response.getCity().getCoord().getLon())
-        .setLat(response.getCity().getCoord().getLat())
-        .setTemperatures(response.getList()
-            .stream()
-            .map(x -> x.getMeasurements().getTemp())
-            .collect(Collectors.toList()))
-        .setHumidity(response.getList()
-            .stream()
-            .map(x -> x.getMeasurements().getHumidity())
-            .collect(Collectors.toList()))
-        .setWeatherCodes(response.getList()
-            .stream()
-            .map(x -> x.getWeather().get(0).getId())
-            .collect(Collectors.toList()))
-        .createCity();
-//    System.out.println(city.getHumidity().get(0) + 1);
-    System.out.println(city.getHumidity().get(999999));
-    System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
-    lastCity = city;
-    return gson.toJson(city, new TypeToken<City>() {}.getType());
+    System.out.println(gson.toJson(response));
+    return gson.toJson(response);
+//    System.out.println(response.getList().get(9999));
+//    CityBuilder builder = new CityBuilder();
+//    City city = builder.setName(response.getCity().getName())
+//        .setLon(response.getCity().getCoord().getLon())
+//        .setLat(response.getCity().getCoord().getLat())
+//        .setTemperatures(response.getList()
+//            .stream()
+//            .map(x -> x.getMeasurements().getTemp())
+//            .collect(Collectors.toList()))
+//        .setHumidity(response.getList()
+//            .stream()
+//            .map(x -> x.getMeasurements().getHumidity())
+//            .collect(Collectors.toList()))
+//        .setWeatherCodes(response.getList()
+//            .stream()
+//            .map(x -> x.getWeather().get(0).getId())
+//            .collect(Collectors.toList()))
+//        .createCity();
+////    System.out.println(city.getHumidity().get(0) + 1);
+//    System.out.println(city.getHumidity().get(999999));
+//    System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
+//    lastCity = city;
+//    return gson.toJson(city, new TypeToken<City>() {}.getType());
   }
 }

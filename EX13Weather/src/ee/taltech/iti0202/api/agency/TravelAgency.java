@@ -3,12 +3,14 @@ package ee.taltech.iti0202.api.agency;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import ee.taltech.iti0202.api.destinations.City;
+import ee.taltech.iti0202.api.destinations.CityBuilder;
 import ee.taltech.iti0202.api.provider.OnlineDataController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TravelAgency {
 
@@ -59,18 +61,37 @@ public class TravelAgency {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
 //          cities.add(dataController.lastCity);
-          cities.add(gson.fromJson(response, new TypeToken<City>() {}.getType()));
+//          cities.add(gson.fromJson(response, new TypeToken<City>() {}.getType()));
+          OnlineDataController.ApiResponse responseObject = gson.fromJson(response, new TypeToken<OnlineDataController.ApiResponse>() {}.getType());
+          CityBuilder builder = new CityBuilder();
+          City city = builder.setName(responseObject.getCity().getName())
+              .setLon(responseObject.getCity().getCoord().getLon())
+              .setLat(responseObject.getCity().getCoord().getLat())
+              .setTemperatures(responseObject.getList()
+                  .stream()
+                  .map(x -> x.getMeasurements().getTemp())
+                  .collect(Collectors.toList()))
+              .setHumidity(responseObject.getList()
+                  .stream()
+                  .map(x -> x.getMeasurements().getHumidity())
+                  .collect(Collectors.toList()))
+              .setWeatherCodes(responseObject.getList()
+                  .stream()
+                  .map(x -> x.getWeather().get(0).getId())
+                  .collect(Collectors.toList()))
+              .createCity();
+          cities.add(city);
         }
       }
     }
-//    System.out.println(cities.get(0).getHumidity());
-    System.out.println(cities.get(9999999).getName());
-//    System.out.println(cities.get(1).getTemperatures());
-//    System.out.println(cities.get(0).getAverageHumidity());
-//    System.out.println(cities.get(0).getHumidity());
-//    System.out.println(cities.get(0).getLat());
-//    System.out.println(cities.get(0).getLon());
-//    System.out.println(cities.get(0).getWeatherCodes());
+    System.out.println(cities.get(0).getHumidity());
+//    System.out.println(cities.get(9999999).getName());
+    System.out.println(cities.get(1).getTemperatures());
+    System.out.println(cities.get(0).getAverageHumidity());
+    System.out.println(cities.get(0).getHumidity());
+    System.out.println(cities.get(0).getLat());
+    System.out.println(cities.get(0).getLon());
+    System.out.println(cities.get(0).getWeatherCodes());
 
 //    Optional<City> wasd = client.chooseBestCity(cities);
 
