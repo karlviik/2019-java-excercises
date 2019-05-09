@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -119,9 +118,7 @@ public class OnlineDataController {
    * f4f5c7fec3ac8e25ab261496495da93a
    */
   public String getCity(String cityName) throws IOException {
-    List<String> test = new ArrayList<>();
-    throw (new IndexOutOfBoundsException());
-//    System.out.println(test.get(999));
+    return "";
 //    cityName = cityName.trim().replace(" ", "+");
 //    URL url = new URL(
 //        "https://api.openweathermap.org/data/2.5/forecast?q="
