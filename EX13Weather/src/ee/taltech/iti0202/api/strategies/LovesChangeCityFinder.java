@@ -21,17 +21,19 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
       List<Double> humidDiffs = new ArrayList<>();
       for (int i = 0; i < 5; i++) {
         tempDiffs.add(city.getTemperatures()
-            .subList(8 * i, 8 * (i + 1) - 1)
+            .subList(8 * i, 8 * (i + 1))
             .stream()
             .mapToDouble(x -> x)
             .average()
-            .orElse(0));
+            .getAsDouble());
+//            .orElse(0));
         humidDiffs.add(city.getHumidity()
-            .subList(8 * i, 8 * (i + 1) - 1)
+            .subList(8 * i, 8 * (i + 1))
             .stream()
             .mapToDouble(x -> x)
             .average()
-            .orElse(0));
+            .getAsDouble());
+//            .orElse(0));
       }
       for (int i = 1; i < 5; i++) {
         weight += Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
