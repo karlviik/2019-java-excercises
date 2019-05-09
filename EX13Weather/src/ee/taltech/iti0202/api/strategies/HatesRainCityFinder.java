@@ -10,7 +10,6 @@ import java.util.Optional;
 public class HatesRainCityFinder implements CityFinderStrategy {
   private static final int DATAPOINTS = 40;
   private static final int DATAPOINTS_IN_DAY = 8;
-  private static final double MAXIMUM_ALLOWED_HUMIDITY = 80d;
   /**
    * Klient eelistab linna, kus on kõige vähem sajuga päevi.
    * Kui sama sajupäevadega linnu on mitu, siis eelistab sellist, kus keskmine õhuniiskus on väikseim.
@@ -18,7 +17,7 @@ public class HatesRainCityFinder implements CityFinderStrategy {
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
     List<City> possibleCities = new ArrayList<>();
-    Integer minRainyDayCount = Integer.MAX_VALUE;
+    int minRainyDayCount = Integer.MAX_VALUE;
     for (City city : candidateCities) {
       int miniCounter = 0;
       List<Integer> codes = city.getWeatherCodes();
@@ -39,6 +38,7 @@ public class HatesRainCityFinder implements CityFinderStrategy {
         possibleCities.add(city);
       } else if (rainyDayCount < minRainyDayCount) {
         possibleCities = new ArrayList<>(List.of(city));
+        minRainyDayCount = rainyDayCount;
       }
     }
     return possibleCities.stream().min(Comparator.comparing(City::getAverageHumidity));
