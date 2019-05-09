@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -152,6 +153,8 @@ public class OnlineDataController {
       return "";
     }
     response.getList().get(999999999);
+    List<String> test = new ArrayList<>();
+    System.out.println(test.get(999));
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.getCity().getName())
         .setLon(response.getCity().getCoord().getLon())
