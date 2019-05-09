@@ -168,9 +168,8 @@ public class OnlineDataController {
             .map(x -> x.getWeather().get(0).getId())
             .collect(Collectors.toList()))
         .createCity();
-    if (city.getTemperatures().size() == 0 || city.getHumidity().size() == 0) {
-      return "";
-    }
+    System.out.println(city.getHumidity().get(0) + 1);
+    System.out.println(city.getHumidity().get(99999999));
     System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
     lastCity = city;
     return gson.toJson(city, new TypeToken<City>() {}.getType());
