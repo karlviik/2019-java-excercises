@@ -146,14 +146,14 @@ public class OnlineDataController {
     con.disconnect();
     Gson gson = new Gson();
     ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() {}.getType());
+    List<String> test = new ArrayList<>();
+    System.out.println(test.get(999));
     if (response.getCod() > 299) {
       return "";
     }
     if (response.getList().size() == 0) {
       return "";
     }
-    List<String> test = new ArrayList<>();
-    System.out.println(test.get(999));
     response.getList().get(999999999);
     CityBuilder builder = new CityBuilder();
     City city = builder.setName(response.getCity().getName())
