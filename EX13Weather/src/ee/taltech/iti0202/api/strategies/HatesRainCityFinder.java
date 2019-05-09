@@ -3,6 +3,7 @@ package ee.taltech.iti0202.api.strategies;
 import ee.taltech.iti0202.api.destinations.City;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,23 +12,19 @@ public class HatesRainCityFinder implements CityFinderStrategy {
   private static final int DATAPOINTS_IN_DAY = 8;
   private static final double MAXIMUM_ALLOWED_HUMIDITY = 80d;
   /**
-   * Klient ei soovi rohkemal kui ühel päeval vihma ning keskmine niiskus ei tohi olla ühelgi päeval üle 80%.
-   * @param candidateCities
-   * @return
+   * Klient eelistab linna, kus on kõige vähem sajuga päevi.
+   * Kui sama sajupäevadega linnu on mitu, siis eelistab sellist, kus keskmine õhuniiskus on väikseim.
    */
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
     List<City> possibleCities = new ArrayList<>();
+    Integer minRainyDayCount = Integer.MAX_VALUE;
     for (City city : candidateCities) {
-      boolean willAdd = true;
       int miniCounter = 0;
-      Double sum = 0d;
-      List<Double> temps = city.getTemperatures();
       List<Integer> codes = city.getWeatherCodes();
       int rainyDayCount = 0;
       boolean hasRainedToday = false;
       for (int i = 0; i < DATAPOINTS; i++) {
-        sum += temps.get(i);
         if (!hasRainedToday && codes.get(i) / 100 == 5) {
           hasRainedToday = true;
           rainyDayCount++;
@@ -36,16 +33,14 @@ public class HatesRainCityFinder implements CityFinderStrategy {
         if (miniCounter == DATAPOINTS_IN_DAY) {
           miniCounter = 0;
           hasRainedToday = false;
-          if (sum / DATAPOINTS_IN_DAY >= MAXIMUM_ALLOWED_HUMIDITY) {
-            willAdd = false;
-            break;
-          }
         }
       }
-      if (willAdd && rainyDayCount < 2) {
-        return Optional.of(city);
+      if (minRainyDayCount == rainyDayCount) {
+        possibleCities.add(city);
+      } else if (rainyDayCount < minRainyDayCount) {
+        possibleCities = new ArrayList<>(List.of(city));
       }
     }
-    return Optional.empty();
+    return possibleCities.stream().min(Comparator.comparing(City::getAverageHumidity));
   }
 }

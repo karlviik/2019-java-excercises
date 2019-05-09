@@ -1,10 +1,8 @@
 package ee.taltech.iti0202.api.provider;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import ee.taltech.iti0202.api.destinations.City;
-import ee.taltech.iti0202.api.destinations.CityBuilder;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,9 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import java.util.stream.Collectors;
 
-//todo check this
 public class OnlineDataController {
   public City lastCity;
 
@@ -119,7 +115,6 @@ public class OnlineDataController {
    * f4f5c7fec3ac8e25ab261496495da93a
    */
   public String getCity(String cityName) throws IOException {
-//    return "";
     cityName = cityName.trim().replace(" ", "+");
     URL url = new URL(
         "https://api.openweathermap.org/data/2.5/forecast?q="
@@ -155,28 +150,5 @@ public class OnlineDataController {
     }
     System.out.println(gson.toJson(response));
     return gson.toJson(response);
-//    System.out.println(response.getList().get(9999));
-//    CityBuilder builder = new CityBuilder();
-//    City city = builder.setName(response.getCity().getName())
-//        .setLon(response.getCity().getCoord().getLon())
-//        .setLat(response.getCity().getCoord().getLat())
-//        .setTemperatures(response.getList()
-//            .stream()
-//            .map(x -> x.getMeasurements().getTemp())
-//            .collect(Collectors.toList()))
-//        .setHumidity(response.getList()
-//            .stream()
-//            .map(x -> x.getMeasurements().getHumidity())
-//            .collect(Collectors.toList()))
-//        .setWeatherCodes(response.getList()
-//            .stream()
-//            .map(x -> x.getWeather().get(0).getId())
-//            .collect(Collectors.toList()))
-//        .createCity();
-////    System.out.println(city.getHumidity().get(0) + 1);
-//    System.out.println(city.getHumidity().get(999999));
-//    System.out.println(gson.toJson(city, new TypeToken<City>() {}.getType()));
-//    lastCity = city;
-//    return gson.toJson(city, new TypeToken<City>() {}.getType());
   }
 }
