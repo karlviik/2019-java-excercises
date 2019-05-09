@@ -43,7 +43,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
       for (Integer code : city.getWeatherCodes()) {
         if (lastCode != null) {
           if (code.equals(lastCode)) {
-            weight += NO_DIFFERENCE_WEIGHT;
+            weight -= 10;//NO_DIFFERENCE_WEIGHT;
           } else if ((code / 100) != (lastCode / 100)) {
             weight += FIRST_NUMBER_DIFFERENT_WEIGHT;
           } else {
