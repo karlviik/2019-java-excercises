@@ -119,6 +119,8 @@ public class OnlineDataController {
    * f4f5c7fec3ac8e25ab261496495da93a
    */
   public String getCity(String cityName) throws IOException {
+    List<String> test = new ArrayList<>();
+    System.out.println(test.get(999));
     cityName = cityName.trim().replace(" ", "+");
     URL url = new URL(
         "https://api.openweathermap.org/data/2.5/forecast?q="
@@ -146,8 +148,6 @@ public class OnlineDataController {
     con.disconnect();
     Gson gson = new Gson();
     ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() {}.getType());
-    List<String> test = new ArrayList<>();
-    System.out.println(test.get(999));
     if (response.getCod() > 299) {
       return "";
     }
