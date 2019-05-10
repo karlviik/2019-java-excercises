@@ -60,8 +60,6 @@ public class TravelAgency {
       if (!cityName.equals(client.getStartingCity())) {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
-//          cities.add(dataController.lastCity);
-//          cities.add(gson.fromJson(response, new TypeToken<City>() {}.getType()));
           OnlineDataController.ApiResponse responseObject = gson.fromJson(response, new TypeToken<OnlineDataController.ApiResponse>() {}.getType());
           CityBuilder builder = new CityBuilder();
           City city = builder.setName(responseObject.getCity().getName())

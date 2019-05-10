@@ -59,7 +59,7 @@ public class City {
 
   public Double getAverageHumidity() {
     return humidity.stream()
-        .mapToDouble(Double::doubleValue)
+        .mapToDouble(x -> x)
         .average()
         .orElse(0);
 

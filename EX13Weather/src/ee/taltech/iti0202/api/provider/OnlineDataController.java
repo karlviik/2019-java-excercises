@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.List;
 
 public class OnlineDataController {
-  public City lastCity;
 
   public class ApiResponse {
     private Integer cod;

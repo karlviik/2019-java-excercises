@@ -40,23 +40,15 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 //        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
 //            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
 //      }
-//      System.out.println(city.getName() + " " + weight);
       Integer lastCode = null;
-//      System.out.println(city.getWeatherCodes());
-//      int a = 0;
-//      int b = 0;
       for (Integer code : city.getWeatherCodes()) {
         if (lastCode != null) {
-//          System.out.println(code / 100 != lastCode / 100);
-
           if (code.equals(lastCode)) {
             weight += NO_DIFFERENCE_WEIGHT;
-//            a++;
           } else if (code / 100 != lastCode / 100) {
             weight += FIRST_NUMBER_DIFFERENT_WEIGHT;
           } else {
             weight += DIFFERENT_BUT_NOT_FIRST_WEIGHT;
-//            b++;
           }
 //          if (weight < 0) {
 //            weight = 0d;
@@ -64,9 +56,9 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
         }
         lastCode = code;
       }
-      weight = Math.round(weight * 100.0) / 100.0;
+//      weight = Math.round(weight * 100.0) / 100.0;
 //      System.out.println(city.getName() + " " + weight);
-      if (bestWeight < weight) {
+      if (weight > 0 && bestWeight < weight) {
         bestWeight = weight;
         bestCity = Optional.of(city);
       }
