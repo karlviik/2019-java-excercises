@@ -13,7 +13,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
-    Double bestWeight = -4000d;
+    Double bestWeight = -Double.MAX_VALUE;
     Optional<City> bestCity = Optional.empty();
     for (City city : candidateCities) {
       Double weight = 0d;
