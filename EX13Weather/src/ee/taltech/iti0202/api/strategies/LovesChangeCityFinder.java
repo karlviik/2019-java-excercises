@@ -36,14 +36,14 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
             .getAsDouble());
 //            .orElse(0));
       }
-//      for (int i = 1; i < 5; i++) {
-//        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
-//            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
-//      }
       for (int i = 1; i < 5; i++) {
-        weight += tempDiffs.get(i - 1) - tempDiffs.get(i)
-            + humidDiffs.get(i - 1) - humidDiffs.get(i);
+        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
+            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
       }
+//      for (int i = 1; i < 5; i++) {
+//        weight += tempDiffs.get(i - 1) - tempDiffs.get(i)
+//            + humidDiffs.get(i - 1) - humidDiffs.get(i);
+//      }
 //      System.out.println(city.getName() + " " + weight);
       Integer lastCode = null;
 //      System.out.println(city.getWeatherCodes());
