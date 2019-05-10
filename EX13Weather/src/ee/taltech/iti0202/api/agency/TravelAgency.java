@@ -60,7 +60,7 @@ public class TravelAgency {
       if (!cityName.equals(client.getStartingCity())) {
         String response = dataController.getCity(cityName);
         if (!response.equals("")) {
-          OnlineDataController.ApiResponse responseObject = gson.fromJson(response, new TypeToken<OnlineDataController.ApiResponse>() {}.getType());
+          OnlineDataController.ApiResponse responseObject = gson.fromJson(response, new TypeToken<OnlineDataController.ApiResponse>() { } .getType());
           CityBuilder builder = new CityBuilder();
           City city = builder.setName(responseObject.getCity().getName())
               .setLon(responseObject.getCity().getCoord().getLon())
@@ -82,17 +82,6 @@ public class TravelAgency {
         }
       }
     }
-//    System.out.println(cities.get(0).getHumidity());
-////    System.out.println(cities.get(9999999).getName());
-//    System.out.println(cities.get(1).getTemperatures());
-//    System.out.println(cities.get(0).getAverageHumidity());
-//    System.out.println(cities.get(0).getHumidity());
-//    System.out.println(cities.get(0).getLat());
-//    System.out.println(cities.get(0).getLon());
-//    System.out.println(cities.get(0).getWeatherCodes());
-
-//    Optional<City> wasd = client.chooseBestCity(cities);
-
     return client.chooseBestCity(cities);
   }
 
