@@ -124,9 +124,9 @@ public class OnlineDataController {
     HttpURLConnection con = (HttpURLConnection) url.openConnection();
     con.setRequestMethod("GET");
     int status = con.getResponseCode();
-    if (status > 299) {
-      return "";
-    }
+//    if (status > 299) {
+//      return "";
+//    }
     BufferedReader in;
     try {
       in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -141,14 +141,13 @@ public class OnlineDataController {
     in.close();
     con.disconnect();
     Gson gson = new Gson();
-    ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() {}.getType());
-    if (response.getCod() > 299) {
-      return "";
-    }
+    ApiResponse response = gson.fromJson(content.toString(), new TypeToken<ApiResponse>() { } .getType());
+//    if (response.getCod() > 299) {
+//      return "";
+//    }
     if (response.getList().size() == 0) {
       return "";
     }
-//    System.out.println(gson.toJson(response));
     return gson.toJson(response);
   }
 }
