@@ -58,7 +58,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
         }
         lastCode = code;
       }
-      weight = Math.round(weight * 100000.0) / 100000.0;
+      weight = Math.round(weight * 100.0) / 100.0;
       System.out.println(city.getName() + " " + weight);
       if (bestWeight < weight) {
         bestWeight = weight;
