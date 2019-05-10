@@ -10,6 +10,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
   private static final int FIRST_NUMBER_DIFFERENT_WEIGHT = 100;
   private static final int NO_DIFFERENCE_WEIGHT = -10;
   private static final int DIFFERENT_BUT_NOT_FIRST_WEIGHT = 20;
+  private static final int DATAPOINT_IN_DAY = 8;
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
@@ -22,14 +23,14 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
       // get temp and humid averages of days
       for (int i = 0; i < 5; i++) {
         tempDiffs.add(city.getTemperatures()
-            .subList(8 * i, 8 * (i + 1))
+            .subList(DATAPOINT_IN_DAY * i, DATAPOINT_IN_DAY * (i + 1))
             .stream()
             .mapToDouble(x -> x)
             .average()
             .getAsDouble());
 //            .orElse(0));
         humidDiffs.add(city.getHumidity()
-            .subList(8 * i, 8 * (i + 1))
+            .subList(DATAPOINT_IN_DAY * i, DATAPOINT_IN_DAY * (i + 1))
             .stream()
             .mapToDouble(x -> x)
             .average()
