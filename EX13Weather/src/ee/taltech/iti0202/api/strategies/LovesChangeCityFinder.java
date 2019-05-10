@@ -13,12 +13,13 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 
   @Override
   public Optional<City> findBestCity(List<City> candidateCities) {
-    Double bestWeight = Double.MIN_VALUE;
+    Double bestWeight = -4000d;
     Optional<City> bestCity = Optional.empty();
     for (City city : candidateCities) {
       Double weight = 0d;
       List<Double> tempDiffs = new ArrayList<>();
       List<Double> humidDiffs = new ArrayList<>();
+      // get temp and humid averages of days
       for (int i = 0; i < 5; i++) {
         tempDiffs.add(city.getTemperatures()
             .subList(8 * i, 8 * (i + 1))
@@ -35,10 +36,13 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
             .getAsDouble());
 //            .orElse(0));
       }
-//      for (int i = 1; i < 5; i++) {
-//        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
-//            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
-//      }
+      // add absolute differences of humid and temp differences to weight
+      for (int i = 1; i < 5; i++) {
+        weight += (Math.abs(tempDiffs.get(i) - tempDiffs.get(i - 1))
+            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
+      }
+      // go through all weather codes and add weights based on difference between
+      // this and previous code
       Integer lastCode = null;
       for (Integer code : city.getWeatherCodes()) {
         if (lastCode != null) {
@@ -52,6 +56,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
         }
         lastCode = code;
       }
+      // if this city has higher weight, put it and its weight as best weight / city
       if (bestWeight <= weight) {
         bestWeight = weight;
         bestCity = Optional.of(city);

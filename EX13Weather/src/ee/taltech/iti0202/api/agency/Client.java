@@ -48,20 +48,20 @@ public class Client {
   }
 
   public Optional<City> chooseBestCity(List<City> possibleCities) {
-    return choosingStrategy.findBestCity(possibleCities);
+//    return choosingStrategy.findBestCity(possibleCities);
 
-//    List<City> wantCities = new ArrayList<>();
-//    for (City city : possibleCities) {
-//      if (wantsToVisitCities.contains(city.getName())) {
-//        wantCities.add(city);
-//      }
-//    }
-//    Optional<City> chosenCity = choosingStrategy.findBestCity(wantCities);
-//    if (chosenCity.isEmpty()) {
-//      return choosingStrategy.findBestCity(possibleCities);
-//    } else {
-//      return chosenCity;
-//    }
+    List<City> wantCities = new ArrayList<>();
+    for (City city : possibleCities) {
+      if (wantsToVisitCities.contains(city.getName())) {
+        wantCities.add(city);
+      }
+    }
+    Optional<City> chosenCity = choosingStrategy.findBestCity(wantCities);
+    if (chosenCity.isEmpty()) {
+      return choosingStrategy.findBestCity(possibleCities);
+    } else {
+      return chosenCity;
+    }
   }
 }
 
