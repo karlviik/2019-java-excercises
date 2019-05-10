@@ -148,7 +148,7 @@ public class OnlineDataController {
     if (response.getList().size() == 0) {
       return "";
     }
-    System.out.println(gson.toJson(response));
+//    System.out.println(gson.toJson(response));
     return gson.toJson(response);
   }
 }

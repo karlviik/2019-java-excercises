@@ -20,7 +20,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
       List<Double> tempDiffs = new ArrayList<>();
       List<Double> humidDiffs = new ArrayList<>();
       for (int i = 0; i < 5; i++) {
-        System.out.println(city.getTemperatures().subList(8 * i, 8 * (i + 1)));
+//        System.out.println(city.getTemperatures().subList(8 * i, 8 * (i + 1)));
         tempDiffs.add(city.getTemperatures()
             .subList(8 * i, 8 * (i + 1))
             .stream()
@@ -47,7 +47,7 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 //      int b = 0;
       for (Integer code : city.getWeatherCodes()) {
         if (lastCode != null) {
-          System.out.println(code / 100 != lastCode / 100);
+//          System.out.println(code / 100 != lastCode / 100);
 
           if (code.equals(lastCode)) {
             weight += NO_DIFFERENCE_WEIGHT;
@@ -58,14 +58,14 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
             weight += DIFFERENT_BUT_NOT_FIRST_WEIGHT;
 //            b++;
           }
-          if (weight < 0) {
-            weight = 0d;
-          }
+//          if (weight < 0) {
+//            weight = 0d;
+//          }
         }
         lastCode = code;
       }
       weight = Math.round(weight * 100.0) / 100.0;
-      System.out.println(city.getName() + " " + weight);
+//      System.out.println(city.getName() + " " + weight);
       if (bestWeight < weight) {
         bestWeight = weight;
         bestCity = Optional.of(city);
