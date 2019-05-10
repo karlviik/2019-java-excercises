@@ -41,8 +41,8 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
 //            + Math.abs(humidDiffs.get(i) - humidDiffs.get(i - 1)));
 //      }
       for (int i = 1; i < 5; i++) {
-        weight += tempDiffs.get(i) - tempDiffs.get(i - 1)
-            + humidDiffs.get(i) - humidDiffs.get(i - 1);
+        weight += tempDiffs.get(i - 1) - tempDiffs.get(i)
+            + humidDiffs.get(i - 1) - humidDiffs.get(i);
       }
 //      System.out.println(city.getName() + " " + weight);
       Integer lastCode = null;
@@ -61,6 +61,9 @@ public class LovesChangeCityFinder implements CityFinderStrategy {
           } else {
             weight += DIFFERENT_BUT_NOT_FIRST_WEIGHT;
 //            b++;
+          }
+          if (weight < 0) {
+            weight = 0d;
           }
         }
         lastCode = code;
