@@ -4,6 +4,7 @@ import ee.taltech.iti0202.api.agency.ChoosingClient;
 import ee.taltech.iti0202.api.agency.Client;
 import ee.taltech.iti0202.api.agency.TravelAgency;
 import ee.taltech.iti0202.api.provider.OnlineDataController;
+import ee.taltech.iti0202.api.strategies.LovesChangeCityFinder;
 import ee.taltech.iti0202.api.strategies.WarmWeatherCityFinder;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class Main {
   public static void main(String[] args) throws IOException {
     List<String> cities = new ArrayList<>();
     cities.add("Lloret de Mar");
-    Client client = new Client("peeter", "London", new WarmWeatherCityFinder());
+    Client client = new Client("peeter", "London", new LovesChangeCityFinder());
     cities.add("Londonnnnnnn");
     cities.add("Amsterdam");
 
