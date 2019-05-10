@@ -2,7 +2,6 @@ package ee.taltech.iti0202.api.provider;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import ee.taltech.iti0202.api.destinations.City;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

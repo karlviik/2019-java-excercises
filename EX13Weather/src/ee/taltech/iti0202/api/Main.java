@@ -1,6 +1,5 @@
 package ee.taltech.iti0202.api;
 
-import ee.taltech.iti0202.api.agency.ChoosingClient;
 import ee.taltech.iti0202.api.agency.Client;
 import ee.taltech.iti0202.api.agency.TravelAgency;
 import ee.taltech.iti0202.api.provider.OnlineDataController;
