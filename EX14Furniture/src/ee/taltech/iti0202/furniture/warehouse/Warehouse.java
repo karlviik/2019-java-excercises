@@ -16,13 +16,12 @@ import java.util.stream.Stream;
  * Everything in there is also in the catalogue.
  */
 public class Warehouse {
+
     private Catalogue catalogue;
     private HashMap<Furniture, Integer> furnitureStocks;
     private HashMap<Material, Float> materialStocks;
     private WarehouseFurnitureBuilder builder;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-
 
     public Warehouse() throws CloneNotSupportedException {
         this(new HashMap<>());

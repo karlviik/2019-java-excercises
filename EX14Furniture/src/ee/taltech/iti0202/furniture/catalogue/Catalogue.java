@@ -1,11 +1,13 @@
 package ee.taltech.iti0202.furniture.catalogue;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import ee.taltech.iti0202.furniture.furniture.Furniture;
 
 import java.util.ArrayList;
 
 public class Catalogue {
+    @SerializedName("furniture")
     private ArrayList<Furniture> allFurniture;
 
     public Catalogue() {

@@ -1,5 +1,6 @@
 package ee.taltech.iti0202.furniture.furniture;
 
+import com.google.gson.annotations.SerializedName;
 import ee.taltech.iti0202.furniture.material.Material;
 
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public abstract class Furniture implements Cloneable {
     final float width;
     final float length;
     final float price;
+    @SerializedName("used materials")
     final List<String> usedMaterials;
+    @SerializedName("required materials")
     HashMap<Material, Float> requiredMaterials;
 
     Furniture(
