@@ -22,6 +22,7 @@ public enum Material {
     Material(String custom) {
         this.custom = custom;
     }
+
     @Override
     public String toString() {
         return custom;

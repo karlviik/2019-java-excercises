@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 public class Bookshelf extends Furniture {
 
-    int shelves;
-    int drawers;
+    private int shelves;
+    private int drawers;
 
     public Bookshelf(String model, float height, float width, float length, float price, HashMap<Material, Float> requiredMaterials, int shelves, int drawers) {
         super("bookshelf", model, height, width, length, price, requiredMaterials);

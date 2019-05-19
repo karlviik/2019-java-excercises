@@ -1,6 +1,7 @@
 package ee.taltech.iti0202.furniture.catalogue;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import ee.taltech.iti0202.furniture.furniture.Furniture;
 
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 public class Catalogue {
     @SerializedName("furniture")
     private ArrayList<Furniture> allFurniture;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 
     public Catalogue() {
         allFurniture = new ArrayList<>();
@@ -43,7 +46,7 @@ public class Catalogue {
     }
 
     public String getAllFurnitureJSON() {
-        return new Gson().toJson(allFurniture);
+        return gson.toJson(allFurniture);
     }
 
     public ArrayList<Furniture> getAllFurniture() {

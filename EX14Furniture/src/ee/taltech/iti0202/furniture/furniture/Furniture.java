@@ -18,18 +18,18 @@ import java.util.stream.Collectors;
  */
 public abstract class Furniture implements Cloneable {
 
-    final String type;
-    final String model;
-    final float height;
-    final float width;
-    final float length;
-    final float price;
-    @SerializedName("used materials")
-    final List<String> usedMaterials;
-    @SerializedName("required materials")
-    HashMap<Material, Float> requiredMaterials;
+    protected final String type;
+    protected final String model;
+    protected final float height;
+    protected final float width;
+    protected final float length;
+    protected final float price;
+    @SerializedName("used_materials")
+    protected final List<String> usedMaterials;
+    @SerializedName("required_materials")
+    protected HashMap<Material, Float> requiredMaterials;
 
-    Furniture(
+    protected Furniture(
             String type,
             String model,
             float height,
@@ -56,10 +56,14 @@ public abstract class Furniture implements Cloneable {
      *
      * @return Furniture object which can be serialized to json without building material costs which are
      * irrelevant to the customer.
-     * @throws CloneNotSupportedException if not supported
      */
-    public Furniture getCatalogueDisplay() throws CloneNotSupportedException {
-        Furniture clone = (Furniture) this.clone();
+    public Furniture getCatalogueDisplay() {
+        Furniture clone;
+        try {
+            clone = (Furniture) this.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
         clone.requiredMaterials = null;
         return clone;
     }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Closet extends Furniture {
 
     @SerializedName("how many people can fit in")
-    float howManyPeopleCanFitIn;
+    private float howManyPeopleCanFitIn;
 
     public Closet(String model, float height, float width, float length, float price, HashMap<Material, Float> requiredMaterials, float howManyPeopleCanFitIn) {
         super("closet", model, height, width, length, price, requiredMaterials);

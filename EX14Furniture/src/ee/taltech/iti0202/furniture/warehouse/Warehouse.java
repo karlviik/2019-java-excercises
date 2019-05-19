@@ -5,10 +5,13 @@ import com.google.gson.GsonBuilder;
 import ee.taltech.iti0202.furniture.catalogue.Catalogue;
 import ee.taltech.iti0202.furniture.furniture.Furniture;
 import ee.taltech.iti0202.furniture.material.Material;
+import ee.taltech.iti0202.furniture.warehouse.filter.FurnitureFilter;
+import ee.taltech.iti0202.furniture.warehouse.format.FurnitureBuild;
+import ee.taltech.iti0202.furniture.warehouse.format.FurnitureStock;
+import ee.taltech.iti0202.furniture.warehouse.format.MaterialStock;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Warehouse class.
@@ -18,147 +21,99 @@ import java.util.stream.Stream;
 public class Warehouse {
 
     private Catalogue catalogue;
-    private HashMap<Furniture, Integer> furnitureStocks;
-    private HashMap<Material, Float> materialStocks;
-    private WarehouseFurnitureBuilder builder;
+    private ArrayList<FurnitureStock> furnitureStocks;
+    private ArrayList<MaterialStock> materialStocks;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public Warehouse() throws CloneNotSupportedException {
-        this(new HashMap<>());
+    public Warehouse() {
+        this(new ArrayList<>());
     }
 
-    public Warehouse(HashMap<Furniture, Integer> furnitureStocks) throws CloneNotSupportedException {
+    public Warehouse(ArrayList<FurnitureStock> furnitureStocks) {
         this.furnitureStocks = furnitureStocks;
         this.catalogue = new Catalogue();
-        for(Furniture furniture : furnitureStocks.keySet()) {
-            catalogue.addFurniture(furniture.getCatalogueDisplay());
+        for(FurnitureStock furnitureStock : furnitureStocks) {
+            catalogue.addFurniture(furnitureStock.getFurniture().getCatalogueDisplay());
         }
-        this.builder = new WarehouseFurnitureBuilder(this);
-        this.materialStocks = new HashMap<>();
+        this.materialStocks = new ArrayList<>();
     }
 
     public Catalogue getCatalogue() {
         return catalogue;
     }
 
-    public HashMap<Furniture, Integer> getAllFurnitureStocks() {
-        return furnitureStocks;
-    }
-
-    private List<Map.Entry<Furniture, Integer>> getFurnitureStocksEntryList() {
-        return new ArrayList<>(furnitureStocks.entrySet());
-    }
-
-    private List<Map.Entry<Furniture, Integer>> filterOutNotInStock(Stream<Map.Entry<Furniture, Integer>> stream) {
-        return stream.filter(x -> x.getValue() > 0).collect(Collectors.toList());
-    }
-
-    public String getFurnitureStocksJSON(boolean onlyInStock) {
-        if (!onlyInStock) {
-            return gson.toJson(this.getFurnitureStocksEntryList());
-        }
-        return gson.toJson(filterOutNotInStock(this.getFurnitureStocksEntryList().stream()));
-    }
-
-    public String getFurnitureStockOfTypeJSON(boolean onlyInStock, String type) {
-        Stream<Map.Entry<Furniture, Integer>> filteredStream = this.getFurnitureStocksEntryList()
-                .stream()
-                .filter(x -> x.getKey().getType().equals(type));
-        if (onlyInStock) {
-            return gson.toJson(filteredStream.collect(Collectors.toList()));
-        }
-        return gson.toJson(filterOutNotInStock(filteredStream));
-    }
-
-    public String getFurnitureStockOfModelJSON(boolean onlyInStock, String model) {
-        Stream<Map.Entry<Furniture, Integer>> filteredStream = this.getFurnitureStocksEntryList()
-                .stream()
-                .filter(x -> x.getKey().getModel().equals(model));
-        if (onlyInStock) {
-            return gson.toJson(filteredStream.collect(Collectors.toList()));
-        }
-        return gson.toJson(filterOutNotInStock(filteredStream));
-    }
-
-    public String getFurnitureStockOfPriceBetweenGivenJSON(boolean onlyInStock, Float lowPrice, Float highPrice) {
-        Stream<Map.Entry<Furniture, Integer>> filteredStream = this.getFurnitureStocksEntryList()
-                .stream()
-                .filter(x -> lowPrice <= x.getKey().getPrice() && x.getKey().getPrice() <= highPrice);
-        if (onlyInStock) {
-            return gson.toJson(filteredStream.collect(Collectors.toList()));
-        }
-        return gson.toJson(filterOutNotInStock(filteredStream));
-    }
-
-    public String getFurnitureObjectsJSON(boolean onlyInStock) {
-        Stream<Map.Entry<Furniture, Integer>> stream = getFurnitureStocksEntryList().stream();
-        if (onlyInStock) {
-            return gson.toJson(stream
-                    .filter(x -> x.getValue() > 0)
-                    .map(Map.Entry::getKey)
-                    .collect(Collectors.toList()));
-        }
-        return gson.toJson(stream
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList()));
-    }
-
-    public HashMap<Material, Float> getMaterialStocks() {
-        return materialStocks;
+    public String getFurnitureStocksJSON(FurnitureFilter filter) {
+        return gson.toJson(furnitureStocks.stream()
+            .filter(x -> filter.getInStock().isEmpty() || !filter.getInStock().get() || !x.getStock().equals(0))
+            .filter(x -> filter.getType().isEmpty() || filter.getType().get().equalsIgnoreCase(x.getFurniture().getType()))
+            .filter(x -> filter.getModel().isEmpty() || filter.getModel().get().equalsIgnoreCase(x.getFurniture().getModel()))
+            .filter(x -> filter.getMinPrice().isEmpty() || filter.getMinPrice().get() <= x.getFurniture().getPrice())
+            .filter(x -> filter.getMaxPrice().isEmpty() || filter.getMaxPrice().get() >= x.getFurniture().getPrice())
+            .collect(Collectors.toList()));
     }
 
     public String getMaterialStocksJSON() {
-        return gson.toJson(new ArrayList<>(materialStocks.entrySet()));
+        return getMaterialStocksJSON(null);
     }
 
-    public String getSpecificMaterialStocksJSON(Material material) {
-        return gson.toJson(new ArrayList<>(materialStocks.entrySet())
-                .stream()
-                .filter(x -> x.getKey().equals(material)));
+    public String getMaterialStocksJSON(Material material) {
+        return gson.toJson(materialStocks.stream().filter(x -> material == null || x.getMaterial().equals(material)));
     }
 
-    public void addToMaterialStock(Material material, Float amount) {
-        if (amount < 0) {
+    public boolean changeMaterialStock(Material material, Float amount) {
+        MaterialStock stockObject = materialStocks.stream().filter(x -> x.getMaterial().equals(material)).findFirst().orElse(null);
+        if (stockObject == null) {
+            stockObject = new MaterialStock(material, 0f);
+            materialStocks.add(stockObject);
+        }
+        if (stockObject.getStock() + amount >= 0) {
+            stockObject.changeStock(amount);
+            return true;
+        }
+        return false;
+    }
+
+    public void changeFurnitureStock(Furniture furniture, Integer stock) {
+        if (furnitureStocks.stream().filter(x -> x.getFurniture().equals(furniture)).findFirst().isEmpty()) {
+            furniture.getRequiredMaterials().keySet().forEach(x -> changeMaterialStock(x, 0f));
+            furnitureStocks.add(new FurnitureStock(furniture, stock));
+            catalogue.addFurniture(furniture.getCatalogueDisplay());
             return;
         }
-        materialStocks.put(material, materialStocks.getOrDefault(material, 0f) + amount);
+        furnitureStocks.stream().filter(x -> x.getFurniture().equals(furniture)).findFirst().get().changeStock(stock);
     }
 
-    public void removeFromMaterialStock(Material material, Float amount) {
-        if (amount > 0 || !materialStocks.containsKey(material) || materialStocks.get(material) < amount) {
-            return;
-        }
-        materialStocks.put(material, materialStocks.get(material) - amount);
-    }
-
-    public void addFurnitureStock(Furniture furniture, Integer stock) throws CloneNotSupportedException {
-        if(!furnitureStocks.containsKey(furniture)) {
-          catalogue.addFurniture(furniture.getCatalogueDisplay());
-          for(Material material : furniture.getRequiredMaterials().keySet()) {
-              materialStocks.put(material, materialStocks.getOrDefault(material, 0f));
-          }
-        }
-        furnitureStocks.put(furniture, furnitureStocks.getOrDefault(furniture, 0) + stock);
-    }
-
-    public void removeFurniture(Furniture furniture) {
-        furnitureStocks.remove(furniture);
-        catalogue.removeFurniture(furniture);
-    }
-
-    public Float getMaterialStockOf(Material material) {
-        return materialStocks.get(material);
+    private Integer getMaxBuildAmount(Furniture furniture) {
+        return materialStocks.stream()
+            .mapToInt(x -> (int) Math.floor(x.getStock() / furniture.getRequiredMaterials().get(x.getMaterial())))
+            .map(x -> x < 0 ? 0 : x)
+            .min()
+            .orElse(0);
     }
 
     public String getMaterialsRequiredForFurniture(Furniture furniture, Integer amount) {
-        return gson.toJson(new AbstractMap.SimpleEntry<>(furniture, builder.whatMoreMaterialsRequiredByObject(furniture, amount)));
+        return gson.toJson(furniture.getRequiredMaterials().entrySet().stream()
+            .map(x -> new MaterialStock(x.getKey(), x.getValue() * amount - materialStocks.stream()
+                .filter(y -> y.getMaterial().equals(x.getKey()))
+                .findFirst()
+                .get()
+                .getStock()))
+            .filter(x -> x.getStock() > 0)
+            .collect(Collectors.toList()));
     }
 
     public String getMaxAmountPossibleToBuild(Furniture furniture) {
-        return gson.toJson(new AbstractMap.SimpleEntry<>(furniture, builder.howManyCanBuild(furniture)));
+        return gson.toJson(new FurnitureBuild(furniture, getMaxBuildAmount(furniture)));
     }
 
-    public String build(Furniture furniture, Integer amount) throws CloneNotSupportedException {
-        return gson.toJson(new AbstractMap.SimpleEntry<>(furniture, builder.build(furniture, amount)));
+    public boolean build(Furniture furniture, Integer amount) {
+        if (getMaxBuildAmount(furniture) >= amount) {
+            furniture.getRequiredMaterials().forEach((key, value) -> {
+                materialStocks.stream().filter(y -> y.getMaterial().equals(key)).findFirst().get().changeStock(-value * amount);
+                changeFurnitureStock(furniture, amount);
+            });
+            return true;
+        }
+        return false;
     }
 }
