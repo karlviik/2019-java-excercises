@@ -19,7 +19,7 @@ public class FurnitureStock {
     return stock;
   }
 
-  public void changeStock(Integer change) {
+  public void changeFurnitureStock(Integer change) {
     if (stock + change >= 0) {
       stock += change;
     }

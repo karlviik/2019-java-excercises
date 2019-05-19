@@ -57,7 +57,7 @@ public class Warehouse {
     }
 
     public String getMaterialStocksJSON(Material material) {
-        return gson.toJson(materialStocks.stream().filter(x -> material == null || x.getMaterial().equals(material)));
+        return gson.toJson(materialStocks.stream().filter(x -> material == null || x.getMaterial().equals(material)).collect(Collectors.toList()));
     }
 
     public boolean changeMaterialStock(Material material, Float amount) {
@@ -80,12 +80,12 @@ public class Warehouse {
             catalogue.addFurniture(furniture.getCatalogueDisplay());
             return;
         }
-        furnitureStocks.stream().filter(x -> x.getFurniture().equals(furniture)).findFirst().get().changeStock(stock);
+        furnitureStocks.stream().filter(x -> x.getFurniture().equals(furniture)).findFirst().get().changeFurnitureStock(stock);
     }
 
     private Integer getMaxBuildAmount(Furniture furniture) {
-        return materialStocks.stream()
-            .mapToInt(x -> (int) Math.floor(x.getStock() / furniture.getRequiredMaterials().get(x.getMaterial())))
+        return furniture.getRequiredMaterials().entrySet().stream()
+            .mapToInt(x -> (int) Math.floor(materialStocks.stream().filter(y -> y.getMaterial().equals(x.getKey())).findFirst().get().getStock() / x.getValue()))
             .map(x -> x < 0 ? 0 : x)
             .min()
             .orElse(0);
@@ -110,8 +110,9 @@ public class Warehouse {
         if (getMaxBuildAmount(furniture) >= amount) {
             furniture.getRequiredMaterials().forEach((key, value) -> {
                 materialStocks.stream().filter(y -> y.getMaterial().equals(key)).findFirst().get().changeStock(-value * amount);
-                changeFurnitureStock(furniture, amount);
+//                changeFurnitureStock(furniture, amount);
             });
+            changeFurnitureStock(furniture, amount);
             return true;
         }
         return false;
